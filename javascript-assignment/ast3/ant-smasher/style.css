@@ -1,0 +1,14 @@
+.box {
+  position: absolute;;
+  border-radius: 50%;
+  background-image: url('./60.png');
+}
+
+
+.app-container {
+  position: relative;
+  height: 800px;
+  width: 1200px;
+  border: 1px solid green;
+  margin: 0 auto;
+}

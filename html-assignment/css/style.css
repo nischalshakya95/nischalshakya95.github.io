@@ -1,0 +1,82 @@
+.wrapper i {
+  float: right;
+}
+
+.custom-inner p {
+  color: #fff;
+  font-size: 12px;
+}
+
+.num-item p {
+  margin-bottom: 0;
+  color: #cb164f;
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.welcome {
+  width: 50%;
+  float: right;
+  text-align: center;
+  height: 100%;
+  transform: translateY(60px);
+}
+
+.welcome h2 {
+  color: #cc003e;
+  font-weight: 100;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+}
+
+.welcome h2 span {
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: underline;
+
+}
+
+.welcome p {
+  color: #444;
+  line-height: 20px;
+}
+
+.welcome p span {
+  font-weight: bold;
+}
+
+.item-list .blog-item .blog-title {
+  font-size: 1.3em;
+  color: #cc003e;
+}
+
+.item-list .blog-item .blog-stats {
+  font-size: 0.8em;
+  padding: 15px 0;
+  color: #888;
+}
+
+.item-list .blog-item .blog-detail p span a {
+  font-weight: 600;
+  color: #cc003e;
+}
+
+.seller-item-list {
+  display: inline;
+}
+
+.tweet-icon,
+.tweet-message {
+  display: inline-block;
+  vertical-align: text-top;
+}
+
+.footer-content ul {
+  list-style: none; /* Remove default bullets */
+}
+
+.final-footer ul li {
+  display : inline;
+  font-size: 11px;
+}
