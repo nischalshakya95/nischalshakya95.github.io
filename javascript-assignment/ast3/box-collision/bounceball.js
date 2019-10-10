@@ -1,5 +1,5 @@
-let MAX_WIDTH = 1000;
-let MAX_HEIGHT = 600;
+let MAX_WIDTH = 1200;
+let MAX_HEIGHT = 800;
 
 
 (function() {
@@ -78,7 +78,6 @@ let MAX_HEIGHT = 600;
 
   function Game(ballCount) {
     this.colors = ['red', 'green', 'blue', 'brown'];
-    this.ballRadius = ['20' , '30' , '40', '50'];
     this.ballCount = 0;
     this.balls = [];
     this.interval = null;
@@ -96,7 +95,6 @@ let MAX_HEIGHT = 600;
       let dx = ballOne.x + ballOne.radius - (ballTwo.x + ballTwo.radius);
       let dy = ballOne.y + ballOne.radius - (ballTwo.y + ballTwo.radius);
       let distance = Math.sqrt(dx * dx + dy * dy);
-
       return distance < (ballOne.radius + ballTwo.radius) / 2;
     };
 
@@ -144,7 +142,7 @@ let MAX_HEIGHT = 600;
         if (index === this.colors.length) {
           index = 0;
         }
-        let ball = new Ball(this.ballRadius[index], this.colors[index]);
+        let ball = new Ball(50, this.colors[index]);
         let randomX = generateRandomInt(0, 500);
         let randomY = generateRandomInt(0, 500);
         ball.setPosition(randomX, randomY);
@@ -154,7 +152,7 @@ let MAX_HEIGHT = 600;
     };
   }
 
-  let game = new Game(20).init();
+  let game = new Game(40).init();
 
   document.addEventListener('click', () => {
     game.playPause();

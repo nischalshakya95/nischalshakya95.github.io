@@ -1,13 +1,14 @@
-.ant {
+.box {
   position: absolute;
   background: blue;
   border-radius: 50%;
 }
 
+
 .app-container {
   position: relative;
-  height: 500px;
-  width: 1000px;
+  height: 800px;
+  width: 1200px;
   border: 1px solid green;
   margin: 0 auto;
 }
