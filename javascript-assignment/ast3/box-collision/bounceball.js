@@ -1,5 +1,5 @@
-let MAX_WIDTH = 1200;
-let MAX_HEIGHT = 800;
+let MAX_WIDTH = 1000;
+let MAX_HEIGHT = 600;
 
 
 (function() {
@@ -16,8 +16,6 @@ let MAX_HEIGHT = 800;
     this.dx = 1;
     this.dy = 1;
     this.radius = null;
-    this.canvas = null;
-    this.context = null;
     this.color = null;
 
     this.init = () => {
@@ -52,11 +50,7 @@ let MAX_HEIGHT = 800;
     };
 
     this.isXWallCollision = () => {
-      if (this.x + this.dx > MAX_HEIGHT - this.radius || this.x < 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.x + this.dx > MAX_HEIGHT - this.radius || this.x < 0;
     };
 
     this.reverseXDirection = () => {
@@ -64,11 +58,7 @@ let MAX_HEIGHT = 800;
     };
 
     this.isYWallCollision = () => {
-      if (this.y + this.dy > MAX_WIDTH - this.radius || this.y < 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.y + this.dy > MAX_WIDTH - this.radius || this.y < 0;
     };
 
     this.reverseYDirection = () => {
@@ -88,6 +78,7 @@ let MAX_HEIGHT = 800;
 
   function Game(ballCount) {
     this.colors = ['red', 'green', 'blue', 'brown'];
+    this.ballRadius = ['20' , '30' , '40', '50'];
     this.ballCount = 0;
     this.balls = [];
     this.interval = null;
@@ -106,17 +97,13 @@ let MAX_HEIGHT = 800;
       let dy = ballOne.y + ballOne.radius - (ballTwo.y + ballTwo.radius);
       let distance = Math.sqrt(dx * dx + dy * dy);
 
-      if (distance < (ballOne.radius + ballTwo.radius) / 2) {
-        return true;
-      } else {
-        return false;
-      }
+      return distance < (ballOne.radius + ballTwo.radius) / 2;
     };
 
     this.detectAllCollision = () => {
       for (let k = 0; k < this.balls.length; k++) {
         for (let j = 0; j < this.balls.length; j++) {
-          if (k != j) {
+          if (k !== j) {
             if (this.detectCollision(this.balls[k], this.balls[j])) {
               this.balls[k].changeDirection(this.balls[j]);
             }
@@ -157,7 +144,7 @@ let MAX_HEIGHT = 800;
         if (index === this.colors.length) {
           index = 0;
         }
-        let ball = new Ball(50, this.colors[index]);
+        let ball = new Ball(this.ballRadius[index], this.colors[index]);
         let randomX = generateRandomInt(0, 500);
         let randomY = generateRandomInt(0, 500);
         ball.setPosition(randomX, randomY);
@@ -167,7 +154,7 @@ let MAX_HEIGHT = 800;
     };
   }
 
-  let game = new Game(40).init();
+  let game = new Game(20).init();
 
   document.addEventListener('click', () => {
     game.playPause();

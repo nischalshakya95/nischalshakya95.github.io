@@ -1,5 +1,5 @@
 let MAX_WIDTH = 1200;
-let MAX_HEIGHT = 800;
+let MAX_HEIGHT = 600;
 
 (function() {
   function generateRandomInt(min, max) {
@@ -15,7 +15,6 @@ let MAX_HEIGHT = 800;
     this.dx = 1;
     this.dy = 1;
     this.radius = null;
-    this.context = null;
 
     this.init = () => {
       this.radius = radius;
@@ -47,11 +46,7 @@ let MAX_HEIGHT = 800;
     };
 
     this.isXWallCollision = () => {
-      if (this.x + this.dx > MAX_HEIGHT - this.radius || this.x < 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.x + this.dx > MAX_HEIGHT - this.radius || this.x < 0;
     };
 
     this.reverseXDirection = () => {
@@ -59,11 +54,7 @@ let MAX_HEIGHT = 800;
     };
 
     this.isYWallCollision = () => {
-      if (this.y + this.dy > MAX_WIDTH - this.radius || this.y < 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.y + this.dy > MAX_WIDTH - this.radius || this.y < 0;
     };
 
     this.reverseYDirection = () => {
@@ -104,17 +95,13 @@ let MAX_HEIGHT = 800;
       let dy = ballOne.y + ballOne.radius - (ballTwo.y + ballTwo.radius);
       let distance = Math.sqrt(dx * dx + dy * dy);
 
-      if (distance < (ballOne.radius + ballTwo.radius) / 2) {
-        return true;
-      } else {
-        return false;
-      }
+      return distance < (ballOne.radius + ballTwo.radius) / 2;
     };
 
     this.detectAllCollision = () => {
       for (let k = 0; k < this.balls.length; k++) {
         for (let j = 0; j < this.balls.length; j++) {
-          if (k != j) {
+          if (k !== j) {
             if (this.detectCollision(this.balls[k], this.balls[j])) {
               this.balls[k].changeDirection(this.balls[j]);
             }
@@ -177,10 +164,9 @@ let MAX_HEIGHT = 800;
     };
 
     this.displayScore = () => {
-      console.log(this.score);
       document.getElementById('score').innerHTML = 'Score: ' + this.score;
     };
-  };
+  }
 
   let game = new Game(20).init();
 })();
