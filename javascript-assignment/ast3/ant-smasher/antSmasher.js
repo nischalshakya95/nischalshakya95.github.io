@@ -89,6 +89,7 @@ let MAX_HEIGHT = 800;
     this.isBallMoving = true;
     this.GAME_ANIMATION_FRAME = 10;
     this.parentElement = null;
+    this.score = 0;
 
     this.init = () => {
       this.ballCount = ballCount;
@@ -165,10 +166,21 @@ let MAX_HEIGHT = 800;
         ants[i].onclick = () => {
           this.balls.splice(i, 1);
           this.parentElement.removeChild(ants[i]);
+          this.calculateScore();
+          this.displayScore();
         };
       }
     };
+
+    this.calculateScore = () => {
+        this.score++;
+    };
+
+    this.displayScore = () => {
+      console.log(this.score);
+      document.getElementById('score').innerHTML = 'Score: ' + this.score;
+    };
   };
 
-  let game = new Game(100).init();
+  let game = new Game(20).init();
 })();
