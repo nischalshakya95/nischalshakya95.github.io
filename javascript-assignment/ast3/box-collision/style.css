@@ -1,4 +1,4 @@
-.box {
+.ant {
   position: absolute;
   background: blue;
   border-radius: 50%;
@@ -6,7 +6,7 @@
 
 .app-container {
   position: relative;
-  height: 600px;
+  height: 500px;
   width: 1000px;
   border: 1px solid green;
   margin: 0 auto;
