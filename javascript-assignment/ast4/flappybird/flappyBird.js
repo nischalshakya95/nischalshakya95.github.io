@@ -6,7 +6,12 @@ const ARROW_RIGHT = "ArrowRight";
 const ARROW_LEFT = "ArrowLeft";
 
 class GameArea {
-  constructor() {
+
+  interval = null;
+
+  constructor(bird, obstacle) {
+    this.bird = bird;
+    this.obstacle = obstacle;
     return this;
   }
 
@@ -14,42 +19,76 @@ class GameArea {
     canvas.width = 480;
     canvas.height = 500;
     document.body.insertBefore(canvas, document.body.childNodes[0]);
-  }
-}
-
-class Bird {
-  isKeyPressed = true;
-  dx = 1;
-  dy = 1;
-  key = null;
-
-  constructor(x, y, width, height, color) {
-    this.setInitialPosition(x, y);
-    this.width = width;
-    this.height = height;
-    this.color = color;
-    this.addEvent();
-    return this;
+    this.setInterval();
   }
 
-  drawBird() {
-    context.fillStyle = this.color;
-    context.fillRect(this.x, this.y, this.width, this.height);
+  updateFrame() {
+    this.clear();
+    this.bird.draw();
+    this.bird.move();
+    this.obstacle.x -= this.obstacle.dx;
+    this.detectCollision();
+    this.obstacle.draw();
   }
 
   clear() {
     context.clearRect(0, 0, canvas.width, canvas.height);
   }
 
+  setInterval() {
+    this.interval = setInterval(this.updateFrame.bind(this), 10);
+  }
+
+  checkCollision() {
+    if (this.bird.x < this.obstacle.x + this.obstacle.width &&
+      this.bird.x + this.bird.width > this.obstacle.x &&
+      this.bird.y < this.obstacle.y + this.obstacle.height &&
+      this.bird.y + this.bird.height > this.obstacle.y) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  detectCollision() {
+    if (this.checkCollision()) {
+      clearInterval(this.interval);
+    }
+  }
+}
+
+class Component {
+  dx = 1;
+  dy = 1;
+
+  constructor(x, y, width, height, color) {
+    this.setInitialPosition(x, y);
+    this.width = width;
+    this.height = height;
+    this.color = color;
+    return this;
+  }
+
+  draw() {
+    context.fillStyle = this.color;
+    context.fillRect(this.x, this.y, this.width, this.height);
+  }
+
   setInitialPosition(x, y) {
     this.x = x;
     this.y = y;
   }
+}
 
-  updateFrame() {
-    this.clear();
-    this.drawBird();
-    this.move();
+class Bird extends Component {
+
+  isKeyPressed = true;
+  key = null;
+
+  constructor(x, y, width, height, color) {
+    super(x, y, width, height, color);
+    this.addEvent();
+    return this;
   }
 
   move() {
@@ -81,17 +120,19 @@ class Bird {
       this.isKeyPressed = false;
     });
   }
+}
 
-  interval() {
-    setInterval(this.updateFrame.bind(this), 10);
+class Obstacle extends Component {
+
+  constructor(x, y, width, height, color) {
+    super(x, y, width, height, color);
+    return this;
   }
+
 }
 
-class Obstacle {
-    
-}
-
-let game = new GameArea();
+let bird = new Bird(10, 300, 20, 20, "red");
+let obstacle = new Obstacle(300, 300, 10, 200, "green");
+let game = new GameArea(bird, obstacle);
 game.start();
-let bird = new Bird(10, canvas.height / 2, 20, 20, "red");
-bird.interval();
+
