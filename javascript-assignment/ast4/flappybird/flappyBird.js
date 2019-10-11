@@ -7,127 +7,138 @@ const ARROW_LEFT = "ArrowLeft";
 
 class GameArea {
 
-  interval = null;
+    interval = null;
+    frameNo = 1;
+    obstacles = [];
 
-  constructor(bird, obstacle) {
-    this.bird = bird;
-    this.obstacle = obstacle;
-    return this;
-  }
-
-  start() {
-    canvas.width = 480;
-    canvas.height = 500;
-    document.body.insertBefore(canvas, document.body.childNodes[0]);
-    this.setInterval();
-  }
-
-  updateFrame() {
-    this.clear();
-    this.bird.draw();
-    this.bird.move();
-    this.obstacle.x -= this.obstacle.dx;
-    this.detectCollision();
-    this.obstacle.draw();
-  }
-
-  clear() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-  }
-
-  setInterval() {
-    this.interval = setInterval(this.updateFrame.bind(this), 10);
-  }
-
-  checkCollision() {
-    if (this.bird.x < this.obstacle.x + this.obstacle.width &&
-      this.bird.x + this.bird.width > this.obstacle.x &&
-      this.bird.y < this.obstacle.y + this.obstacle.height &&
-      this.bird.y + this.bird.height > this.obstacle.y) {
-      return true;
-    } else {
-      return false;
+    constructor(bird, obstacle) {
+        this.bird = bird;
+        this.obstacle = obstacle;
+        return this;
     }
-  }
 
-  detectCollision() {
-    if (this.checkCollision()) {
-      clearInterval(this.interval);
+    start() {
+        canvas.width = 480;
+        canvas.height = 500;
+        document.body.insertBefore(canvas, document.body.childNodes[0]);
+        this.setInterval();
     }
-  }
+
+    updateFrame() {
+        this.clear();
+        this.bird.draw();
+        this.bird.move();
+        this.detectCollision();
+        this.frameNo++;
+        if (this.frameNo === 1 || this.everyInterval(150)) {
+            let x = canvas.width;
+            let y = canvas.height - 200;
+            this.obstacles.push(new Obstacle(x, y, 10, 200, "green"));
+        }
+
+        for (let i = 0; i < this.obstacles.length; i++) {
+            this.obstacles[i].x -= this.obstacles[i].dx;
+            this.obstacles[i].draw();
+        }
+    }
+
+    everyInterval(n) {
+        return (this.frameNo / n) % 1 === 0;
+    }
+
+    clear() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    setInterval() {
+        this.interval = setInterval(this.updateFrame.bind(this), 10);
+    }
+
+    checkCollision() {
+        return this.bird.x < this.obstacle.x + this.obstacle.width &&
+            this.bird.x + this.bird.width > this.obstacle.x &&
+            this.bird.y < this.obstacle.y + this.obstacle.height &&
+            this.bird.y + this.bird.height > this.obstacle.y;
+    }
+
+    detectCollision() {
+        if (this.checkCollision()) {
+            clearInterval(this.interval);
+        }
+    }
 }
 
 class Component {
-  dx = 1;
-  dy = 1;
+    dx = 1;
+    dy = 1;
 
-  constructor(x, y, width, height, color) {
-    this.setInitialPosition(x, y);
-    this.width = width;
-    this.height = height;
-    this.color = color;
-    return this;
-  }
+    constructor(x, y, width, height, color) {
+        this.setInitialPosition(x, y);
+        this.width = width;
+        this.height = height;
+        this.color = color;
+        return this;
+    }
 
-  draw() {
-    context.fillStyle = this.color;
-    context.fillRect(this.x, this.y, this.width, this.height);
-  }
+    draw() {
+        context.fillStyle = this.color;
+        context.fillRect(this.x, this.y, this.width, this.height);
+    }
 
-  setInitialPosition(x, y) {
-    this.x = x;
-    this.y = y;
-  }
+    setInitialPosition(x, y) {
+        this.x = x;
+        this.y = y;
+    }
 }
 
 class Bird extends Component {
 
-  isKeyPressed = true;
-  key = null;
+    isKeyPressed = true;
+    key = null;
 
-  constructor(x, y, width, height, color) {
-    super(x, y, width, height, color);
-    this.addEvent();
-    return this;
-  }
-
-  move() {
-    if (this.isKeyPressed) {
-      switch (this.key) {
-        case ARROW_UP:
-          this.y += -this.dy;
-          break;
-        case ARROW_DOWN:
-          this.y += this.dy;
-          break;
-        case ARROW_RIGHT:
-          this.x += this.dx;
-          break;
-        case ARROW_LEFT:
-          this.x += -this.dx;
-          break;
-      }
+    constructor(x, y, width, height, color) {
+        super(x, y, width, height, color);
+        this.addEvent();
+        return this;
     }
-  }
 
-  addEvent() {
-    window.addEventListener("keydown", e => {
-      this.isKeyPressed = true;
-      this.key = e.key;
-    });
+    move() {
+        if (this.isKeyPressed) {
+            switch (this.key) {
+                case ARROW_UP:
+                    this.y += -this.dy;
+                    break;
+                case ARROW_DOWN:
+                    this.y += this.dy;
+                    break;
+                case ARROW_RIGHT:
+                    this.x += this.dx;
+                    break;
+                case ARROW_LEFT:
+                    this.x += -this.dx;
+                    break;
+            }
+        }
+    }
 
-    window.addEventListener("keyup", () => {
-      this.isKeyPressed = false;
-    });
-  }
+    addEvent() {
+        window.addEventListener("keydown", e => {
+            this.isKeyPressed = true;
+            this.key = e.key;
+        });
+
+        window.addEventListener("keyup", () => {
+            this.isKeyPressed = false;
+        });
+    }
 }
 
 class Obstacle extends Component {
 
-  constructor(x, y, width, height, color) {
-    super(x, y, width, height, color);
-    return this;
-  }
+    constructor(x, y, width, height, color) {
+        super(x, y, width, height, color);
+        return this;
+    }
 
 }
 
