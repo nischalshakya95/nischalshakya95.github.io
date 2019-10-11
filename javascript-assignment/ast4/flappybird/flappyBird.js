@@ -11,9 +11,8 @@ class GameArea {
     frameNo = 1;
     obstacles = [];
 
-    constructor(bird, obstacle) {
+    constructor(bird) {
         this.bird = bird;
-        this.obstacle = obstacle;
         return this;
     }
 
@@ -28,7 +27,6 @@ class GameArea {
         this.clear();
         this.bird.draw();
         this.bird.move();
-        this.detectCollision();
         this.frameNo++;
         if (this.frameNo === 1 || this.everyInterval(150)) {
             let x = canvas.width;
@@ -39,6 +37,7 @@ class GameArea {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].x -= this.obstacles[i].dx;
             this.obstacles[i].draw();
+            this.detectCollision(this.obstacles[i]);
         }
     }
 
@@ -54,15 +53,15 @@ class GameArea {
         this.interval = setInterval(this.updateFrame.bind(this), 10);
     }
 
-    checkCollision() {
-        return this.bird.x < this.obstacle.x + this.obstacle.width &&
-            this.bird.x + this.bird.width > this.obstacle.x &&
-            this.bird.y < this.obstacle.y + this.obstacle.height &&
-            this.bird.y + this.bird.height > this.obstacle.y;
+    checkCollision(obstacle) {
+        return this.bird.x < obstacle.x + obstacle.width &&
+            this.bird.x + this.bird.width > obstacle.x &&
+            this.bird.y < obstacle.y + obstacle.height &&
+            this.bird.y + this.bird.height > obstacle.y;
     }
 
-    detectCollision() {
-        if (this.checkCollision()) {
+    detectCollision(obstacle) {
+        if (this.checkCollision(obstacle)) {
             clearInterval(this.interval);
         }
     }
@@ -143,7 +142,6 @@ class Obstacle extends Component {
 }
 
 let bird = new Bird(10, 300, 20, 20, "red");
-let obstacle = new Obstacle(300, 300, 10, 200, "green");
-let game = new GameArea(bird, obstacle);
+let game = new GameArea(bird);
 game.start();
 
