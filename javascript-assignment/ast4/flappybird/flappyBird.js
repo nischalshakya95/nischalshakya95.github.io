@@ -27,13 +27,26 @@ class GameArea {
         this.clear();
         this.bird.draw();
         this.bird.move();
-        this.frameNo++;
-        if (this.frameNo === 1 || this.everyInterval(150)) {
-            let x = canvas.width;
-            let y = canvas.height - 200;
-            this.obstacles.push(new Obstacle(x, y, 10, 200, "green"));
-        }
+        this.createObstacles();
+        this.drawObstacles();
+    }
 
+    createObstacles() {
+        this.frameNo++;
+        if (this.frameNo === 1 || this.onEveryInterval(150)) {
+            let minHeight = 10;
+            let maxHeight = 200;
+            let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
+            let minGap = 50;
+            let maxGap = 200;
+            let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+            let x = canvas.width;
+            this.obstacles.push(new Obstacle(x, 0, 10, height, 'green'));
+            this.obstacles.push(new Obstacle(x, height + gap, 10, x - height - gap, "green"));
+        }
+    }
+
+    drawObstacles() {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].x -= this.obstacles[i].dx;
             this.obstacles[i].draw();
@@ -41,7 +54,7 @@ class GameArea {
         }
     }
 
-    everyInterval(n) {
+    onEveryInterval(n) {
         return (this.frameNo / n) % 1 === 0;
     }
 
@@ -63,6 +76,7 @@ class GameArea {
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
             clearInterval(this.interval);
+            alert('game over');
         }
     }
 }
@@ -138,6 +152,7 @@ class Obstacle extends Component {
         super(x, y, width, height, color);
         return this;
     }
+
 
 }
 
