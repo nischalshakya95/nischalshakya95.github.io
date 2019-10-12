@@ -35,14 +35,14 @@ class GameArea {
         this.frameNo++;
         if (this.frameNo === 1 || this.onEveryInterval(150)) {
             let minHeight = 10;
-            let maxHeight = 200;
+            let maxHeight = 220;
             let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
             let minGap = 50;
-            let maxGap = 200;
+            let maxGap = 150;
             let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
             let x = canvas.width;
             this.obstacles.push(new Obstacle(x, 0, 10, height, 'green'));
-            this.obstacles.push(new Obstacle(x, height + gap, 10, x - height - gap, "green"));
+            this.obstacles.push(new Obstacle(x, height + gap + 20, 10, x - height - gap, "green"));
         }
     }
 
