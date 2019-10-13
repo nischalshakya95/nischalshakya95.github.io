@@ -44,13 +44,13 @@ class GameArea {
             let maxGap = 200;
             let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
             let x = 1200;
-            this.obstacles.push(new Obstacle(x, 0, OBSTACLE_WIDTH, height, './obstacleUp.png', 'obstacles'));
-            this.obstacles.push(new Obstacle(x, height + gap, OBSTACLE_WIDTH, x - height - gap, './obstacleDown.png', 'obstacles'));
+            this.obstacles.push(new Obstacle(x, 0, OBSTACLE_WIDTH, height, './images/obstacleUp.png', 'obstacles'));
+            this.obstacles.push(new Obstacle(x, height + gap, OBSTACLE_WIDTH, x - height - gap, './images/obstacleDown.png', 'obstacles'));
         }
     }
 
     drawBackgrond() {
-        let backgroundImage = new Component(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, './background.png', 'background');
+        let backgroundImage = new Component(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, './images/background.png', 'background');
         backgroundImage.draw();
     }
 
@@ -144,9 +144,11 @@ class Bird extends Component {
     gravitySpeed = 0; 
     speedX = 0;
     speedY = 0;
+    
 
     constructor(x, y, width, height, color, type) {
         super(x, y, width, height, color, type);
+        this.sound = new Audio('./sound/fly.mp3');
         this.addEvent();
         return this;
     }
@@ -168,8 +170,10 @@ class Bird extends Component {
     }
 
     accelerateUp() {
+        // this.sound.src = "./sound/fly.mp3";
         if (this.key === 32 && this.isKeyPressed) {
             this.gravity = -0.01;
+            this.sound.play();
         } else {
             this.gravity = 0.01;
         }
@@ -198,6 +202,6 @@ class Obstacle extends Component {
 
 }
 
-let bird = new Bird(10, 300, 38, 26, './bird.png', 'bird');
+let bird = new Bird(10, 300, 38, 26, './images/bird.png', 'bird');
 let game = new GameArea(bird);
 game.start();
