@@ -1,11 +1,11 @@
-let canvas = document.createElement('canvas');
+let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
 const ARROW_UP = 'ArrowUp';
 const ARROW_DOWN = 'ArrowDown';
 const ARROW_RIGHT = 'ArrowRight';
 const ARROW_LEFT = 'ArrowLeft';
-const CANVAS_HEIGHT = 800;
-const CANVAS_WIDTH = 1200;
+const CANVAS_HEIGHT = canvas.height;
+const CANVAS_WIDTH = canvas.width;
 const OBSTACLE_WIDTH = 100;
 
 class GameArea {
@@ -20,9 +20,6 @@ class GameArea {
     }
 
     start() {
-        canvas.width = CANVAS_WIDTH;
-        canvas.height = CANVAS_HEIGHT;
-        document.body.insertBefore(canvas, document.body.childNodes[0]);
         this.setInterval();
     }
 
@@ -143,7 +140,7 @@ class Bird extends Component {
 
     isKeyPressed = true;
     key = null;
-    gravity = 0.05; 
+    gravity = 0.5; 
     gravitySpeed = 0; 
     speedX = 0;
     speedY = 0;
@@ -172,9 +169,9 @@ class Bird extends Component {
 
     accelerateUp() {
         if (this.key === 32 && this.isKeyPressed) {
-            this.gravity = -0.1;
+            this.gravity = -0.01;
         } else {
-            this.gravity = 0.1;
+            this.gravity = 0.01;
         }
     }
 
