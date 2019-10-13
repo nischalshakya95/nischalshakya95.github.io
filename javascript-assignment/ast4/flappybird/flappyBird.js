@@ -1,9 +1,11 @@
-let canvas = document.createElement("canvas");
-let context = canvas.getContext("2d");
-const ARROW_UP = "ArrowUp";
-const ARROW_DOWN = "ArrowDown";
-const ARROW_RIGHT = "ArrowRight";
-const ARROW_LEFT = "ArrowLeft";
+let canvas = document.createElement('canvas');
+let context = canvas.getContext('2d');
+const ARROW_UP = 'ArrowUp';
+const ARROW_DOWN = 'ArrowDown';
+const ARROW_RIGHT = 'ArrowRight';
+const ARROW_LEFT = 'ArrowLeft';
+const CANVAS_HEIGHT =  800;
+const CANVAS_WIDTH = 1200;
 
 class GameArea {
 
@@ -17,8 +19,8 @@ class GameArea {
     }
 
     start() {
-        canvas.width = 480;
-        canvas.height = 500;
+        canvas.width = CANVAS_WIDTH;
+        canvas.height = CANVAS_HEIGHT;
         document.body.insertBefore(canvas, document.body.childNodes[0]);
         this.setInterval();
     }
@@ -29,11 +31,13 @@ class GameArea {
         this.bird.move();
         this.createObstacles();
         this.drawObstacles();
+        this.drawScore();
+
     }
 
     createObstacles() {
         this.frameNo++;
-        if (this.frameNo === 1 || this.onEveryInterval(150)) {
+        if (this.frameNo === 1 || this.onEveryInterval(600)) {
             let minHeight = 10;
             let maxHeight = 220;
             let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
@@ -42,7 +46,7 @@ class GameArea {
             let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
             let x = canvas.width;
             this.obstacles.push(new Obstacle(x, 0, 10, height, 'green'));
-            this.obstacles.push(new Obstacle(x, height + gap + 20, 10, x - height - gap, "green"));
+            this.obstacles.push(new Obstacle(x, height + gap + 20, 10, x - height - gap, 'green'));
         }
     }
 
@@ -52,6 +56,11 @@ class GameArea {
             this.obstacles[i].draw();
             this.detectCollision(this.obstacles[i]);
         }
+    }
+
+    drawScore() {
+        let score = new Component(240, 40, '30px', 'Consolas', 'black', 'text');
+        score.draw(this.calculateScore());
     }
 
     onEveryInterval(n) {
@@ -79,23 +88,39 @@ class GameArea {
             alert('game over');
         }
     }
+
+    calculateScore() {
+        return this.frameNo++;
+    }
 }
 
 class Component {
     dx = 1;
     dy = 1;
 
-    constructor(x, y, width, height, color) {
+    constructor(x, y, width, height, color, type) {
         this.setInitialPosition(x, y);
         this.width = width;
         this.height = height;
         this.color = color;
+        this.type = type;
         return this;
     }
 
-    draw() {
-        context.fillStyle = this.color;
-        context.fillRect(this.x, this.y, this.width, this.height);
+    draw(score) {
+        if (this.type === 'text') {
+            context.font = this.width + ' ' + this.height;
+            context.fillStyle = this.color;
+            context.fillText('Score: ' + score, this.x, this.y);
+        } else if (this.type === 'bird') {
+            this.image = new Image();
+            this.image.src = this.color;
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        }else {
+            context.fillStyle = this.color;
+            context.fillRect(this.x, this.y, this.width, this.height);
+        }
+
     }
 
     setInitialPosition(x, y) {
@@ -109,8 +134,8 @@ class Bird extends Component {
     isKeyPressed = true;
     key = null;
 
-    constructor(x, y, width, height, color) {
-        super(x, y, width, height, color);
+    constructor(x, y, width, height, color, type) {
+        super(x, y, width, height, color, type);
         this.addEvent();
         return this;
     }
@@ -135,12 +160,12 @@ class Bird extends Component {
     }
 
     addEvent() {
-        window.addEventListener("keydown", e => {
+        window.addEventListener('keydown', e => {
             this.isKeyPressed = true;
             this.key = e.key;
         });
 
-        window.addEventListener("keyup", () => {
+        window.addEventListener('keyup', () => {
             this.isKeyPressed = false;
         });
     }
@@ -156,7 +181,7 @@ class Obstacle extends Component {
 
 }
 
-let bird = new Bird(10, 300, 20, 20, "red");
+let bird = new Bird(10, 300, 150, 150, './tenor.gif', 'bird');
 let game = new GameArea(bird);
 game.start();
 
