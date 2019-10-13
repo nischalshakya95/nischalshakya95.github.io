@@ -31,7 +31,6 @@ class GameArea {
         this.drawBackgrond();
         this.bird.draw();
         this.bird.move();
-        
         this.createObstacles();
         this.drawObstacles();
         this.drawScore();
@@ -44,12 +43,12 @@ class GameArea {
             let minHeight = 200;
             let maxHeight = 400;
             let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
-            let minGap = 50;
-            let maxGap = 150;
+            let minGap = 100;
+            let maxGap = 200;
             let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
-            let x = canvas.width;
-            this.obstacles.push(new Obstacle(x, 0, OBSTACLE_WIDTH, height, './obstacle-down.png', 'obstacles'));
-            this.obstacles.push(new Obstacle(x, height + gap, OBSTACLE_WIDTH, x - height, './obstacle-up.png', 'obstacles'));
+            let x = 1200;
+            this.obstacles.push(new Obstacle(x, 0, OBSTACLE_WIDTH, height, './obstacleUp.png', 'obstacles'));
+            this.obstacles.push(new Obstacle(x, height + gap, OBSTACLE_WIDTH, x - height - gap, './obstacleDown.png', 'obstacles'));
         }
     }
 
@@ -62,7 +61,7 @@ class GameArea {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].x -= this.obstacles[i].dx;
             this.obstacles[i].draw();
-            // this.detectCollision(this.obstacles[i]);
+            this.detectCollision(this.obstacles[i]);
         }
     }
 
@@ -144,6 +143,10 @@ class Bird extends Component {
 
     isKeyPressed = true;
     key = null;
+    gravity = 0.05; 
+    gravitySpeed = 0; 
+    speedX = 0;
+    speedY = 0;
 
     constructor(x, y, width, height, color, type) {
         super(x, y, width, height, color, type);
@@ -152,28 +155,34 @@ class Bird extends Component {
     }
 
     move() {
-        if (this.isKeyPressed) {
-            switch (this.key) {
-                case ARROW_UP:
-                    this.y += -this.dy;
-                    break;
-                case ARROW_DOWN:
-                    this.y += this.dy;
-                    break;
-                case ARROW_RIGHT:
-                    this.x += this.dx;
-                    break;
-                case ARROW_LEFT:
-                    this.x += -this.dx;
-                    break;
-            }
+        this.accelerateUp();
+        this.gravitySpeed += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY + this.gravitySpeed;
+        this.hitBottom();
+    }
+
+    hitBottom() {
+        let rockBottom = canvas.height - this.height;
+        if (this.y > rockBottom) {
+            this.y = rockBottom;
+            this.gravitySpeed = 0;
         }
     }
+
+    accelerateUp() {
+        if (this.key === 32 && this.isKeyPressed) {
+            this.gravity = -0.1;
+        } else {
+            this.gravity = 0.1;
+        }
+    }
+
 
     addEvent() {
         window.addEventListener('keydown', e => {
             this.isKeyPressed = true;
-            this.key = e.key;
+            this.key = e.keyCode;
         });
 
         window.addEventListener('keyup', () => {
@@ -192,7 +201,6 @@ class Obstacle extends Component {
 
 }
 
-let bird = new Bird(10, 300, 100, 100, './tenor.png', 'bird');
+let bird = new Bird(10, 300, 38, 26, './bird.png', 'bird');
 let game = new GameArea(bird);
 game.start();
-
