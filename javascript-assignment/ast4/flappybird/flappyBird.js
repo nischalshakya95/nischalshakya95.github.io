@@ -17,7 +17,8 @@ class GameArea {
 
     constructor(bird) {
         this.bird = bird;
-        this.audio = new Audio('./sound/score.mp3');
+        this.scoreAudio = this.generateAudio('./sound/score.mp3');
+        this.gameOverAudio = this.generateAudio('./sound/game-over.mp3');
         return this;
     }
 
@@ -50,7 +51,7 @@ class GameArea {
             this.obstacles.push(new Obstacle(x, height + gap, OBSTACLE_WIDTH, x - height - gap, './images/obstacleDown.png', 'obstacles'));
             this.score++;
             if (this.score > 0) {
-                this.audio.play();
+                this.scoreAudio.play();
             }           
         }
     }
@@ -94,8 +95,13 @@ class GameArea {
 
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
+            this.gameOverAudio.play();
             clearInterval(this.interval);
         }
+    }
+
+    generateAudio(path) {
+        return new Audio(path);
     }
 }
 
