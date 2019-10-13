@@ -13,9 +13,11 @@ class GameArea {
     interval = null;
     frameNo = 1;
     obstacles = [];
+    score = -3;
 
     constructor(bird) {
         this.bird = bird;
+        this.audio = new Audio('./sound/score.mp3');
         return this;
     }
 
@@ -36,16 +38,20 @@ class GameArea {
 
     createObstacles() {
         this.frameNo++;
-        if (this.frameNo === 1 || this.onEveryInterval(600)) {
+        if (this.frame === 1 || this.onEveryInterval(300)) {
             let minHeight = 200;
             let maxHeight = 400;
             let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
             let minGap = 100;
             let maxGap = 200;
             let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
-            let x = 1200;
+            let x = CANVAS_WIDTH;
             this.obstacles.push(new Obstacle(x, 0, OBSTACLE_WIDTH, height, './images/obstacleUp.png', 'obstacles'));
             this.obstacles.push(new Obstacle(x, height + gap, OBSTACLE_WIDTH, x - height - gap, './images/obstacleDown.png', 'obstacles'));
+            this.score++;
+            if (this.score > 0) {
+                this.audio.play();
+            }           
         }
     }
 
@@ -64,14 +70,14 @@ class GameArea {
 
     drawScore() {
         let score = new Component(240, 40, '30px', 'Consolas', 'black', 'text');
-        score.draw(this.calculateScore());
+        this.score < 0 ? score.draw(0) : score.draw(this.score);        
     }
 
     onEveryInterval(n) {
         return (this.frameNo / n) % 1 === 0;
     }
 
-    clear() {
+    clear() {             
         context.clearRect(0, 0, canvas.width, canvas.height);
     }
 
@@ -91,10 +97,6 @@ class GameArea {
             clearInterval(this.interval);
         }
     }
-
-    calculateScore() {
-        return this.frameNo++;
-    }
 }
 
 class Component {
@@ -111,12 +113,10 @@ class Component {
     }
 
     draw(score) {
-
         if (this.type === 'bird' || this.type === 'background' || this.type === 'obstacles') {
             this.image = new Image();
             this.image.src = this.color;     
         }
-
         if (this.type === 'text') {
             context.font = this.width + ' ' + this.height;
             context.fillStyle = this.color;
@@ -170,7 +170,6 @@ class Bird extends Component {
     }
 
     accelerateUp() {
-        // this.sound.src = "./sound/fly.mp3";
         if (this.key === 32 && this.isKeyPressed) {
             this.gravity = -0.01;
             this.sound.play();
