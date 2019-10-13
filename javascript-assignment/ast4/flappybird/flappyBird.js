@@ -6,7 +6,7 @@ const ARROW_RIGHT = 'ArrowRight';
 const ARROW_LEFT = 'ArrowLeft';
 const CANVAS_HEIGHT = 800;
 const CANVAS_WIDTH = 1200;
-const OBSTACLE_WIDTH = 200;
+const OBSTACLE_WIDTH = 100;
 
 class GameArea {
 
@@ -41,15 +41,15 @@ class GameArea {
     createObstacles() {
         this.frameNo++;
         if (this.frameNo === 1 || this.onEveryInterval(600)) {
-            let minHeight = 20;
-            let maxHeight = 200;
+            let minHeight = 200;
+            let maxHeight = 400;
             let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
             let minGap = 50;
             let maxGap = 150;
             let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
             let x = canvas.width;
             this.obstacles.push(new Obstacle(x, 0, OBSTACLE_WIDTH, height, './obstacle-down.png', 'obstacles'));
-            this.obstacles.push(new Obstacle(x, height + gap + 20, OBSTACLE_WIDTH, x - height - gap, './obstacle-up.png', 'obstacles'));
+            this.obstacles.push(new Obstacle(x, height + gap, OBSTACLE_WIDTH, x - height, './obstacle-up.png', 'obstacles'));
         }
     }
 
@@ -62,7 +62,7 @@ class GameArea {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].x -= this.obstacles[i].dx;
             this.obstacles[i].draw();
-            this.detectCollision(this.obstacles[i]);
+            // this.detectCollision(this.obstacles[i]);
         }
     }
 
@@ -192,7 +192,7 @@ class Obstacle extends Component {
 
 }
 
-let bird = new Bird(10, 300, 150, 150, './tenor.gif', 'bird');
+let bird = new Bird(10, 300, 100, 100, './tenor.png', 'bird');
 let game = new GameArea(bird);
 game.start();
 
