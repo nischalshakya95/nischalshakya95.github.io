@@ -4,8 +4,9 @@ const ARROW_UP = 'ArrowUp';
 const ARROW_DOWN = 'ArrowDown';
 const ARROW_RIGHT = 'ArrowRight';
 const ARROW_LEFT = 'ArrowLeft';
-const CANVAS_HEIGHT =  800;
+const CANVAS_HEIGHT = 800;
 const CANVAS_WIDTH = 1200;
+const OBSTACLE_WIDTH = 200;
 
 class GameArea {
 
@@ -27,8 +28,10 @@ class GameArea {
 
     updateFrame() {
         this.clear();
+        this.drawBackgrond();
         this.bird.draw();
         this.bird.move();
+        
         this.createObstacles();
         this.drawObstacles();
         this.drawScore();
@@ -38,16 +41,21 @@ class GameArea {
     createObstacles() {
         this.frameNo++;
         if (this.frameNo === 1 || this.onEveryInterval(600)) {
-            let minHeight = 10;
-            let maxHeight = 220;
+            let minHeight = 20;
+            let maxHeight = 200;
             let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
             let minGap = 50;
             let maxGap = 150;
             let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
             let x = canvas.width;
-            this.obstacles.push(new Obstacle(x, 0, 10, height, 'green'));
-            this.obstacles.push(new Obstacle(x, height + gap + 20, 10, x - height - gap, 'green'));
+            this.obstacles.push(new Obstacle(x, 0, OBSTACLE_WIDTH, height, './obstacle-down.png', 'obstacles'));
+            this.obstacles.push(new Obstacle(x, height + gap + 20, OBSTACLE_WIDTH, x - height - gap, './obstacle-up.png', 'obstacles'));
         }
+    }
+
+    drawBackgrond() {
+        let backgroundImage = new Component(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, './background.png', 'background');
+        backgroundImage.draw();
     }
 
     drawObstacles() {
@@ -85,7 +93,6 @@ class GameArea {
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
             clearInterval(this.interval);
-            alert('game over');
         }
     }
 
@@ -108,19 +115,23 @@ class Component {
     }
 
     draw(score) {
+
+        if (this.type === 'bird' || this.type === 'background' || this.type === 'obstacles') {
+            this.image = new Image();
+            this.image.src = this.color;     
+        }
+
         if (this.type === 'text') {
             context.font = this.width + ' ' + this.height;
             context.fillStyle = this.color;
             context.fillText('Score: ' + score, this.x, this.y);
-        } else if (this.type === 'bird') {
-            this.image = new Image();
-            this.image.src = this.color;
+        } else if (this.type === 'bird' || this.type === 'background') {
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);       
+        }else if (this.type === 'background') {
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }else {
-            context.fillStyle = this.color;
-            context.fillRect(this.x, this.y, this.width, this.height);
+        } else if (this.type === 'obstacles'){
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
-
     }
 
     setInitialPosition(x, y) {
@@ -173,8 +184,8 @@ class Bird extends Component {
 
 class Obstacle extends Component {
 
-    constructor(x, y, width, height, color) {
-        super(x, y, width, height, color);
+    constructor(x, y, width, height, color, type) {
+        super(x, y, width, height, color, type);
         return this;
     }
 
