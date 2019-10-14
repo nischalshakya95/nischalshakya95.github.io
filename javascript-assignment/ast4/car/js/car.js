@@ -3,8 +3,12 @@ let context = canvas.getContext('2d');
 
 const CANVAS_WIDTH = canvas.width;
 const CANVAS_HEIGHT = canvas.height;
+
 const CAR_WIDTH = 100;
 const CAR_HEIGHT = 100;
+const OBSTACLE_COLOR = 'red';
+const CAR_COLOR = 'green';
+const LINE_COLOR = 'white';
 
 class GameArea {
 
@@ -19,11 +23,15 @@ class GameArea {
     }
 
     updateFrame() {
+
         this.clear();
         this.drawLines();
+
         this.car.draw();
+
         this.createObstacles();
         this.drawObstacle();
+
         this.requestAnimationFrameId = requestAnimationFrame(this.updateFrame.bind(this));
     }
 
@@ -32,8 +40,8 @@ class GameArea {
     }
 
     drawLines() {
-        let lineOne = new Component(200, 0, 5, CANVAS_HEIGHT, 'white', 'line');
-        let lineTwo = new Component(400, 0, 5, CANVAS_HEIGHT, 'white', 'line');
+        let lineOne = new Component(200, 0, 5, CANVAS_HEIGHT, LINE_COLOR, 'line');
+        let lineTwo = new Component(400, 0, 5, CANVAS_HEIGHT, LINE_COLOR, 'line');
         lineOne.draw();
         lineTwo.draw();
     }
@@ -41,13 +49,13 @@ class GameArea {
     createObstacles() {
         this.frameNo++;
         if (this.frameNo === 1 || this.onEveryInterval(200)) {
-            this.obstacles.push(new Obstacle(50, 0, CAR_WIDTH, CAR_HEIGHT, './images/car.jpg', 'obstacle'));
+            this.obstacles.push(new Obstacle(50, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_COLOR, 'obstacle'));
         }
-        if (this.frameNo === 1 || this.onEveryInterval(200)) {
-            this.obstacles.push(new Obstacle(250, 0, CAR_WIDTH, CAR_HEIGHT, './images/car.jpg', 'obstacle'));
+        if (this.frameNo === 1 || this.onEveryInterval(500)) {
+            this.obstacles.push(new Obstacle(250, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_COLOR, 'obstacle'));
         }
         if (this.frameNo === 1 || this.onEveryInterval(600)) {
-            this.obstacles.push(new Obstacle(450, 0, CAR_WIDTH, CAR_HEIGHT, './images/car.jpg', 'obstacle'));
+            this.obstacles.push(new Obstacle(450, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_COLOR, 'obstacle'));
         }
     }
 
@@ -72,11 +80,10 @@ class GameArea {
 
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
-            console.log(this.requestAnimationFrameId);
+            this.car.color = 'black';
             cancelAnimationFrame(this.requestAnimationFrameId);
         }
     }
-
 }
 
 class Component {
@@ -94,20 +101,13 @@ class Component {
     }
 
     draw() {
-        if (this.type === 'car' || this.type === 'obstacle') {
-            this.image = new Image();
-            this.image.src = this.color;
-        }
-
         if (this.type === 'line') {
             context.fillStyle = this.color;
             context.fillRect(this.x, this.y, this.width, this.height);
         }
-        if (this.type === 'obstacle') {
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-        if (this.type === 'car') {
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        if (this.type === 'obstacle' || this.type === 'car') {
+            context.fillStyle = this.color;
+            context.fillRect(this.x, this.y, this.width, this.height);
         }
     }
 
@@ -129,20 +129,6 @@ class Car extends Component {
         return this;
     }
 
-    move() {
-        if (this.isKeyPressed && this.key === 'ArrowRight') {
-            this.dx += 1;
-        }
-        if (this.isKeyPressed && this.key === 'ArrowLeft') {
-            this.dx -= 1;
-        }
-        this.updatePos();
-    }
-
-    updatePos() {
-        this.x += this.dx;
-    }
-
     addEvent() {
         window.addEventListener('keydown', e => {
             this.isKeyPressed = true;
@@ -152,7 +138,6 @@ class Car extends Component {
             this.isKeyPressed = false;
         });
     }
-
 }
 
 class Obstacle extends Component {
@@ -163,5 +148,5 @@ class Obstacle extends Component {
     }
 }
 
-let car = new Car(250, 700, CAR_WIDTH, CAR_HEIGHT, './images/car.jpg', 'car');
-let gameArea = new GameArea(car);
+let car = new Car(250, 700, CAR_WIDTH, CAR_HEIGHT, CAR_COLOR, 'car');
+new GameArea(car);
