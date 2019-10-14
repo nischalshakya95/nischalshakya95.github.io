@@ -30,7 +30,7 @@ class GameArea {
         this.clear();
         this.drawBackgrond();
         this.bird.draw();
-        this.bird.move();
+        this.bird.move(this.interval);
         this.createObstacles();
         this.drawObstacles();
         this.drawScore();
@@ -159,19 +159,20 @@ class Bird extends Component {
         return this;
     }
 
-    move() {
+    move(interval){
         this.accelerateUp();
         this.gravitySpeed += this.gravity;
         this.x += this.speedX;
         this.y += this.speedY + this.gravitySpeed;
-        this.hitBottom();
+        this.hitBottom(interval);
     }
 
-    hitBottom() {
+    hitBottom(interval) {
         let rockBottom = canvas.height - this.height;
         if (this.y > rockBottom) {
             this.y = rockBottom;
             this.gravitySpeed = 0;
+            clearInterval(interval);
         }
     }
 
