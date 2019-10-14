@@ -3,8 +3,13 @@ let context = canvas.getContext('2d');
 
 const CANVAS_WIDTH = canvas.width;
 const CANVAS_HEIGHT = canvas.height;
+const CAR_WIDTH = 100;
+const CAR_HEIGHT = 100;
 
 class GameArea {
+
+    obstacles = [];
+    frameNo = 1;
 
     constructor(car) {
         this.car = car;
@@ -15,8 +20,9 @@ class GameArea {
     updateFrame() {
         this.clear();
         this.drawLines();
-        this.car.move();
         this.car.draw();
+        this.createObstacles();
+        this.drawObstacle();
         requestAnimationFrame(this.updateFrame.bind(this));
     }
 
@@ -30,6 +36,26 @@ class GameArea {
         lineOne.draw();
         lineTwo.draw();
     }
+
+    createObstacles() {
+        this.frameNo++;
+        if (this.frameNo === 1 || this.onEveryInterval(50)) {
+            this.obstacles.push(new Obstacle(50, 0, CAR_WIDTH, CAR_HEIGHT, 'red', 'obstacle'));
+            this.obstacles.push(new Obstacle(250, 0, CAR_WIDTH, CAR_HEIGHT, 'red', 'obstacle'));
+            this.obstacles.push(new Obstacle(450, 0, CAR_WIDTH, CAR_HEIGHT, 'red', 'obstacle'));
+        }
+    }
+
+    drawObstacle() {
+        for (let i = 0; i < this.obstacles.length; i++) {
+            this.obstacles[i].draw();
+        }
+    }
+
+    onEveryInterval(n) {
+        return (this.frameNo / n) % 1 === 0;
+    }
+
 }
 
 class Component {
@@ -48,7 +74,7 @@ class Component {
             context.fillStyle = this.color;
             context.fillRect(this.x, this.y, this.width, this.height);
         }
-        if (this.type === 'car') {
+        if (this.type === 'car' || this.type === 'obstacle') {
             context.fillStyle = this.color;
             context.fillRect(this.x, this.y, this.width, this.height);
         }
@@ -63,23 +89,24 @@ class Component {
 
 class Car extends Component {
 
-    isKeyPressed = true;
+    isKeyPressed = null;
     key = null;
-    dx = 0;
-    dy = 0;
+    dx = 1;
+    dy = 1;
 
     constructor(x, y, width, height, color, type) {
         super(x, y, width, height, color, type);
+        this.isKeyPressed = false;
         this.addEvent();
         return this;
     }
 
     move() {
         if (this.isKeyPressed && this.key === 'ArrowRight') {
-            this.dx += 100;
+            this.dx += 1;
         }
         if (this.isKeyPressed && this.key === 'ArrowLeft') {
-            this.dx -= 100;
+            this.dx -= 1;
         }
         this.updatePos();
     }
@@ -100,5 +127,13 @@ class Car extends Component {
 
 }
 
-let car = new Car(250, 700, 100, 100, 'red', 'car');
+class Obstacle extends Component {
+
+    constructor(x, y, width, height, color, type) {
+        super(x, y, width, height, color, type);
+        return this;
+    }
+}
+
+let car = new Car(250, 700, CAR_WIDTH, CAR_HEIGHT, 'red', 'car');
 let gameArea = new GameArea(car);
