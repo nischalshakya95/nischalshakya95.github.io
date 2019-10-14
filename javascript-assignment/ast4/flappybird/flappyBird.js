@@ -29,12 +29,11 @@ class GameArea {
     updateFrame() {
         this.clear();
         this.drawBackgrond();
-        this.bird.draw();
         this.bird.move(this.interval);
+        this.bird.draw();
         this.createObstacles();
         this.drawObstacles();
         this.drawScore();
-
     }
 
     createObstacles() {
@@ -52,7 +51,7 @@ class GameArea {
             this.score++;
             if (this.score > 0) {
                 this.scoreAudio.play();
-            }           
+            }
         }
     }
 
@@ -71,14 +70,14 @@ class GameArea {
 
     drawScore() {
         let score = new Component(240, 40, '30px', 'Consolas', 'black', 'text');
-        this.score < 0 ? score.draw(0) : score.draw(this.score);        
+        this.score < 0 ? score.draw(0) : score.draw(this.score);
     }
 
     onEveryInterval(n) {
         return (this.frameNo / n) % 1 === 0;
     }
 
-    clear() {             
+    clear() {
         context.clearRect(0, 0, canvas.width, canvas.height);
     }
 
@@ -121,17 +120,17 @@ class Component {
     draw(score) {
         if (this.type === 'bird' || this.type === 'background' || this.type === 'obstacles') {
             this.image = new Image();
-            this.image.src = this.color;     
+            this.image.src = this.color;
         }
         if (this.type === 'text') {
             context.font = this.width + ' ' + this.height;
             context.fillStyle = this.color;
             context.fillText('Score: ' + score, this.x, this.y);
         } else if (this.type === 'bird' || this.type === 'background') {
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);       
-        }else if (this.type === 'background') {
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        } else if (this.type === 'obstacles'){
+        } else if (this.type === 'background') {
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        } else if (this.type === 'obstacles') {
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
     }
@@ -146,11 +145,11 @@ class Bird extends Component {
 
     isKeyPressed = true;
     key = null;
-    gravity = 0.5; 
-    gravitySpeed = 0; 
+    gravity = 0.5;
+    gravitySpeed = 0;
     speedX = 0;
     speedY = 0;
-    
+
 
     constructor(x, y, width, height, color, type) {
         super(x, y, width, height, color, type);
@@ -159,7 +158,7 @@ class Bird extends Component {
         return this;
     }
 
-    move(interval){
+    move(interval) {
         this.accelerateUp();
         this.gravitySpeed += this.gravity;
         this.x += this.speedX;
