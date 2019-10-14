@@ -39,7 +39,7 @@ class GameArea {
 
     createObstacles() {
         this.frameNo++;
-        if (this.frameNo === 1 || this.onEveryInterval(50)) {
+        if (this.frameNo === 1 || this.onEveryInterval(200)) {
             this.obstacles.push(new Obstacle(50, 0, CAR_WIDTH, CAR_HEIGHT, 'red', 'obstacle'));
             this.obstacles.push(new Obstacle(250, 0, CAR_WIDTH, CAR_HEIGHT, 'red', 'obstacle'));
             this.obstacles.push(new Obstacle(450, 0, CAR_WIDTH, CAR_HEIGHT, 'red', 'obstacle'));
