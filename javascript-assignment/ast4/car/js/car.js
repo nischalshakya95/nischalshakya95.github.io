@@ -10,6 +10,7 @@ class GameArea {
 
     obstacles = [];
     frameNo = 1;
+    requestAnimationFrameId = null;
 
     constructor(car) {
         this.car = car;
@@ -23,7 +24,7 @@ class GameArea {
         this.car.draw();
         this.createObstacles();
         this.drawObstacle();
-        requestAnimationFrame(this.updateFrame.bind(this));
+        this.requestAnimationFrameId = requestAnimationFrame(this.updateFrame.bind(this));
     }
 
     clear() {
@@ -40,9 +41,13 @@ class GameArea {
     createObstacles() {
         this.frameNo++;
         if (this.frameNo === 1 || this.onEveryInterval(200)) {
-            this.obstacles.push(new Obstacle(50, 0, CAR_WIDTH, CAR_HEIGHT, 'red', 'obstacle'));
-            this.obstacles.push(new Obstacle(250, 0, CAR_WIDTH, CAR_HEIGHT, 'red', 'obstacle'));
-            this.obstacles.push(new Obstacle(450, 0, CAR_WIDTH, CAR_HEIGHT, 'red', 'obstacle'));
+            this.obstacles.push(new Obstacle(50, 0, CAR_WIDTH, CAR_HEIGHT, './images/car.jpg', 'obstacle'));
+        }
+        if (this.frameNo === 1 || this.onEveryInterval(200)) {
+            this.obstacles.push(new Obstacle(250, 0, CAR_WIDTH, CAR_HEIGHT, './images/car.jpg', 'obstacle'));
+        }
+        if (this.frameNo === 1 || this.onEveryInterval(600)) {
+            this.obstacles.push(new Obstacle(450, 0, CAR_WIDTH, CAR_HEIGHT, './images/car.jpg', 'obstacle'));
         }
     }
 
@@ -50,11 +55,26 @@ class GameArea {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].y += this.obstacles[i].dy;
             this.obstacles[i].draw();
+            this.detectCollision(this.obstacles[i]);
         }
     }
 
     onEveryInterval(n) {
         return (this.frameNo / n) % 1 === 0;
+    }
+
+    checkCollision(obstacle) {
+        return this.car.x < obstacle.x + obstacle.width &&
+            this.car.x + this.car.width > obstacle.x &&
+            this.car.y < obstacle.y + obstacle.height &&
+            this.car.y + this.car.height > obstacle.y;
+    }
+
+    detectCollision(obstacle) {
+        if (this.checkCollision(obstacle)) {
+            console.log(this.requestAnimationFrameId);
+            cancelAnimationFrame(this.requestAnimationFrameId);
+        }
     }
 
 }
@@ -74,16 +94,22 @@ class Component {
     }
 
     draw() {
+        if (this.type === 'car' || this.type === 'obstacle') {
+            this.image = new Image();
+            this.image.src = this.color;
+        }
+
         if (this.type === 'line') {
             context.fillStyle = this.color;
             context.fillRect(this.x, this.y, this.width, this.height);
         }
-        if (this.type === 'car' || this.type === 'obstacle') {
-            context.fillStyle = this.color;
-            context.fillRect(this.x, this.y, this.width, this.height);
+        if (this.type === 'obstacle') {
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        }
+        if (this.type === 'car') {
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
     }
-
 
     setInitialPosition(x, y) {
         this.x = x;
@@ -137,5 +163,5 @@ class Obstacle extends Component {
     }
 }
 
-let car = new Car(250, 700, CAR_WIDTH, CAR_HEIGHT, 'red', 'car');
+let car = new Car(250, 700, CAR_WIDTH, CAR_HEIGHT, './images/car.jpg', 'car');
 let gameArea = new GameArea(car);
