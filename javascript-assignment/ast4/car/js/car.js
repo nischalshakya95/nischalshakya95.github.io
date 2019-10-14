@@ -48,6 +48,7 @@ class GameArea {
 
     drawObstacle() {
         for (let i = 0; i < this.obstacles.length; i++) {
+            this.obstacles[i].y += this.obstacles[i].dy;
             this.obstacles[i].draw();
         }
     }
@@ -59,6 +60,9 @@ class GameArea {
 }
 
 class Component {
+
+    dx = 1;
+    dy = 1;
 
     constructor(x, y, width, height, color, type) {
         this.setInitialPosition(x, y);
@@ -91,8 +95,6 @@ class Car extends Component {
 
     isKeyPressed = null;
     key = null;
-    dx = 1;
-    dy = 1;
 
     constructor(x, y, width, height, color, type) {
         super(x, y, width, height, color, type);
