@@ -25,13 +25,18 @@ const CAR_SOUND = './sound/drive.mp3';
 class GameArea {
 
     obstacles = [];
+    bullets = [];
     frameNo = 1;
+    key = null;
     interval = null;
     obstaclePosition = [LEFT_CAR_X_POSITION, CENTER_CAR_X_POSITION, RIGHT_CAR_X_POSITION];
     score = 0;
+    isKeyPressed = false;
+    bullet = null;
 
     constructor(car) {
         this.car = car;
+        this.addSpaceEvent();
         return this;
     }
 
@@ -57,6 +62,15 @@ class GameArea {
         this.drawObstacle();
 
         this.drawScore();
+
+        if (this.bullets.length >=0) {
+            this.fireBullet();
+        }
+
+        this.createBullet();
+
+
+
     }
 
     setInterval() {
@@ -81,6 +95,40 @@ class GameArea {
         }
     }
 
+    createBullet() {
+        if (this.isKeyPressed && this.key === ' ') {
+            let pos = this.car.getPosition();
+            if (pos === 'center') {
+                this.bullet = new Bullet(CENTER_CAR_X_POSITION, 490, 10, 10, 'red');
+            } else if (pos === 'left') {
+                this.bullet = new Bullet(LEFT_CAR_X_POSITION, 490, 10, 10, 'red');
+            } else if (pos === 'right') {
+                this.bullet = new Bullet(RIGHT_CAR_X_POSITION, 490, 10, 10, 'red');
+            }
+            if (this.bullets.length < 10) {
+                this.bullets.push(this.bullet);
+            }            
+        }
+        console.log(this.bullets.length);
+    }
+
+    fireBullet() {
+        for (let i = 0; i < this.bullets.length; i++) {
+            this.bullets[i].move();
+            this.bullets[i].draw();
+        }
+    }
+
+    addSpaceEvent() {
+        window.addEventListener('keydown', e => {
+            this.isKeyPressed = true;
+            this.key = e.key;
+        });
+        window.addEventListener('keyup', () => {
+            this.isKeyPressed = false;
+        });
+    }
+
     drawObstacle() {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].y += this.obstacles[i].dy;
@@ -89,7 +137,7 @@ class GameArea {
                 this.obstacles.splice(i, 1);
             }
             this.obstacles[i].draw();
-            this.detectCollision(this.obstacles[i]);
+            // this.detectCollision(this.obstacles[i]);
         }
     }
 
@@ -150,6 +198,7 @@ class Car extends Component {
 
     isKeyPressed = null;
     key = null;
+    bullet = null;
 
     constructor(x, y, width, height, color) {
         super(x, y, width, height, color);
@@ -213,6 +262,29 @@ class Obstacle extends Component {
     constructor(x, y, width, height, color) {
         super(x, y, width, height, color);
         return this;
+    }
+}
+
+class Bullet {
+
+    dy = 1;
+
+    constructor(x, y, width, height, color) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.color = color;
+        return this;
+    }
+
+    draw() {
+        context.fillStyle = this.color;
+        context.fillRect(this.x, this.y, this.width, this.height, this.color);
+    }
+
+    move() {
+        this.y -= this.dy;
     }
 }
 
