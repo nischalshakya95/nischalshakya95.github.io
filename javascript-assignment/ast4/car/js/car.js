@@ -8,8 +8,9 @@ const CAR_WIDTH = 100;
 const CAR_HEIGHT = 150;
 const OBSTACLE_CAR = './images/obstacle.png';
 const PLAYER_CAR = './images/player.png';
-const CAR_COLOR = 'green';
-const LINE_COLOR = 'white';
+const LEFT_CAR_POSITION_X = 50;
+const CENTER_CAR_POSITION_X = 250;
+const RIGHT_CAR_POSITION_X = 450;
 
 class GameArea {
 
@@ -56,13 +57,13 @@ class GameArea {
     createObstacles() {
         this.frameNo++;
         if (this.frameNo === 1 || this.onEveryInterval(200)) {
-            this.obstacles.push(new Obstacle(50, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
+            this.obstacles.push(new Obstacle(LEFT_CAR_POSITION_X, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
         }
         if (this.frameNo === 1 || this.onEveryInterval(400)) {
-            this.obstacles.push(new Obstacle(250, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
+            this.obstacles.push(new Obstacle(CENTER_CAR_POSITION_X, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
         }
         if (this.frameNo === 1 || this.onEveryInterval(800)) {
-            this.obstacles.push(new Obstacle(450, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
+            this.obstacles.push(new Obstacle(LEFT_CAR_POSITION_X, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
         }
     }
 
@@ -87,7 +88,6 @@ class GameArea {
 
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
-            this.car.color = 'black';
             clearInterval(this.interval);
         }
     }
@@ -155,17 +155,35 @@ class Car extends Component {
             switch (this.key) {
                 case 'ArrowRight':
                     if (this.x + CAR_WIDTH < CANVAS_WIDTH - 50) {
-                        this.dx = 14.3;
+                        this.dx = 200;
                         this.x += this.dx;
+                        this.isKeyPressed = false;
                     }
                     break;
                 case 'ArrowLeft':
                     if (this.x > 50) {
-                        this.dx = -14.3;
+                        this.dx = -200;
                         this.x += this.dx;
+                        this.isKeyPressed = false;
                     }
                     break;
             }
+        }
+    }
+
+    detectPosition() {
+        switch(this.x) {
+            case LEFT_CAR_POSITION_X:
+                this.carPosition = 'left';
+                break;
+            case CENTER_CAR_POSITION_X:
+                this.carPosition = 'center';
+                break;
+            case RIGHT_CAR_POSITION_X:
+                this.carPosition = 'right';
+                break;
+            default:
+                this.carPosition = 'center';
         }
     }
 }
@@ -178,6 +196,6 @@ class Obstacle extends Component {
     }
 }
 
-let car = new Car(250, 650, CAR_WIDTH, CAR_HEIGHT, PLAYER_CAR, 'car');
+let car = new Car(CENTER_CAR_POSITION_X, 650, CAR_WIDTH, CAR_HEIGHT, PLAYER_CAR, 'car');
 let game = new GameArea(car);
 game.start();
