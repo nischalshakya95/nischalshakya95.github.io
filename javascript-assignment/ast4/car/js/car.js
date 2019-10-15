@@ -5,7 +5,7 @@ const CANVAS_WIDTH = canvas.width;
 const CANVAS_HEIGHT = canvas.height;
 
 const CAR_WIDTH = 100;
-const CAR_HEIGHT = 200;
+const CAR_HEIGHT = 150;
 const OBSTACLE_CAR = './images/obstacle.png';
 const PLAYER_CAR = './images/player.png';
 const CAR_COLOR = 'green';
@@ -178,6 +178,6 @@ class Obstacle extends Component {
     }
 }
 
-let car = new Car(250, 600, CAR_WIDTH, CAR_HEIGHT, PLAYER_CAR, 'car');
+let car = new Car(250, 650, CAR_WIDTH, CAR_HEIGHT, PLAYER_CAR, 'car');
 let game = new GameArea(car);
 game.start();
