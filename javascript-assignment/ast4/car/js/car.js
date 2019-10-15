@@ -8,20 +8,28 @@ const CAR_WIDTH = 100;
 const CAR_HEIGHT = 150;
 const OBSTACLE_CAR = './images/obstacle.png';
 const PLAYER_CAR = './images/player.png';
+const BACKGROUND = './images/background.png';
 const LEFT_CAR_POSITION_X = 50;
 const CENTER_CAR_POSITION_X = 250;
 const RIGHT_CAR_POSITION_X = 450;
+const CHANGE_CAR_POSITION_X_BY = 200;
 
 class GameArea {
 
     obstacles = [];
     frameNo = 1;
-    requestAnimationFrameId = null;
     interval = null;
+    obstaclePosition = [LEFT_CAR_POSITION_X, CENTER_CAR_POSITION_X, RIGHT_CAR_POSITION_X];
 
     constructor(car) {
         this.car = car;
         return this;
+    }
+
+    generateRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.ceil(max);
+        return Math.floor(Math.random() * (max - min)) + min;
     }
 
     start() {
@@ -41,7 +49,7 @@ class GameArea {
     }
 
     setInterval() {
-        this.interval = setInterval(this.updateFrame.bind(this), 10);
+        this.interval = setInterval(this.updateFrame.bind(this), 5);
     }
 
 
@@ -50,20 +58,15 @@ class GameArea {
     }
 
     drawLines() {
-        let lineOne = new Component(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, './images/background.png', 'line');
+        let lineOne = new Component(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, BACKGROUND);
         lineOne.draw();
     }
 
     createObstacles() {
         this.frameNo++;
-        if (this.frameNo === 1 || this.onEveryInterval(200)) {
-            this.obstacles.push(new Obstacle(LEFT_CAR_POSITION_X, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
-        }
-        if (this.frameNo === 1 || this.onEveryInterval(400)) {
-            this.obstacles.push(new Obstacle(CENTER_CAR_POSITION_X, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
-        }
-        if (this.frameNo === 1 || this.onEveryInterval(800)) {
-            this.obstacles.push(new Obstacle(LEFT_CAR_POSITION_X, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
+        let randomIndex = this.generateRandomInt(0, 3);
+        if (this.frameNo === 1 || this.onEveryInterval(300)) {
+            this.obstacles.push(new Obstacle(this.obstaclePosition[randomIndex], 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR));
         }
     }
 
@@ -98,27 +101,18 @@ class Component {
     dx = 1;
     dy = 1;
 
-    constructor(x, y, width, height, color, type) {
+    constructor(x, y, width, height, color) {
         this.setInitialPosition(x, y);
         this.width = width;
         this.height = height;
         this.color = color;
         this.image = new Image();
         this.image.src = this.color;
-        this.type = type;
         return this;
     }
 
     draw() {
-        if (this.type === 'line') {
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-        if (this.type === 'car') {
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-        if (this.type === 'obstacle') {
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
     setInitialPosition(x, y) {
@@ -132,8 +126,8 @@ class Car extends Component {
     isKeyPressed = null;
     key = null;
 
-    constructor(x, y, width, height, color, type) {
-        super(x, y, width, height, color, type);
+    constructor(x, y, width, height, color) {
+        super(x, y, width, height, color);
         this.isKeyPressed = false;
         this.carPosition = 'center';
         this.addEvent();
@@ -155,14 +149,14 @@ class Car extends Component {
             switch (this.key) {
                 case 'ArrowRight':
                     if (this.x + CAR_WIDTH < CANVAS_WIDTH - 50) {
-                        this.dx = 200;
+                        this.dx = CHANGE_CAR_POSITION_X_BY;
                         this.x += this.dx;
                         this.isKeyPressed = false;
                     }
                     break;
                 case 'ArrowLeft':
                     if (this.x > 50) {
-                        this.dx = -200;
+                        this.dx = -CHANGE_CAR_POSITION_X_BY;
                         this.x += this.dx;
                         this.isKeyPressed = false;
                     }
@@ -171,8 +165,8 @@ class Car extends Component {
         }
     }
 
-    detectPosition() {
-        switch(this.x) {
+    getPosition() {
+        switch (this.x) {
             case LEFT_CAR_POSITION_X:
                 this.carPosition = 'left';
                 break;
@@ -185,13 +179,14 @@ class Car extends Component {
             default:
                 this.carPosition = 'center';
         }
+        return this.carPosition;
     }
 }
 
 class Obstacle extends Component {
 
-    constructor(x, y, width, height, color, type) {
-        super(x, y, width, height, color, type);
+    constructor(x, y, width, height, color) {
+        super(x, y, width, height, color);
         return this;
     }
 }
