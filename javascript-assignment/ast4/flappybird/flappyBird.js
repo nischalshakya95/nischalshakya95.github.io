@@ -184,7 +184,6 @@ class Bird extends Component {
         }
     }
 
-
     addEvent() {
         window.addEventListener('keydown', e => {
             this.isKeyPressed = true;

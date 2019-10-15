@@ -1,5 +1,5 @@
 let MAX_WIDTH = 1000;
-let MAX_HEIGHT = 500;
+let MAX_HEIGHT = 900;
 
 (function () {
     function generateRandomInt(min, max) {
