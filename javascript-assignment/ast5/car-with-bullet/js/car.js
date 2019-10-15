@@ -64,14 +64,11 @@ class GameArea {
 
         this.drawScore();
 
-        if (this.bullets.length >=0) {
+        if (this.bullets.length >= 0) {
             this.fireBullet();
         }
 
         this.createBullet();
-
-
-
     }
 
     setInterval() {
@@ -106,20 +103,21 @@ class GameArea {
             } else if (pos === 'right') {
                 this.bullet = new Bullet(RIGHT_CAR_X_POSITION + BULLET_POSITION, 490, 10, 10, 'red');
             }
-            
+
             if (this.bullets.length < 10) {
                 this.bullets.push(this.bullet);
-                this.isKeyPressed =false;                
-            }               
+                this.isKeyPressed = false;
+            }
         }
-        console.log(this.bullets.length);
     }
 
     fireBullet() {
         for (let i = 0; i < this.bullets.length; i++) {
             this.bullets[i].move();
+            if (this.bullets[i].y < 0) {
+                this.bullets.splice(i, 1);
+            }
             this.bullets[i].draw();
-
         }
     }
 
@@ -141,7 +139,10 @@ class GameArea {
                 this.obstacles.splice(i, 1);
             }
             this.obstacles[i].draw();
-            // this.detectCollision(this.obstacles[i]);
+            this.detectCollision(this.obstacles[i]);
+            for (let j = 0; j < this.bullets.length; j++) {
+                this.detectCollisionWithBullet(this.bullets[j], this.obstacles[i]);
+            }
         }
     }
 
@@ -156,9 +157,23 @@ class GameArea {
             this.car.y + this.car.height > obstacle.y;
     }
 
+    checkCollisionWithBullet(bullet, obstacle) {
+        return bullet.x < obstacle.x + obstacle.width &&
+            bullet.x + bullet.width > obstacle.x &&
+            bullet.y < obstacle.y + obstacle.height &&
+            bullet.y + bullet.height > obstacle.y;
+    }
+
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
             clearInterval(this.interval);
+        }
+    }
+
+    detectCollisionWithBullet(bullet, obstacle) {
+        if (this.checkCollisionWithBullet(bullet, obstacle)) {
+            this.obstacles.splice(this.obstacles.indexOf(obstacle), 1);
+            this.bullets.splice(this.bullets.indexOf(bullet), 1);
         }
     }
 
