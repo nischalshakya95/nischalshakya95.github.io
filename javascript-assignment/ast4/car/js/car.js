@@ -5,8 +5,9 @@ const CANVAS_WIDTH = canvas.width;
 const CANVAS_HEIGHT = canvas.height;
 
 const CAR_WIDTH = 100;
-const CAR_HEIGHT = 100;
-const OBSTACLE_COLOR = 'red';
+const CAR_HEIGHT = 200;
+const OBSTACLE_CAR = './images/obstacle.png';
+const PLAYER_CAR = './images/player.png';
 const CAR_COLOR = 'green';
 const LINE_COLOR = 'white';
 
@@ -41,29 +42,27 @@ class GameArea {
     setInterval() {
         this.interval = setInterval(this.updateFrame.bind(this), 10);
     }
-    
+
 
     clear() {
         context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
 
     drawLines() {
-        let lineOne = new Component(200, 0, 5, CANVAS_HEIGHT, LINE_COLOR, 'line');
-        let lineTwo = new Component(400, 0, 5, CANVAS_HEIGHT, LINE_COLOR, 'line');
+        let lineOne = new Component(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, './images/background.png', 'line');
         lineOne.draw();
-        lineTwo.draw();
     }
 
     createObstacles() {
         this.frameNo++;
         if (this.frameNo === 1 || this.onEveryInterval(200)) {
-            this.obstacles.push(new Obstacle(50, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_COLOR, 'obstacle'));
+            this.obstacles.push(new Obstacle(50, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
         }
         if (this.frameNo === 1 || this.onEveryInterval(400)) {
-            this.obstacles.push(new Obstacle(250, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_COLOR, 'obstacle'));
+            this.obstacles.push(new Obstacle(250, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
         }
         if (this.frameNo === 1 || this.onEveryInterval(800)) {
-            this.obstacles.push(new Obstacle(450, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_COLOR, 'obstacle'));
+            this.obstacles.push(new Obstacle(450, 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR, 'obstacle'));
         }
     }
 
@@ -104,18 +103,21 @@ class Component {
         this.width = width;
         this.height = height;
         this.color = color;
+        this.image = new Image();
+        this.image.src = this.color;
         this.type = type;
         return this;
     }
 
     draw() {
         if (this.type === 'line') {
-            context.fillStyle = this.color;
-            context.fillRect(this.x, this.y, this.width, this.height);
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
-        if (this.type === 'obstacle' || this.type === 'car') {
-            context.fillStyle = this.color;
-            context.fillRect(this.x, this.y, this.width, this.height);
+        if (this.type === 'car') {
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+        }
+        if (this.type === 'obstacle') {
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
     }
 
@@ -150,7 +152,7 @@ class Car extends Component {
 
     changePosition() {
         if (this.isKeyPressed) {
-            switch(this.key){
+            switch (this.key) {
                 case 'ArrowRight':
                     if (this.x + CAR_WIDTH < CANVAS_WIDTH - 50) {
                         this.dx = 14.3;
@@ -161,7 +163,7 @@ class Car extends Component {
                     if (this.x > 50) {
                         this.dx = -14.3;
                         this.x += this.dx;
-                    }                   
+                    }
                     break;
             }
         }
@@ -176,6 +178,6 @@ class Obstacle extends Component {
     }
 }
 
-let car = new Car(250, 700, CAR_WIDTH, CAR_HEIGHT, CAR_COLOR, 'car');
+let car = new Car(250, 600, CAR_WIDTH, CAR_HEIGHT, PLAYER_CAR, 'car');
 let game = new GameArea(car);
 game.start();
