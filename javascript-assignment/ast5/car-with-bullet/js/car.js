@@ -15,6 +15,7 @@ const RANDOM_NUMBER_FROM = 0;
 const RANDOM_NUMBER_TO = 3;
 const BACKGROUND_X_POSITION = 0;
 const BACKGROUND_Y_POSITION = 0;
+const BULLET_POSITION = CAR_WIDTH / 2;
 
 const DEFAULT_CAR_POSITION = 'center';
 const OBSTACLE_CAR = './images/obstacle.png';
@@ -99,15 +100,17 @@ class GameArea {
         if (this.isKeyPressed && this.key === ' ') {
             let pos = this.car.getPosition();
             if (pos === 'center') {
-                this.bullet = new Bullet(CENTER_CAR_X_POSITION, 490, 10, 10, 'red');
+                this.bullet = new Bullet(CENTER_CAR_X_POSITION + BULLET_POSITION, 490, 10, 10, 'red');
             } else if (pos === 'left') {
-                this.bullet = new Bullet(LEFT_CAR_X_POSITION, 490, 10, 10, 'red');
+                this.bullet = new Bullet(LEFT_CAR_X_POSITION + BULLET_POSITION, 490, 10, 10, 'red');
             } else if (pos === 'right') {
-                this.bullet = new Bullet(RIGHT_CAR_X_POSITION, 490, 10, 10, 'red');
+                this.bullet = new Bullet(RIGHT_CAR_X_POSITION + BULLET_POSITION, 490, 10, 10, 'red');
             }
+            
             if (this.bullets.length < 10) {
                 this.bullets.push(this.bullet);
-            }            
+                this.isKeyPressed =false;                
+            }               
         }
         console.log(this.bullets.length);
     }
@@ -116,6 +119,7 @@ class GameArea {
         for (let i = 0; i < this.bullets.length; i++) {
             this.bullets[i].move();
             this.bullets[i].draw();
+
         }
     }
 
