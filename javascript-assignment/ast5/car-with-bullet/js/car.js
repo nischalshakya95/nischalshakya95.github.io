@@ -15,12 +15,18 @@ const RANDOM_NUMBER_FROM = 0;
 const RANDOM_NUMBER_TO = 3;
 const BACKGROUND_X_POSITION = 0;
 const BACKGROUND_Y_POSITION = 0;
-const BULLET_POSITION = CAR_WIDTH / 2;
+const BULLET_POSITION = (CAR_WIDTH / 2) - 20;
+const BULLET_Y_POSITION = 490;
+const BULLET_WIDTH = 50;
+const BULLET_HEIGHT = 30;
+
 
 const DEFAULT_CAR_POSITION = 'center';
+const BULLET_COLOR = 'red';
 const OBSTACLE_CAR = './images/obstacle.png';
 const PLAYER_CAR = './images/player.png';
 const BACKGROUND = './images/background.png';
+const BULLET = './images/rocket.gif';
 const CAR_SOUND = './sound/drive.mp3';
 
 class GameArea {
@@ -34,6 +40,7 @@ class GameArea {
     score = 0;
     isKeyPressed = false;
     bullet = null;
+    bulletXPosition = null;
 
     constructor(car) {
         this.car = car;
@@ -97,14 +104,14 @@ class GameArea {
         if (this.isKeyPressed && this.key === ' ') {
             let pos = this.car.getPosition();
             if (pos === 'center') {
-                this.bullet = new Bullet(CENTER_CAR_X_POSITION + BULLET_POSITION, 490, 10, 10, 'red');
+                this.bulletXPosition = CENTER_CAR_X_POSITION + BULLET_POSITION;
             } else if (pos === 'left') {
-                this.bullet = new Bullet(LEFT_CAR_X_POSITION + BULLET_POSITION, 490, 10, 10, 'red');
+                this.bulletXPosition = LEFT_CAR_X_POSITION + BULLET_POSITION;
             } else if (pos === 'right') {
-                this.bullet = new Bullet(RIGHT_CAR_X_POSITION + BULLET_POSITION, 490, 10, 10, 'red');
+                this.bulletXPosition = RIGHT_CAR_X_POSITION + BULLET_POSITION;
             }
-
             if (this.bullets.length < 10) {
+                this.bullet = new Bullet(this.bulletXPosition, BULLET_Y_POSITION, BULLET_WIDTH, BULLET_HEIGHT, BULLET);
                 this.bullets.push(this.bullet);
                 this.isKeyPressed = false;
             }
@@ -139,7 +146,7 @@ class GameArea {
                 this.obstacles.splice(i, 1);
             }
             this.obstacles[i].draw();
-            this.detectCollision(this.obstacles[i]);
+            // this.detectCollision(this.obstacles[i]);
             for (let j = 0; j < this.bullets.length; j++) {
                 this.detectCollisionWithBullet(this.bullets[j], this.obstacles[i]);
             }
@@ -284,22 +291,13 @@ class Obstacle extends Component {
     }
 }
 
-class Bullet {
+class Bullet extends Component {
 
     dy = 1;
 
     constructor(x, y, width, height, color) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.color = color;
+        super(x, y, width, height, color);
         return this;
-    }
-
-    draw() {
-        context.fillStyle = this.color;
-        context.fillRect(this.x, this.y, this.width, this.height, this.color);
     }
 
     move() {
