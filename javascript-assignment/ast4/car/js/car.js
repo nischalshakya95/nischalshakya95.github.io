@@ -6,13 +6,16 @@ const CANVAS_HEIGHT = canvas.height;
 
 const CAR_WIDTH = 100;
 const CAR_HEIGHT = 150;
-const OBSTACLE_CAR = './images/obstacle.png';
-const PLAYER_CAR = './images/player.png';
-const BACKGROUND = './images/background.png';
 const LEFT_CAR_POSITION_X = 50;
 const CENTER_CAR_POSITION_X = 250;
 const RIGHT_CAR_POSITION_X = 450;
 const CHANGE_CAR_POSITION_X_BY = 200;
+const RANDOM_NUMBER_FROM = 0;
+const RANDOM_NUMBER_TO = 3;
+
+const OBSTACLE_CAR = './images/obstacle.png';
+const PLAYER_CAR = './images/player.png';
+const BACKGROUND = './images/background.png';
 
 class GameArea {
 
@@ -20,6 +23,7 @@ class GameArea {
     frameNo = 1;
     interval = null;
     obstaclePosition = [LEFT_CAR_POSITION_X, CENTER_CAR_POSITION_X, RIGHT_CAR_POSITION_X];
+    score = 0;
 
     constructor(car) {
         this.car = car;
@@ -46,6 +50,8 @@ class GameArea {
 
         this.createObstacles();
         this.drawObstacle();
+
+        this.drawScore();
     }
 
     setInterval() {
@@ -64,7 +70,7 @@ class GameArea {
 
     createObstacles() {
         this.frameNo++;
-        let randomIndex = this.generateRandomInt(0, 3);
+        let randomIndex = this.generateRandomInt(RANDOM_NUMBER_FROM, RANDOM_NUMBER_TO);
         if (this.frameNo === 1 || this.onEveryInterval(300)) {
             this.obstacles.push(new Obstacle(this.obstaclePosition[randomIndex], 0, CAR_WIDTH, CAR_HEIGHT, OBSTACLE_CAR));
         }
@@ -72,7 +78,12 @@ class GameArea {
 
     drawObstacle() {
         for (let i = 0; i < this.obstacles.length; i++) {
+            console.log(this.obstacles.length);
             this.obstacles[i].y += this.obstacles[i].dy;
+            if (this.obstacles[i].y > CANVAS_WIDTH) {
+                this.getScore();
+                this.obstacles.splice(i, 1);
+            }
             this.obstacles[i].draw();
             this.detectCollision(this.obstacles[i]);
         }
@@ -93,6 +104,16 @@ class GameArea {
         if (this.checkCollision(obstacle)) {
             clearInterval(this.interval);
         }
+    }
+
+    drawScore() {
+        context.font = '30px' + ' ' + 'Consolas';
+        context.fillStyle = 'black';
+        context.fillText('Score: ' + this.score, 240, 40);
+    }
+
+    getScore() {
+        return this.score++;
     }
 }
 
