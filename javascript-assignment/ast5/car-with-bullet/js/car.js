@@ -1,5 +1,9 @@
 let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
+let documnetCanvas = document.getElementById('canvas');
+let splashScreen = document.getElementById('splash-screen');
+let gameOver = document.getElementById('game-over');
+let highScore = document.getElementById('high-score');
 
 const CANVAS_WIDTH = canvas.width;
 const CANVAS_HEIGHT = canvas.height;
@@ -146,7 +150,7 @@ class GameArea {
                 this.obstacles.splice(i, 1);
             }
             this.obstacles[i].draw();
-            // this.detectCollision(this.obstacles[i]);
+            this.detectCollision(this.obstacles[i]);
             for (let j = 0; j < this.bullets.length; j++) {
                 this.detectCollisionWithBullet(this.bullets[j], this.obstacles[i]);
             }
@@ -174,6 +178,10 @@ class GameArea {
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
             clearInterval(this.interval);
+            documnetCanvas.style.display = 'none';
+            gameOver.style.display = 'block';
+            let finalScore = parseInt(sessionStorage.getItem('highScore'));
+            highScore.innerHTML = 'HighScore: ' + (finalScore + 1);   
         }
     }
 
@@ -191,7 +199,9 @@ class GameArea {
     }
 
     getScore() {
-        return this.score++;
+        let score = this.score++;
+        sessionStorage.setItem('highScore', score);
+        return score;
     }
 }
 
@@ -305,6 +315,13 @@ class Bullet extends Component {
     }
 }
 
-let car = new Car(CENTER_CAR_X_POSITION, 500, CAR_WIDTH, CAR_HEIGHT, PLAYER_CAR);
-let game = new GameArea(car);
-game.start();
+function start() {
+    canvas.style.display = 'block';
+
+    let car = new Car(CENTER_CAR_X_POSITION, 500, CAR_WIDTH, CAR_HEIGHT, PLAYER_CAR);
+    let game = new GameArea(car);
+    game.start();
+
+    splashScreen.style.display = 'none';
+    gameOver.style.display = 'none';
+}
