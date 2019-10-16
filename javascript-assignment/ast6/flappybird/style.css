@@ -1,5 +1,26 @@
 canvas {
   border: 1px solid #d3d3d3;
   margin: 0 auto;
-  display: block;
+  display: none;
+  position: relative;
+}
+
+.splash-screen {
+  background-image: url('./images/message.png');
+  background-size: 300px 512px;
+  width: 300px;
+  height: 512px;
+  display: inline-block;
+}
+
+.background-splash {
+  background-image: url('./images/background-night.png');
+  background-size: 300px 512px;
+  width: 300px;
+  height: 512px;
+  display: inline-block;
+}
+
+body {
+ text-align: center; 
 }
