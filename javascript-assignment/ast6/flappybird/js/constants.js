@@ -37,3 +37,9 @@ const OBSTACLES_DOWN_IMAGE_URL = './images/obstacle-down.png';
 const MINIMUM_OBSTACLE_HEIGHT = 100;
 const MAXIMUM_OBSTACLE_HEIGHT = 250;
 const GAP_BETWEEN_PIPES = 50;
+
+const SCORE_X_POSITION = 120;
+const SCORE_Y_POSITION = 20;
+const SCORE_SIZE = '20px';
+const SCORE_FONT = 'Consolas';
+const SCORE_COLOR = 'black';

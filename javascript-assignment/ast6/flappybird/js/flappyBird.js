@@ -7,7 +7,7 @@ class GameArea {
     interval = null;
     frameNo = 1;
     obstacles = [];
-    score = -3;
+    score = -2;
 
     constructor(bird) {
         this.bird = bird;
@@ -26,12 +26,12 @@ class GameArea {
         this.drawBackground();
 
         // this.bird.move(this.interval);
-        // this.bird.move();
+        this.bird.move();
         this.bird.draw();
 
         this.createObstacles();
         this.drawObstacles();
-        // this.drawScore();
+        this.drawScore();
         setTimeout(() => {
             requestAnimationFrame(this.updateFrame.bind(this));
         }, 1000 / 200);
@@ -43,6 +43,10 @@ class GameArea {
             let height = Math.floor(Math.random() * (MAXIMUM_OBSTACLE_HEIGHT - MINIMUM_OBSTACLE_HEIGHT + 1) + MINIMUM_OBSTACLE_HEIGHT);
             this.obstacles.push(new Obstacle(OBSTACLES_X_POSITON, OBSTACLES_Y_POSITION, OBSTACLE_WIDTH, height, OBSTACLES_UP_IMAGE_URL));
             this.obstacles.push(new Obstacle(OBSTACLES_X_POSITON, GAP_BETWEEN_PIPES + height, OBSTACLE_WIDTH, OBSTACLES_X_POSITON - height - GAP_BETWEEN_PIPES - FOREGROUND_HEIGHT, OBSTACLES_DOWN_IMAGE_URL));
+            this.score++;
+            if (this.score > 0) {
+                this.scoreAudio.play();
+            }
         }
     }
 
@@ -52,7 +56,7 @@ class GameArea {
     }
 
     drawForeGround() {
-        let foreground = new Component(FOREGROUND_X_POSITION, FOREGROUND_Y_POSITION, FOREGROUND_WIDTH, FOREGROUND_HEIGHT, FOREGROUND_IMAGE_URL);
+        let foreground = new ForeGround(FOREGROUND_X_POSITION, FOREGROUND_Y_POSITION, FOREGROUND_WIDTH, FOREGROUND_HEIGHT, FOREGROUND_IMAGE_URL);
         foreground.draw();
     }
 
@@ -69,8 +73,10 @@ class GameArea {
     }
 
     drawScore() {
-        let score = new Component(240, 40, '30px', 'Consolas', 'black', 'text');
-        this.score < 0 ? score.draw(0) : score.draw(this.score);
+        console.log('score is called');
+        context.font = SCORE_SIZE + ' ' + SCORE_FONT;
+        context.fillStyle = SCORE_COLOR;
+        this.score < 0 ? context.fillText('Score: ' + 0, SCORE_X_POSITION, SCORE_Y_POSITION) : context.fillText('Score: ' + this.score, SCORE_X_POSITION, SCORE_Y_POSITION);
     }
 
     onEveryInterval(n) {
