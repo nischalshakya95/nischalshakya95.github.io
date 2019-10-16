@@ -24,42 +24,33 @@ class GameArea {
         this.clear();
         this.drawForeGround();
         this.drawBackground();
-        
+
         // this.bird.move(this.interval);
-        this.bird.move();
+        // this.bird.move();
         this.bird.draw();
 
-        // this.createObstacles();
-        // this.drawObstacles();
+        this.createObstacles();
+        this.drawObstacles();
         // this.drawScore();
     }
 
     createObstacles() {
         this.frameNo++;
-        if (this.frame === 1 || this.onEveryInterval(300)) {
-            let minHeight = 200;
-            let maxHeight = 400;
-            let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
-            let minGap = 100;
-            let maxGap = 200;
-            let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
-            let x = CANVAS_WIDTH;
-            this.obstacles.push(new Obstacle(x, 0, OBSTACLE_WIDTH, height, './images/obstacleUp.png', 'obstacles'));
-            this.obstacles.push(new Obstacle(x, height + gap, OBSTACLE_WIDTH, x - height - gap, './images/obstacleDown.png', 'obstacles'));
-            this.score++;
-            if (this.score > 0) {
-                this.scoreAudio.play();
-            }
+        if (this.frame === 1 || this.onEveryInterval(200)) {
+            let height = Math.floor(Math.random() * (MAXIMUM_OBSTACLE_HEIGHT - MINIMUM_OBSTACLE_HEIGHT + 1) + MINIMUM_OBSTACLE_HEIGHT);
+            let gap = Math.floor(Math.random() * (MAXIMUM_GAP - MINIMUM_GAP + 1) + MINIMUM_GAP);
+            this.obstacles.push(new Obstacle(OBSTACLES_X_POSITON, OBSTACLES_Y_POSITION, OBSTACLE_WIDTH, height, OBSTACLES_UP_IMAGE_URL));
+            this.obstacles.push(new Obstacle(OBSTACLES_X_POSITON, gap + height, OBSTACLE_WIDTH, OBSTACLES_X_POSITON - height - gap - FOREGROUND_HEIGHT, OBSTACLES_DOWN_IMAGE_URL));
         }
     }
 
     drawBackground() {
-        let background = new Component(BACKGROUND_X_POSITION, BACKGROUND_Y_POSITION, BACKGROUND_WIDTH, BACKGROUND_HEIGHT, BACKGROUND_IMAGE_URL, 'background');
+        let background = new Component(BACKGROUND_X_POSITION, BACKGROUND_Y_POSITION, BACKGROUND_WIDTH, BACKGROUND_HEIGHT, BACKGROUND_IMAGE_URL);
         background.draw();
     }
 
     drawForeGround() {
-        let foreground = new Component(FOREGROUND_X_POSITION, FOREGROUND_Y_POSITION, FOREGROUND_WIDTH, FOREGROUND_HEIGHT, FOREGROUND_IMAGE_URL, 'background');
+        let foreground = new Component(FOREGROUND_X_POSITION, FOREGROUND_Y_POSITION, FOREGROUND_WIDTH, FOREGROUND_HEIGHT, FOREGROUND_IMAGE_URL);
         foreground.draw();
     }
 
@@ -67,7 +58,7 @@ class GameArea {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].x -= this.obstacles[i].dx;
             this.obstacles[i].draw();
-            this.detectCollision(this.obstacles[i]);
+            // this.detectCollision(this.obstacles[i]);
         }
     }
 
@@ -97,7 +88,7 @@ class GameArea {
 
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
-            this.gameOverAudio.play();
+            // this.gameOverAudio.play();
             clearInterval(this.interval);
         }
     }
@@ -105,17 +96,6 @@ class GameArea {
     generateAudio(path) {
         return new Audio(path);
     }
-}
-
-
-
-class Obstacle extends Component {
-
-    constructor(x, y, width, height, color, type) {
-        super(x, y, width, height, color, type);
-        return this;
-    }
-
 }
 
 

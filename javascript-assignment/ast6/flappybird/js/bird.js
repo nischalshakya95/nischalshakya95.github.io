@@ -35,7 +35,6 @@ class Bird extends Component {
 
     accelerateUp() {
         if (this.key === 32 && this.isKeyPressed) {
-           
             this.gravity = -0.02;
             this.sound.play();
         } else {

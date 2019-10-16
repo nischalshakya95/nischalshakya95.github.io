@@ -28,3 +28,13 @@ const BIRD_IMAGE_URL = './images/bluebird-midflap.png';
 const BIRD_UPFLAP_IMAGE_URL = './images/bluebird-upflap.png';
 const BIRD_MIDFLAP_IMAGE_URL = './images/bluebird-midflap.png';
 const BIRD_DOWNFLAP_IMAGE_URL = './images/bluebird-downflap.png';
+
+const OBSTACLES_X_POSITON = CANVAS_HEIGHT;
+const OBSTACLES_Y_POSITION = 0;
+const OBSTACLES_UP_IMAGE_URL = './images/obstacle-up.png';
+const OBSTACLES_DOWN_IMAGE_URL = './images/obstacle-down.png';
+
+const MINIMUM_OBSTACLE_HEIGHT = 150;
+const MAXIMUM_OBSTACLE_HEIGHT = 300;
+const MINIMUM_GAP = 50;
+const MAXIMUM_GAP = 100;
