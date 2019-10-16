@@ -1,12 +1,26 @@
 let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
+
 const ARROW_UP = 'ArrowUp';
 const ARROW_DOWN = 'ArrowDown';
 const ARROW_RIGHT = 'ArrowRight';
 const ARROW_LEFT = 'ArrowLeft';
+
 const CANVAS_HEIGHT = canvas.height;
 const CANVAS_WIDTH = canvas.width;
-const OBSTACLE_WIDTH = 100;
+const OBSTACLE_WIDTH = 50;
+
+const FOREGROUND_WIDTH = CANVAS_WIDTH;
+const FOREGROUND_HEIGHT = 112;
+const FOREGROUND_X_POSITION = 0;
+const FOREGROUND_Y_POSITION = CANVAS_HEIGHT - FOREGROUND_HEIGHT;
+const FOREGROUND_IMAGE_URL = './images/foreground.png';
+
+const BACKGROUND_WIDTH = CANVAS_WIDTH;
+const BACKGROUND_HEIGHT = CANVAS_HEIGHT - FOREGROUND_HEIGHT;
+const BACKGROUND_X_POSITION = 0;
+const BACKGROUND_Y_POSITION = 0;
+const BACKGROUND_IMAGE_URL = './images/background-night.png';
 
 class GameArea {
 
@@ -28,12 +42,14 @@ class GameArea {
 
     updateFrame() {
         this.clear();
-        this.drawBackgrond();
-        this.bird.move(this.interval);
-        this.bird.draw();
-        this.createObstacles();
-        this.drawObstacles();
-        this.drawScore();
+        this.drawForeGround();
+        this.drawBackground();
+        
+        // this.bird.move(this.interval);
+        // this.bird.draw();
+        // this.createObstacles();
+        // this.drawObstacles();
+        // this.drawScore();
     }
 
     createObstacles() {
@@ -55,9 +71,14 @@ class GameArea {
         }
     }
 
-    drawBackgrond() {
-        let backgroundImage = new Component(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, './images/background.png', 'background');
-        backgroundImage.draw();
+    drawBackground() {
+        let background = new Component(BACKGROUND_X_POSITION, BACKGROUND_Y_POSITION, BACKGROUND_WIDTH, BACKGROUND_HEIGHT, BACKGROUND_IMAGE_URL, 'background');
+        background.draw();
+    }
+
+    drawForeGround() {
+        let foreground = new Component(FOREGROUND_X_POSITION, FOREGROUND_Y_POSITION, FOREGROUND_WIDTH, FOREGROUND_HEIGHT, FOREGROUND_IMAGE_URL, 'background');
+        foreground.draw();
     }
 
     drawObstacles() {
@@ -203,8 +224,8 @@ class Obstacle extends Component {
         return this;
     }
 
-
 }
+
 
 let bird = new Bird(10, 300, 38, 26, './images/bird.png', 'bird');
 let game = new GameArea(bird);

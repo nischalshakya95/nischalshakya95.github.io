@@ -5,8 +5,13 @@ canvas {
     display: none;
 }
 
+body {
+  background-color: black;
+  text-align: center;
+}
+
 .splash-screen {
-  display: block;
+  display: inline-block;
   position: absolute;
   width: 600px;
   height: 600px;
