@@ -113,7 +113,8 @@ class GameArea {
             clearInterval(this.interval);
             documnetCanvas.style.display = 'none';
             gameOver.style.display = 'block';
-            highScore.innerHTML = 'HighScore: ' + sessionStorage.getItem('highScore');           
+            let finalScore = parseInt(sessionStorage.getItem('highScore'));
+            highScore.innerHTML = 'HighScore: ' + (finalScore + 1);           
         }
     }
 
