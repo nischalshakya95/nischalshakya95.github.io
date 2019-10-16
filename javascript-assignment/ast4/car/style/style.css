@@ -1,24 +1,33 @@
 canvas {
     border: 1px solid #d3d3d3;
     margin: 0 auto;
-    display: block;
     position: relative;
+    display: none;
 }
 
 .splash-screen {
-  margin: 0 auto;
-  position: relative;
   display: block;
+  position: absolute;
   width: 600px;
   height: 800px;
   background-image: url('../images/background.png');
-  background-size: 600px 800px;
-  visibility: hidden;
+  background-size: 600px 800px;  
 }
 
-.splash-screen button {
+.game-over {
+  display: none;
+  position: absolute;
+  width: 600px;
+  height: 800px;
+  background-image: url('../images/background.png');
+  background-size: 600px 800px;  
+}
+
+button {
   margin-top: 400px;
   margin-left: 250px;
   width: 100px;
   height: 20px;
+  cursor: pointer;
 }
+

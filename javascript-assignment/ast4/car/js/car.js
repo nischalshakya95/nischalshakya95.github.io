@@ -1,5 +1,9 @@
 let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
+let documnetCanvas = document.getElementById('canvas');
+let splashScreen = document.getElementById('splash-screen');
+let gameOver = document.getElementById('game-over');
+let highScore = document.getElementById('high-score');
 
 const CANVAS_WIDTH = canvas.width;
 const CANVAS_HEIGHT = canvas.height;
@@ -107,6 +111,9 @@ class GameArea {
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
             clearInterval(this.interval);
+            documnetCanvas.style.display = 'none';
+            gameOver.style.display = 'block';
+            highScore.innerHTML = 'HighScore: ' + sessionStorage.getItem('highScore');           
         }
     }
 
@@ -117,7 +124,9 @@ class GameArea {
     }
 
     getScore() {
-        return this.score++;
+        let score = this.score++;
+        sessionStorage.setItem('highScore', score);
+        return score;
     }
 }
 
@@ -217,14 +226,11 @@ class Obstacle extends Component {
 }
 
 function start() {
-    let canvas = document.getElementById('canvas');
-    let splashScreen = document.getElementsByClassName('splash-screen');
-    console.log(splashScreen);
-    canvas.style.visibility = 'visible';
-    splashScreen.style.visibility = 'hidden';
+    canvas.style.display = 'block';
 
+    let car = new Car(CENTER_CAR_X_POSITION, 500, CAR_WIDTH, CAR_HEIGHT, PLAYER_CAR);
+    let game = new GameArea(car);
+    game.start();
+
+    splashScreen.style.display = 'none';
 }
-
-let car = new Car(CENTER_CAR_X_POSITION, 500, CAR_WIDTH, CAR_HEIGHT, PLAYER_CAR);
-let game = new GameArea(car);
-game.start();
