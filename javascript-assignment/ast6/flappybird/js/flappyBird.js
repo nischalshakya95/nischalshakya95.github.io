@@ -67,9 +67,8 @@ class GameArea {
             if (this.obstacles[i].x < 0) {
                 this.obstacles.splice(i, 1);
             }
-            // this.detectCollision(this.obstacles[i]);
+            this.detectCollision(this.obstacles[i]);
         }
-
     }
 
     drawScore() {
@@ -100,7 +99,7 @@ class GameArea {
 
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
-            // this.gameOverAudio.play();
+            this.gameOverAudio.play();
             clearInterval(this.interval);
         }
     }
