@@ -9,15 +9,18 @@
 </head>
 
 <body>
-    <canvas id="canvas" width="600" height="700"></canvas>
+    <canvas id="canvas" width="600" height="600"></canvas>
     <div id="splash-screen" class="splash-screen">
-        <button class="button" type="button" onclick="start()">Start</button>
+        <div class="splash-screen-content">
+            <button class="button" type="button" onclick="start()">Start</button>
+        </div>
     </div>
     <div id="game-over" class="game-over">
-        <div id = "high-score">
+        <div class="splash-screen-content">
+            <div id="high-score" class="high-score"></div>
+            Game Over
+            <button class="button" type="button" onclick="start()">Restart</button>
         </div>
-        Game Over
-        <button class="button" type="button" onclick="start()">Restart</button>
     </div>
     <script src="./js/car.js"></script>
 </body>

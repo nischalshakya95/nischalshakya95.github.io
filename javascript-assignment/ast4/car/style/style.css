@@ -9,23 +9,28 @@ canvas {
   display: block;
   position: absolute;
   width: 600px;
-  height: 800px;
+  height: 600px;
   background-image: url('../images/background.png');
-  background-size: 600px 800px;  
+  background-size: 600px 600px;  
+}
+
+.splash-screen-content {
+  width: 100px;
+  height: 100px;
+  margin-left: 250px;
+  margin-top: 400px;
 }
 
 .game-over {
   display: none;
   position: absolute;
   width: 600px;
-  height: 800px;
+  height: 600px;
   background-image: url('../images/background.png');
-  background-size: 600px 800px;  
+  background-size: 600px 600px;  
 }
 
 button {
-  margin-top: 400px;
-  margin-left: 250px;
   width: 100px;
   height: 20px;
   cursor: pointer;
