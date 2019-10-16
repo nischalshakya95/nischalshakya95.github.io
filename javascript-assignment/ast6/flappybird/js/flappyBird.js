@@ -9,6 +9,10 @@ class GameArea {
     obstacles = [];
     score = -2;
     requestAnimationFrameId = null;
+    birdflaps = [BIRD_UPFLAP_IMAGE_URL, BIRD_MIDFLAP_IMAGE_URL, BIRD_DOWNFLAP_IMAGE_URL];
+    beginBirdFlapIndex = 1;
+    scores = [SCORE_O, SCORE_1, SCORE_2, SCORE_3, SCORE_4, SCORE_5, SCORE_6, SCORE_7, SCORE_8, SCORE_9];
+    scoreInitialIndex = 0;
 
     constructor(bird) {
         this.bird = bird;
@@ -18,7 +22,7 @@ class GameArea {
     }
 
     start() {
-        this.updateFrame();
+        this.setInterval();
     }
 
     updateFrame() {
@@ -26,16 +30,19 @@ class GameArea {
         this.drawForeGround();
         this.drawBackground();
 
-        // this.bird.move(this.interval);
         this.bird.move();
-        this.bird.draw();
+        this.bird.render();
+        
+        // this.bird.draw();
+
+        // this.animationLogic();
 
         this.createObstacles();
         this.drawObstacles();
         this.drawScore();
-        setTimeout(() => {
-            this.requestAnimationFrameId = requestAnimationFrame(this.updateFrame.bind(this));
-        }, 1000 / 200);
+        // setTimeout(() => {
+        //     this.requestAnimationFrameId = requestAnimationFrame(this.updateFrame.bind(this));
+        // }, 1000 / 200);
     }
 
     createObstacles() {
@@ -72,10 +79,15 @@ class GameArea {
         }
     }
 
+    setInterval() {
+        this.interval = setInterval(this.updateFrame.bind(this), 10);
+    }
+
     drawScore() {
         context.font = SCORE_SIZE + ' ' + SCORE_FONT;
         context.fillStyle = SCORE_COLOR;
-        this.score < 0 ? context.fillText('Score: ' + 0, SCORE_X_POSITION, SCORE_Y_POSITION) : context.fillText('Score: ' + this.score, SCORE_X_POSITION, SCORE_Y_POSITION);
+        this.score < 0 ? context.fillText(0, SCORE_X_POSITION, SCORE_Y_POSITION)
+            : context.fillText(this.score, SCORE_X_POSITION, SCORE_Y_POSITION);
     }
 
     onEveryInterval(n) {
@@ -95,8 +107,8 @@ class GameArea {
 
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
-            this.gameOverAudio.play();
-            cancelAnimationFrame(this.requestAnimationFrameId);
+            // this.gameOverAudio.play();
+            clearInterval(this.interval);
         }
     }
 

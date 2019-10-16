@@ -1,4 +1,4 @@
-class Bird extends Component {
+class Bird {
 
     isKeyPressed = true;
     key = null;
@@ -6,15 +6,24 @@ class Bird extends Component {
     gravitySpeed = 0;
     speedX = 0;
     speedY = 0;
-    birdflaps = [BIRD_UPFLAP_IMAGE_URL, BIRD_MIDFLAP_IMAGE_URL, BIRD_DOWNFLAP_IMAGE_URL];
-    beginBirdFlapIndex = 1;
-
+    birdFrameX = [0, 35, 70];
+    frameIndex = 0;
 
     constructor(x, y, width, height, color) {
-        super(x, y, width, height, color);
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.color = color;
+        this.image = new Image();
+        this.image.src = this.color;
         this.sound = new Audio('./sound/fly.mp3');
         this.addEvent();
         return this;
+    }
+
+    render() {
+        context.drawImage(this.image, 0, 0, this.width, this.height, this.x, this.y, this.width, this.height);
     }
 
     move() {
@@ -53,15 +62,5 @@ class Bird extends Component {
         });
     }
 
-    animationLogic(){
-        for (let i = this.beginBirdFlapIndex; i < this.birdflaps.length; i++) {
-            let image = new Image();
-            image.src = this.birdflaps[i];
-            console.log(image.src);
-            this.draw(this.x, this.y, this.width, this.height, image);
-            if (i === 2) {
-                this.beginBirdFlapIndex = 0;
-            }
-        }
-    }
+
 }
