@@ -8,6 +8,7 @@ class GameArea {
     frameNo = 1;
     obstacles = [];
     score = -2;
+    requestAnimationFrameId = null;
 
     constructor(bird) {
         this.bird = bird;
@@ -33,7 +34,7 @@ class GameArea {
         this.drawObstacles();
         this.drawScore();
         setTimeout(() => {
-            requestAnimationFrame(this.updateFrame.bind(this));
+            this.requestAnimationFrameId = requestAnimationFrame(this.updateFrame.bind(this));
         }, 1000 / 200);
     }
 
@@ -72,7 +73,6 @@ class GameArea {
     }
 
     drawScore() {
-        console.log('score is called');
         context.font = SCORE_SIZE + ' ' + SCORE_FONT;
         context.fillStyle = SCORE_COLOR;
         this.score < 0 ? context.fillText('Score: ' + 0, SCORE_X_POSITION, SCORE_Y_POSITION) : context.fillText('Score: ' + this.score, SCORE_X_POSITION, SCORE_Y_POSITION);
@@ -86,10 +86,6 @@ class GameArea {
         context.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    setInterval() {
-        this.interval = setInterval(this.updateFrame.bind(this), 10);
-    }
-
     checkCollision(obstacle) {
         return this.bird.x < obstacle.x + obstacle.width &&
             this.bird.x + this.bird.width > obstacle.x &&
@@ -100,7 +96,7 @@ class GameArea {
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
             this.gameOverAudio.play();
-            clearInterval(this.interval);
+            cancelAnimationFrame(this.requestAnimationFrameId);
         }
     }
 

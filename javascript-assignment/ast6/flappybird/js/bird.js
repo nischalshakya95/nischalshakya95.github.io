@@ -58,8 +58,7 @@ class Bird extends Component {
             let image = new Image();
             image.src = this.birdflaps[i];
             console.log(image.src);
-            this(this.x, this.y, this.width, this.height, image);
-            this.draw();
+            this.draw(this.x, this.y, this.width, this.height, image);
             if (i === 2) {
                 this.beginBirdFlapIndex = 0;
             }
