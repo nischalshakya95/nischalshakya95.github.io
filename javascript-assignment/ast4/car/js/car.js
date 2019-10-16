@@ -33,6 +33,7 @@ class GameArea {
     interval = null;
     obstaclePosition = [LEFT_CAR_X_POSITION, CENTER_CAR_X_POSITION, RIGHT_CAR_X_POSITION];
     score = 0;
+    background = null;
 
     constructor(car) {
         this.car = car;
@@ -52,7 +53,10 @@ class GameArea {
     updateFrame() {
 
         this.clear();
+        
+        this.changeBackgroundPosition();
         this.drawBackground();
+        
 
         this.car.changePosition();
         this.car.draw();
@@ -73,9 +77,17 @@ class GameArea {
     }
 
     drawBackground() {
-        let background = new Component(BACKGROUND_X_POSITION, BACKGROUND_Y_POSITION, CANVAS_WIDTH, CANVAS_HEIGHT, BACKGROUND);
-        background.draw();
+        this.background = new Background(BACKGROUND_X_POSITION, BACKGROUND_Y_POSITION, CANVAS_WIDTH, CANVAS_HEIGHT, BACKGROUND);
+        this.background.draw();
     }
+
+    changeBackgroundPosition() {
+        if  (this.background !== null) {
+            this.background.move();
+        }
+        
+    }
+
 
     createObstacles() {
         this.frameNo++;
@@ -223,6 +235,19 @@ class Obstacle extends Component {
     constructor(x, y, width, height, color) {
         super(x, y, width, height, color);
         return this;
+    }
+}
+
+class Background extends Component {
+    dy = 10;
+
+    constructor(x, y, width, height, color) {
+        super(x, y, width, height, color);
+        return this;
+    }
+
+    move() {
+        this.y += this.dy;
     }
 }
 
