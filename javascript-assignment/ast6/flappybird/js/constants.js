@@ -34,7 +34,6 @@ const OBSTACLES_Y_POSITION = 0;
 const OBSTACLES_UP_IMAGE_URL = './images/obstacle-up.png';
 const OBSTACLES_DOWN_IMAGE_URL = './images/obstacle-down.png';
 
-const MINIMUM_OBSTACLE_HEIGHT = 150;
-const MAXIMUM_OBSTACLE_HEIGHT = 300;
-const MINIMUM_GAP = 50;
-const MAXIMUM_GAP = 100;
+const MINIMUM_OBSTACLE_HEIGHT = 100;
+const MAXIMUM_OBSTACLE_HEIGHT = 250;
+const GAP_BETWEEN_PIPES = 50;

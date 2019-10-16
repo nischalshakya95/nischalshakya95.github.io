@@ -38,9 +38,8 @@ class GameArea {
         this.frameNo++;
         if (this.frame === 1 || this.onEveryInterval(200)) {
             let height = Math.floor(Math.random() * (MAXIMUM_OBSTACLE_HEIGHT - MINIMUM_OBSTACLE_HEIGHT + 1) + MINIMUM_OBSTACLE_HEIGHT);
-            let gap = Math.floor(Math.random() * (MAXIMUM_GAP - MINIMUM_GAP + 1) + MINIMUM_GAP);
             this.obstacles.push(new Obstacle(OBSTACLES_X_POSITON, OBSTACLES_Y_POSITION, OBSTACLE_WIDTH, height, OBSTACLES_UP_IMAGE_URL));
-            this.obstacles.push(new Obstacle(OBSTACLES_X_POSITON, gap + height, OBSTACLE_WIDTH, OBSTACLES_X_POSITON - height - gap - FOREGROUND_HEIGHT, OBSTACLES_DOWN_IMAGE_URL));
+            this.obstacles.push(new Obstacle(OBSTACLES_X_POSITON, GAP_BETWEEN_PIPES + height, OBSTACLE_WIDTH, OBSTACLES_X_POSITON - height - GAP_BETWEEN_PIPES - FOREGROUND_HEIGHT, OBSTACLES_DOWN_IMAGE_URL));
         }
     }
 
@@ -60,6 +59,7 @@ class GameArea {
             this.obstacles[i].draw();
             // this.detectCollision(this.obstacles[i]);
         }
+        
     }
 
     drawScore() {
