@@ -21,6 +21,14 @@ canvas {
   display: inline-block;
 }
 
+.game-over{
+ background-image: url('./images/game-over.png'); 
+ background-size: 192px 42px;
+ width: 192px;
+ height: 42px;
+ display: inline-block;
+}
+
 body {
  text-align: center; 
 }

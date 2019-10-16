@@ -30,12 +30,8 @@ class GameArea {
         this.drawForeGround();
         this.drawBackground();
 
-        this.bird.move();
+        this.bird.move(this.interval);
         this.bird.render();
-        
-        // this.bird.draw();
-
-        // this.animationLogic();
 
         this.createObstacles();
         this.drawObstacles();
@@ -108,7 +104,9 @@ class GameArea {
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
             this.gameOverAudio.play();
-            clearInterval(this.interval);
+            let gameOver = new Component(50, 100, 100, 20, './images/gameover.png');
+            gameOver.draw();
+            clearInterval(this.interval);           
         }
     }
 
