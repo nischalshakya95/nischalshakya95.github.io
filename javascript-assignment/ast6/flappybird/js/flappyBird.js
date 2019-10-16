@@ -17,7 +17,7 @@ class GameArea {
     }
 
     start() {
-        this.setInterval();
+        this.updateFrame();
     }
 
     updateFrame() {
@@ -32,6 +32,9 @@ class GameArea {
         this.createObstacles();
         this.drawObstacles();
         // this.drawScore();
+        setTimeout(() => {
+            requestAnimationFrame(this.updateFrame.bind(this));
+        }, 1000 / 200);
     }
 
     createObstacles() {
@@ -57,9 +60,12 @@ class GameArea {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].x -= this.obstacles[i].dx;
             this.obstacles[i].draw();
+            if (this.obstacles[i].x < 0) {
+                this.obstacles.splice(i, 1);
+            }
             // this.detectCollision(this.obstacles[i]);
         }
-        
+
     }
 
     drawScore() {
