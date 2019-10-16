@@ -234,4 +234,5 @@ function start() {
     game.start();
 
     splashScreen.style.display = 'none';
+    gameOver.style.display = 'none';
 }
