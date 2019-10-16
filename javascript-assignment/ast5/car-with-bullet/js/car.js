@@ -45,6 +45,8 @@ class GameArea {
     isKeyPressed = false;
     bullet = null;
     bulletXPosition = null;
+    imageHeight = 0;
+    scrollSpeed = 5;
 
     constructor(car) {
         this.car = car;
@@ -91,9 +93,16 @@ class GameArea {
         context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
 
+  
     drawBackground() {
-        let background = new Component(BACKGROUND_X_POSITION, BACKGROUND_Y_POSITION, CANVAS_WIDTH, CANVAS_HEIGHT, BACKGROUND);
-        background.draw();
+        let img = new Image();
+        img.src = BACKGROUND;
+        context.drawImage(img, 0, this.imageHeight, CANVAS_WIDTH, CANVAS_HEIGHT);
+        context.drawImage(img, 0, this.imageHeight- CANVAS_HEIGHT, CANVAS_WIDTH, CANVAS_HEIGHT);
+        this.imageHeight += this.scrollSpeed;
+        if (this.imageHeight === CANVAS_HEIGHT) {
+            this.imageHeight = 0;
+        }
     }
 
     createObstacles() {
