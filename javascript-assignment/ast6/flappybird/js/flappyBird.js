@@ -107,7 +107,7 @@ class GameArea {
 
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
-            // this.gameOverAudio.play();
+            this.gameOverAudio.play();
             clearInterval(this.interval);
         }
     }
@@ -117,11 +117,3 @@ class GameArea {
     }
 }
 
-
-document.addEventListener('click', (e) => {
-   console.log('mouse is clicked'); 
-});
-
-let bird = new Bird(BIRD_X_POSITION, BIRD_Y_POSITION, BIRD_WIDTH, BIRD_HEIGHT, BIRD_IMAGE_URL);
-let game = new GameArea(bird);
-game.start();

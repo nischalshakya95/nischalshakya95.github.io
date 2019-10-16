@@ -16,7 +16,7 @@ const BACKGROUND_IMAGE_URL = './images/background-night.png';
 
 const BIRD_WIDTH = 34;
 const BIRD_HEIGHT = 24;
-const BIRD_X_POSITION = 150;
+const BIRD_X_POSITION = 50;
 const BIRD_Y_POSITION = 256;
 const BIRD_IMAGE_URL = './images/sprite.png';
 
