@@ -1,26 +1,6 @@
 let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
 
-const ARROW_UP = 'ArrowUp';
-const ARROW_DOWN = 'ArrowDown';
-const ARROW_RIGHT = 'ArrowRight';
-const ARROW_LEFT = 'ArrowLeft';
-
-const CANVAS_HEIGHT = canvas.height;
-const CANVAS_WIDTH = canvas.width;
-const OBSTACLE_WIDTH = 50;
-
-const FOREGROUND_WIDTH = CANVAS_WIDTH;
-const FOREGROUND_HEIGHT = 112;
-const FOREGROUND_X_POSITION = 0;
-const FOREGROUND_Y_POSITION = CANVAS_HEIGHT - FOREGROUND_HEIGHT;
-const FOREGROUND_IMAGE_URL = './images/foreground.png';
-
-const BACKGROUND_WIDTH = CANVAS_WIDTH;
-const BACKGROUND_HEIGHT = CANVAS_HEIGHT - FOREGROUND_HEIGHT;
-const BACKGROUND_X_POSITION = 0;
-const BACKGROUND_Y_POSITION = 0;
-const BACKGROUND_IMAGE_URL = './images/background-night.png';
 
 class GameArea {
 
@@ -46,7 +26,9 @@ class GameArea {
         this.drawBackground();
         
         // this.bird.move(this.interval);
-        // this.bird.draw();
+        this.bird.move();
+        this.bird.draw();
+
         // this.createObstacles();
         // this.drawObstacles();
         // this.drawScore();
@@ -125,97 +107,7 @@ class GameArea {
     }
 }
 
-class Component {
-    dx = 1;
-    dy = 1;
 
-    constructor(x, y, width, height, color, type) {
-        this.setInitialPosition(x, y);
-        this.width = width;
-        this.height = height;
-        this.color = color;
-        this.type = type;
-        return this;
-    }
-
-    draw(score) {
-        if (this.type === 'bird' || this.type === 'background' || this.type === 'obstacles') {
-            this.image = new Image();
-            this.image.src = this.color;
-        }
-        if (this.type === 'text') {
-            context.font = this.width + ' ' + this.height;
-            context.fillStyle = this.color;
-            context.fillText('Score: ' + score, this.x, this.y);
-        } else if (this.type === 'bird' || this.type === 'background') {
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        } else if (this.type === 'background') {
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        } else if (this.type === 'obstacles') {
-            context.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-    }
-
-    setInitialPosition(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
-class Bird extends Component {
-
-    isKeyPressed = true;
-    key = null;
-    gravity = 0.5;
-    gravitySpeed = 0;
-    speedX = 0;
-    speedY = 0;
-
-
-    constructor(x, y, width, height, color, type) {
-        super(x, y, width, height, color, type);
-        this.sound = new Audio('./sound/fly.mp3');
-        this.addEvent();
-        return this;
-    }
-
-    move(interval) {
-        this.accelerateUp();
-        this.gravitySpeed += this.gravity;
-        this.x += this.speedX;
-        this.y += this.speedY + this.gravitySpeed;
-        this.hitBottom(interval);
-    }
-
-    hitBottom(interval) {
-        let rockBottom = canvas.height - this.height;
-        if (this.y > rockBottom) {
-            this.y = rockBottom;
-            this.gravitySpeed = 0;
-            clearInterval(interval);
-        }
-    }
-
-    accelerateUp() {
-        if (this.key === 32 && this.isKeyPressed) {
-            this.gravity = -0.01;
-            this.sound.play();
-        } else {
-            this.gravity = 0.01;
-        }
-    }
-
-    addEvent() {
-        window.addEventListener('keydown', e => {
-            this.isKeyPressed = true;
-            this.key = e.keyCode;
-        });
-
-        window.addEventListener('keyup', () => {
-            this.isKeyPressed = false;
-        });
-    }
-}
 
 class Obstacle extends Component {
 
@@ -227,6 +119,6 @@ class Obstacle extends Component {
 }
 
 
-let bird = new Bird(10, 300, 38, 26, './images/bird.png', 'bird');
+let bird = new Bird(BIRD_X_POSITION, BIRD_Y_POSITION, BIRD_WIDTH, BIRD_HEIGHT, BIRD_IMAGE_URL);
 let game = new GameArea(bird);
 game.start();
