@@ -1,6 +1,4 @@
 class ForeGround extends Component {
-    
-    dx = 1;
 
     constructor(x, y, width, height, color, type) {
         super(x, y, width, height, color, type);
