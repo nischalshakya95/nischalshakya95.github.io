@@ -1,6 +1,6 @@
 let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
-
+let requestAnimationFrameId;
 
 class GameArea {
 
@@ -8,7 +8,6 @@ class GameArea {
     frameNo = 1;
     obstacles = [];
     score = -2;
-    requestAnimationFrameId = null;
     birdflaps = [BIRD_UPFLAP_IMAGE_URL, BIRD_MIDFLAP_IMAGE_URL, BIRD_DOWNFLAP_IMAGE_URL];
     beginBirdFlapIndex = 1;
     scores = [SCORE_O, SCORE_1, SCORE_2, SCORE_3, SCORE_4, SCORE_5, SCORE_6, SCORE_7, SCORE_8, SCORE_9];
@@ -16,6 +15,7 @@ class GameArea {
     scrollSpeed = 1;
     foregroundWidth = FOREGROUND_WIDTH;
     foreground = null;
+    isCollisionDetected = false;
 
     constructor(bird) {
         this.bird = bird;
@@ -25,7 +25,7 @@ class GameArea {
     }
 
     start() {
-        this.setInterval();
+        this.updateFrame();
     }
 
     updateFrame() {
@@ -34,15 +34,15 @@ class GameArea {
         this.moveForeGround();
         this.drawBackground();
 
-        this.bird.move(this.interval);
-        this.bird.render();
-
         this.createObstacles();
         this.drawObstacles();
         this.drawScore();
-        // setTimeout(() => {
-        //     this.requestAnimationFrameId = requestAnimationFrame(this.updateFrame.bind(this));
-        // }, 1000 / 200);
+        if (!this.isCollisionDetected) {
+            requestAnimationFrameId = requestAnimationFrame(this.updateFrame.bind(this));
+        }   
+
+        this.bird.move();
+        this.bird.render();
     }
 
     createObstacles() {
@@ -66,7 +66,6 @@ class GameArea {
     drawForeGround() {     
         this.foreground = new ForeGround(FOREGROUND_X_POSITION, FOREGROUND_Y_POSITION, FOREGROUND_WIDTH, FOREGROUND_HEIGHT, FOREGROUND_IMAGE_URL);
         let foreGroundTwo = new ForeGround(FOREGROUND_X_POSITION + FOREGROUND_WIDTH, FOREGROUND_Y_POSITION, FOREGROUND_WIDTH, FOREGROUND_HEIGHT, FOREGROUND_IMAGE_URL);
-     
     }
 
     moveForeGround() {
@@ -113,10 +112,11 @@ class GameArea {
 
     detectCollision(obstacle) {
         if (this.checkCollision(obstacle)) {
-            this.gameOverAudio.play();
-            let gameOver = new Component(50, 100, 100, 20, './images/gameover.png');
-            gameOver.draw();
-            clearInterval(this.interval);           
+            let gameOver = new Component(150, 200, 100, 20, './images/gameover.png');
+            gameOver.draw();   
+            this.isCollisionDetected = true;
+            this.gameOverAudio.play();    
+            cancelAnimationFrame(requestAnimationFrameId);
         }
     }
 

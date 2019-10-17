@@ -9,7 +9,6 @@ class ForeGround extends Component {
 
     move() {
         this.x -= this.dx;
-        console.log(this.x);
         if (this.x === -(this.width)) {
             this.x = 0;
         }

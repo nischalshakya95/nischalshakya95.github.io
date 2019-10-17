@@ -24,24 +24,25 @@ class Bird {
 
     render() {
         context.drawImage(this.image, 0, 0, this.width, this.height, this.x, this.y, this.width, this.height);
+
     }
 
-    move(interval) {
+    move() {
         this.accelerateUp();
         this.gravitySpeed += this.gravity;
         this.x += this.speedX;
         this.y += this.speedY + this.gravitySpeed;
-        this.hitBottom(interval);
+        this.hitBottom();
     }
 
-    hitBottom(interval) {
+    hitBottom() {
         let rockBottom = (canvas.height - this.height) - 110;
         if (this.y > rockBottom) {
             this.y = rockBottom;
             this.gravitySpeed = 0;
             let sound = new Audio('./sound/game-over.mp3');
             sound.play();
-            clearInterval(interval);
+            cancelAnimationFrame(requestAnimationFrameId);
         }
     }
 
