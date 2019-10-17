@@ -13,6 +13,7 @@ class Player {
         this.currentDirection = FACING_DOWN;
         this.frameCount = 0;
         this.currentLoopIndex = 0;
+        this.hasMoved = false;
         this.initEvent();
     }
 
@@ -35,26 +36,48 @@ class Player {
     }
 
     move() {
-        let hasMoved = false;
+        this.hasMoved = false;
         if (this.keyPresses['w']) {
-            this.positionY -= this.movementSpeed;
-            this.currentDirection = FACING_UP;
-            hasMoved = true;
+            this.moveUp();
         } else if (this.keyPresses['s']) {
-            this.positionY += this.movementSpeed;
-            this.currentDirection = FACING_DOWN;
-            hasMoved = true;
+            this.moveDown();
         }
         if (this.keyPresses['a']) {
-            this.positionX -= this.movementSpeed;
-            this.currentDirection = FACING_LEFT;
-            hasMoved = true;
+            this.moveLeft();
         } else if (this.keyPresses['d']) {
-            this.positionX += this.movementSpeed;
-            this.currentDirection = FACING_RIGHT;
-            hasMoved = true;
+            this.moveRight();
         }
-        if (hasMoved) {
+        this.isPlayerMove();
+        this.update();
+        this.draw();
+    }
+
+    moveUp() {
+        this.positionY -= this.movementSpeed;
+        this.currentDirection = FACING_UP;
+        this.hasMoved = true;
+    }
+
+    moveDown() {
+        this.positionY += this.movementSpeed;
+        this.currentDirection = FACING_DOWN;
+        this.hasMoved = true;
+    }
+
+    moveRight() {
+        this.positionX += this.movementSpeed;
+        this.currentDirection = FACING_RIGHT;
+        this.hasMoved = true;
+    }
+
+    moveLeft() {
+        this.positionX -= this.movementSpeed;
+        this.currentDirection = FACING_LEFT;
+        this.hasMoved = true;
+    }
+
+    isPlayerMove() {
+        if (this.hasMoved) {
             this.frameCount++;
             if (this.frameCount >= FRAME_LIMIT) {
                 this.frameCount = 0;
@@ -64,10 +87,12 @@ class Player {
                 }
             }
         }
+    }
+
+    update() {
         this.canvasX = this.positionX;
         this.canvasY = this.positionY;
         this.frameX = CYCLE_LOOP[this.currentLoopIndex];
         this.frameY = this.currentDirection;
-        this.draw();
     }
 }
