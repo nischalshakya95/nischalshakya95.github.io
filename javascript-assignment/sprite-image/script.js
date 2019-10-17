@@ -35,7 +35,6 @@ window.onload = function () {
                 imageFrameIndex = 0;
             }
             requestAnimationFrame(step);
-
         }
 
         requestAnimationFrame(step);
