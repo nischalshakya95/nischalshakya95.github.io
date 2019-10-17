@@ -1,3 +1,6 @@
+let canvas = document.getElementById('canvas');
+let context = canvas.getContext('2d');
+
 class Game {
 
     constructor(player){
@@ -6,8 +9,7 @@ class Game {
 
     init() {
         context.clearRect(0,0, canvas.width, canvas.height);
-        this.player.move();
-        this.player.draw();
+        this.player.init();
         requestAnimationFrame(this.init.bind(this));
     }
 }
