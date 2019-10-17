@@ -13,6 +13,9 @@ class GameArea {
     beginBirdFlapIndex = 1;
     scores = [SCORE_O, SCORE_1, SCORE_2, SCORE_3, SCORE_4, SCORE_5, SCORE_6, SCORE_7, SCORE_8, SCORE_9];
     scoreInitialIndex = 0;
+    scrollSpeed = 1;
+    foregroundWidth = FOREGROUND_WIDTH;
+    foreground = null;
 
     constructor(bird) {
         this.bird = bird;
@@ -28,6 +31,7 @@ class GameArea {
     updateFrame() {
         this.clear();
         this.drawForeGround();
+        this.moveForeGround();
         this.drawBackground();
 
         this.bird.move(this.interval);
@@ -59,9 +63,15 @@ class GameArea {
         background.draw();
     }
 
-    drawForeGround() {
-        let foreground = new ForeGround(FOREGROUND_X_POSITION, FOREGROUND_Y_POSITION, FOREGROUND_WIDTH, FOREGROUND_HEIGHT, FOREGROUND_IMAGE_URL);
-        foreground.draw();
+    drawForeGround() {     
+        this.foreground = new ForeGround(FOREGROUND_X_POSITION, FOREGROUND_Y_POSITION, FOREGROUND_WIDTH, FOREGROUND_HEIGHT, FOREGROUND_IMAGE_URL);
+        let foreGroundTwo = new ForeGround(FOREGROUND_X_POSITION + FOREGROUND_WIDTH, FOREGROUND_Y_POSITION, FOREGROUND_WIDTH, FOREGROUND_HEIGHT, FOREGROUND_IMAGE_URL);
+     
+    }
+
+    moveForeGround() {
+        this.foreground.move();
+        this.foreground.draw();
     }
 
     drawObstacles() {
