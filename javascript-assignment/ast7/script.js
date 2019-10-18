@@ -8,17 +8,17 @@ class Helix {
     constructor() {
         this.initialX = 100;
         this.initialY = 75;
+        this.create();
     }
 
     loop(){
         context.clearRect(0, 0, canvas.width, canvas.height);
-        this.create();
         this.draw();
         requestAnimationFrame(this.loop.bind(this));
     }
 
     create() {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 5; i++) {
             let ball = new Ball(this.initialX, this.initialY);
             this.initialY += 30;
             this.balls.push(ball);
