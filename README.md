@@ -1,1 +1,2 @@
 # Assignments
+Collection of assignments
