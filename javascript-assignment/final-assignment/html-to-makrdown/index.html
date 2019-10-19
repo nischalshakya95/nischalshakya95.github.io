@@ -2,23 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Title</title>
-    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="./styles/style.css"/>
 </head>
 
 <body>
-    <div class="html">
-        <textarea id="html" rows="10" cols="100">Hello world</textarea>
+<div class="header">
+    <h2>HTML to Markdown convertor</h2>
+</div>
+<div class="row">
+    <div class="col-4">
+        <label class="col-12">HTML</label>
+        <label for="html"></label><textarea id="html" rows="32"></textarea>
     </div>
-    <div class="markdown">
-        <textarea id="markdown" rows="10" cols="100"></textarea>
+    <div class="col-4">
+        <label class="col-12">Markdown</label>
+        <label for="markdown"></label><textarea id="markdown" rows="32" disabled></textarea>
+        <button type="button" class="col-8 btn btn-cons btn-success">Download</button>
     </div>
-    <div id="html-code">
-        
+    <div class="col-4">
+        <label class="col-12"> Preview </label>
+        <div id="preview" class="preview"></div>
     </div>
-    <script src="./js/constant.js"></script>
-    <script src="./js/script.js"></script>
+</div>
+
+<script src="./js/constant.js"></script>
+<script src="./js/mapper.js"></script>
+<script src="./js/script.js"></script>
 </body>
 
 </html>

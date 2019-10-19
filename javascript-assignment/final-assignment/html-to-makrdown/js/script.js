@@ -1,13 +1,26 @@
-let html = document.getElementById('html');
-let markdown = document.getElementById('markdown');
-let htmlCode = document.getElementById('html-code');
+class Script {
 
+    constructor(){
+        this.map = new Mapper().getMap();
+        this.html = document.getElementById('html');
+        this.markdown = document.getElementById('markdown');
+        this.preview = document.getElementById('preview');
+        this.htmlContent = null;
+        this.markdownContent = null;
+        this.previewContent = null;
+        this.event();
+    }
 
-document.addEventListener('keyup', e => {
-    let htmlContent = html.value;
-    htmlContent = htmlContent.replace(replaceH1Regex, '#').replace(removeH1Regex, '');
-    htmlContent = htmlContent.replace(replaceH2Regex, '##').replace(removeH2Regex, '');
-    markdown.innerHTML = htmlContent;
-    htmlContent.innerHTML = htmlContent;
-    htmlCode.innerHTML = html.value;
-});
+    event(){
+        document.addEventListener('keyup', () => {
+            let htmlContent = this.html.value;
+            htmlContent = htmlContent.replace(replaceH1Regex, this.map.get('headingOne')).replace(removeH1Regex, '');
+            this.markdownContent = htmlContent;
+            this.previewContent = this.html.value;
+            this.markdown.innerHTML = this.markdownContent;
+            this.preview.innerHTML = this.previewContent;
+        });
+    }
+}
+
+new Script();
