@@ -1,0 +1,6 @@
+class Regex{
+    
+    getHeadingRegex() {
+        
+    }
+}
