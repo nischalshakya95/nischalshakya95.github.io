@@ -22,4 +22,30 @@ class Mapper {
         this.map.set('headingSix', '######');
     }
 
+    setParagraphs() {
+        this.map.set('paragraphs', '');
+    }
+
+    setLineBreaks() {
+        this.map.set('linebreaks', '\n');
+    }
+
+    setEmphasis() {
+        this.map.set('bold', '**');
+        this.map.set('italic', '*');
+        this.map.set('boldAndItalic', '***');
+    }
+
+    setBlockQuotes() {
+        this.map.set('blockquotes', '>');
+        this.map.set('nestedblockquotes', '>>');
+    }
+
+    setUnorderedLists() {
+        this.map.set('list', '-');
+    }
+
+
+
+
 }
