@@ -1,25 +1,41 @@
 class Script {
 
-    constructor(){
+    constructor() {
         this.map = new Mapper().getMap();
         this.html = document.getElementById('html');
         this.markdown = document.getElementById('markdown');
-        this.preview = document.getElementById('preview');
         this.htmlContent = null;
         this.markdownContent = null;
-        this.previewContent = null;
         this.event();
     }
 
-    event(){
+    event() {
         document.addEventListener('keyup', () => {
-            let htmlContent = this.html.value;
-            htmlContent = htmlContent.replace(replaceH1Regex, this.map.get('headingOne')).replace(removeH1Regex, '');
-            this.markdownContent = htmlContent;
-            this.previewContent = this.html.value;
-            this.markdown.innerHTML = this.markdownContent;
-            this.preview.innerHTML = this.previewContent;
+            this.htmlContent = this.html.value;
+            this.replaceHeadingOne();
+            this.replaceHeadingTwo();
+            this.markdown.innerHTML = this.htmlContent;
         });
+    }
+
+    isHeadingOneExist() {
+        return this.htmlContent.includes('<h1>') || this.htmlContent.includes('</h1>');
+    }
+
+    replaceHeadingOne() {
+        if (this.isHeadingOneExist()) {
+            this.htmlContent = this.htmlContent.replace(replaceH1Regex, this.map.get('headingOne')).replace(removeH1Regex, '\n\n');
+        }
+    }
+
+    isHeadingTwoExist() {
+        return this.htmlContent.includes('<h2>') || this.htmlContent.includes('</h2>');
+    }
+
+    replaceHeadingTwo() {
+        if (this.isHeadingTwoExist()) {
+            this.htmlContent = this.htmlContent.replace(replaceH2Regex, this.map.get('headingTwo')).replace(removeH2Regex, '\n\n');
+        }
     }
 }
 

@@ -44,8 +44,4 @@ class Mapper {
     setUnorderedLists() {
         this.map.set('list', '-');
     }
-
-
-
-
 }
