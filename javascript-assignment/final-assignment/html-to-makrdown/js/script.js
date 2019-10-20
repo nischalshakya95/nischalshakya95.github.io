@@ -1,4 +1,4 @@
-class Script {
+class Script{
 
     constructor() {
         this.map = new Mapper().getMap();
@@ -8,6 +8,7 @@ class Script {
         this.markDownContent = null;
         this.paragraph = new Paragraph();
         this.headings = new Headings();
+        this.emphasis = new Emphasis();
         this.event();
     }
 
@@ -27,6 +28,7 @@ class Script {
     replace() {
         this.replaceHeading();
         this.replaceParagraph();
+        this.replaceEmphasis();
     }
 
     replaceHeading(){
@@ -42,6 +44,25 @@ class Script {
         this.paragraph.setContent(this.htmlContent, this.markDownContent);
         if (this.paragraph.isParagraphExist()){
             this.markDownContent = this.paragraph.replaceParagraph();
+        }
+    }
+
+    replaceEmphasis() {
+        this.replaceBold();
+        this.replaceEm();
+    }
+
+    replaceBold(){
+        this.emphasis.setContent(this.htmlContent, this.markDownContent);
+        if (this.emphasis.isStrongExist()){
+            this.markDownContent = this.emphasis.replaceStrong();
+        }
+    }
+
+    replaceEm(){
+        this.emphasis.setContent(this.htmlContent, this.markDownContent);
+        if(this.emphasis.isEmExist()){
+            this.markDownContent = this.emphasis.replaceEm();
         }
     }
 

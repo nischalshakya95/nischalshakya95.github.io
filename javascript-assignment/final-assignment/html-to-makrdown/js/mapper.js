@@ -8,6 +8,7 @@ class Mapper {
     setMap() {
         this.setHeadingKeyAndValue();
         this.setParagraph();
+        this.setEmphasis();
     }
 
     getMap() {

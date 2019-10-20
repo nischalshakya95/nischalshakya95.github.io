@@ -26,4 +26,12 @@ const REPLACE_PARAGRAPH_REGEX = /<p>/igm;
 
 const REMOVE_PARAGRAPH_REGEX = /<\/p>/igm;
 
+const REPLACE_EMPHASIS_REGEX = /<strong>/igm;
+
+const REMOVE_EMPHASIS_REGEX = /<\/strong>/;
+
+const REPLACE_EM_REGEX = /<em>/igm;
+
+const REMOVE_EM_REGEX = /<\/em>/igm;
+
 const DOUBLE_NEW_LINE = '\n';
