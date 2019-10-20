@@ -21,3 +21,9 @@ const removeH5Regex = /<\/h5>/igm;
 const replaceH6Regex = /<h6>/igm;
 
 const removeH6Regex = /<\/h6>/igm;
+
+const REPLACE_PARAGRAPH_REGEX = /<p>/igm;
+
+const REMOVE_PARAGRAPH_REGEX = /<\/p>/igm;
+
+const DOUBLE_NEW_LINE = '\n';

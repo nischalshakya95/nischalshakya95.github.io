@@ -7,6 +7,7 @@ class Mapper {
 
     setMap() {
         this.setHeadingKeyAndValue();
+        this.setParagraph();
     }
 
     getMap() {
@@ -14,20 +15,20 @@ class Mapper {
     }
 
     setHeadingKeyAndValue() {
-        this.map.set('headingOne', '#');
-        this.map.set('headingTwo', '##');
-        this.map.set('headingThree', '###');
-        this.map.set('headingFour', '####');
-        this.map.set('headingFive', '#####');
-        this.map.set('headingSix', '######');
+        this.map.set('headingOne', '# ');
+        this.map.set('headingTwo', '## ');
+        this.map.set('headingThree', '### ');
+        this.map.set('headingFour', '#### ');
+        this.map.set('headingFive', '##### ');
+        this.map.set('headingSix', '###### ');
     }
 
-    setParagraphs() {
-        this.map.set('paragraphs', '');
+    setParagraph() {
+        this.map.set('paragraph', '');
     }
 
-    setLineBreaks() {
-        this.map.set('linebreaks', '\n');
+    setLineBreak() {
+        this.map.set('linebreak', '\n');
     }
 
     setEmphasis() {

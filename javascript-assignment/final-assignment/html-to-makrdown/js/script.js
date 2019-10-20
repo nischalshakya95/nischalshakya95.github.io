@@ -5,37 +5,57 @@ class Script {
         this.html = document.getElementById('html');
         this.markdown = document.getElementById('markdown');
         this.htmlContent = null;
-        this.markdownContent = null;
+        this.markDownContent = null;
+        this.paragraph = new Paragraph();
+        this.headings = new Headings();
         this.event();
     }
 
     event() {
-        document.addEventListener('keyup', () => {
+        document.addEventListener('keyup', e => {
             this.htmlContent = this.html.value;
-            this.replaceHeadingOne();
-            this.replaceHeadingTwo();
-            this.markdown.innerHTML = this.htmlContent;
+            this.markDownContent = this.htmlContent;
+            this.replace();
+            this.updateMarkdown();
         });
     }
 
-    isHeadingOneExist() {
-        return this.htmlContent.includes('<h1>') || this.htmlContent.includes('</h1>');
+    replace() {
+        this.replaceHeading();
+        this.replaceParagraph();
     }
 
-    replaceHeadingOne() {
-        if (this.isHeadingOneExist()) {
-            this.htmlContent = this.htmlContent.replace(replaceH1Regex, this.map.get('headingOne')).replace(removeH1Regex, '\n\n');
+    replaceHeading(){
+        this.headings.setContent(this.htmlContent, this.markDownContent);
+        if (this.headings.isHeadingOneExist()) {
+            this.markDownContent = this.headings.replaceHeadingOne();
+        }
+        if (this.headings.isHeadingTwoExist()) {
+            this.markDownContent = this.headings.replaceHeadingTwo();
+        }
+        if (this.headings.isHeadingThreeExist()) {
+            this.markDownContent = this.headings.replaceHeadingThree();
+        }
+        if (this.headings.isHeadingFourExist()) {
+            this.markDownContent = this.headings.replaceHeadingFour();
+        }
+        if (this.headings.isHeadingFiveExist()) {
+            this.markDownContent = this.headings.replaceHeadingFive();
+        }
+        if (this.headings.isHeadingSixExist()) {
+            this.markDownContent = this.headings.replaceHeadingSix();
         }
     }
 
-    isHeadingTwoExist() {
-        return this.htmlContent.includes('<h2>') || this.htmlContent.includes('</h2>');
+    replaceParagraph(){
+        this.paragraph.setContent(this.htmlContent, this.markDownContent);
+        if (this.paragraph.isParagraphExist()){
+            this.markDownContent = this.paragraph.replaceParagraph();
+        }
     }
 
-    replaceHeadingTwo() {
-        if (this.isHeadingTwoExist()) {
-            this.htmlContent = this.htmlContent.replace(replaceH2Regex, this.map.get('headingTwo')).replace(removeH2Regex, '\n\n');
-        }
+    updateMarkdown() {
+        this.markdown.innerHTML = this.markDownContent;
     }
 }
 
