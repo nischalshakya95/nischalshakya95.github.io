@@ -24,7 +24,7 @@ class Headings {
     }
 
     replaceHeadingTwo() {
-        return this.markDownContent = this.markDownContent.replace(replaceH2Regex, this.map.get('headingTwo')).replace(removeH2Regex, DOUBLE_NEW_LINE);
+        return this.markDownContent.replace(replaceH2Regex, this.map.get('headingTwo')).replace(removeH2Regex, DOUBLE_NEW_LINE);
     }
 
     isHeadingThreeExist() {
