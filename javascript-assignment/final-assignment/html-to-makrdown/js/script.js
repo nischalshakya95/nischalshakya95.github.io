@@ -51,14 +51,8 @@ class Script {
                         compare === 'h4' || compare === 'h5' || compare === 'h6') {
                         this.markDownContent = this.headings.replaceHeading(content, parseInt(i.localName.charAt(1)));
                     }
-                    if (compare === 'p'){
+                    if (compare === 'p') {
                         this.markDownContent = this.paragraphs.replaceParagraph(content);
-                    }
-                    if (compare === 'strong') {
-                        this.markDownContent = this.emphasis.replaceStrong(content);
-                    }
-                    if (compare === 'em') {
-                        this.markDownContent = this.emphasis.replaceEm(content);
                     }
                 }
             }
