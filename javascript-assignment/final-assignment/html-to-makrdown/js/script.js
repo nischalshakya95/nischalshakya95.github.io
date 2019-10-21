@@ -6,7 +6,7 @@ class Script {
         'figure', 'footer', 'form', 'frameset', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
         'header', 'hgroup', 'hr', 'html', 'isindex', 'li', 'main', 'menu', 'nav',
         'noframes', 'noscript', 'ol', 'output', 'p', 'pre', 'section', 'table',
-        'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'ul'
+        'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'ul', 'strong', 'em'
     ];
 
     constructor() {
@@ -17,6 +17,8 @@ class Script {
         this.childNodes = null;
         this.markDownContent = null;
         this.headings = new Headings();
+        this.paragraphs = new Paragraph();
+        this.emphasis = new Emphasis();
         this.event();
     }
 
@@ -26,7 +28,7 @@ class Script {
             this.markDownContent = this.htmlContent;
             this.createParser();
             this.replace();
-            this.updateMarkdown();
+            this.updateMarkDown();
         });
     }
 
@@ -34,6 +36,7 @@ class Script {
         if (typeof this.htmlContent === 'string') {
             let doc = this.domParser.parseFromString('<x-parser id = "root">' + this.htmlContent + '</x-parser>', 'text/html');
             this.childNodes = doc.getElementById('root').childNodes;
+            console.log(this.childNodes);
         }
     }
 
@@ -42,17 +45,28 @@ class Script {
             if (typeof i !== undefined) {
                 let tag = this.blockElements.indexOf(i.localName);
                 let compare = this.blockElements[tag];
-                if (compare === 'h1' || compare === 'h2' || compare === 'h3' ||
-                    compare === 'h4' || compare === 'h5' || compare === 'h6') {
-                    this.markDownContent = this.headings.replaceHeading(i.textContent.trim(), parseInt(i.localName.charAt(1)));
-                    console.log(this.markDownContent);
+                if (tag !== -1) {
+                    let content = i.textContent.trim();
+                    if (compare === 'h1' || compare === 'h2' || compare === 'h3' ||
+                        compare === 'h4' || compare === 'h5' || compare === 'h6') {
+                        this.markDownContent = this.headings.replaceHeading(content, parseInt(i.localName.charAt(1)));
+                    }
+                    if (compare === 'p'){
+                        this.markDownContent = this.paragraphs.replaceParagraph(content);
+                    }
+                    if (compare === 'strong') {
+                        this.markDownContent = this.emphasis.replaceStrong(content);
+                    }
+                    if (compare === 'em') {
+                        this.markDownContent = this.emphasis.replaceEm(content);
+                    }
                 }
             }
         }
     }
 
-    updateMarkdown() {
-        this.markdown.innerHTML.concat(this.markDownContent);
+    updateMarkDown() {
+        this.markdown.innerHTML = this.markDownContent;
     }
 
 }

@@ -1,4 +1,4 @@
-class Headings extends Content{
+class Headings {
 
     replaceHeading(content, headingLevel) {
         if (headingLevel < 3) {
