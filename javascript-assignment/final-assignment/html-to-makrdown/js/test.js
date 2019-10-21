@@ -1,2 +1,2 @@
-let str = 'hello, world\n, \nworld hello\n';
-console.log(str.replace(/,/g,''));
+let doc =new DOMParser().parseFromString('<div><b>Hello!</b></div>', 'text/html');
+console.log(doc.body.firstChild);
