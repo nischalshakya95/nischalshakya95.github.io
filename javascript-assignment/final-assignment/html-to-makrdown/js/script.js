@@ -14,8 +14,9 @@ class Script {
         this.markdown = document.getElementById('markdown');
         this.domParser = new DOMParser();
         this.htmlContent = null;
-        this.input = null;
+        this.childNodes = null;
         this.markDownContent = null;
+        this.headings = new Headings();
         this.event();
     }
 
@@ -25,40 +26,35 @@ class Script {
             this.markDownContent = this.htmlContent;
             this.createParser();
             this.replace();
+            this.updateMarkdown();
         });
     }
 
     createParser() {
         if (typeof this.htmlContent === 'string') {
             let doc = this.domParser.parseFromString('<x-parser id = "root">' + this.htmlContent + '</x-parser>', 'text/html');
-            this.input = doc.getElementById('root').childNodes;
+            this.childNodes = doc.getElementById('root').childNodes;
         }
     }
 
     replace() {
-        for (let i of this.input) {
+        for (let i of this.childNodes) {
             if (typeof i !== undefined) {
                 let tag = this.blockElements.indexOf(i.localName);
                 let compare = this.blockElements[tag];
-                if (compare === 'h1' || compare === 'h2' || compare === 'h3' || compare === 'h4'
-                    || compare === 'h5' || compare === 'h6') {
-                    let opt = this.replaceHeading(i.textContent.trim(), parseInt(i.localName.charAt(1)));
-                    console.log(opt);
+                if (compare === 'h1' || compare === 'h2' || compare === 'h3' ||
+                    compare === 'h4' || compare === 'h5' || compare === 'h6') {
+                    this.markDownContent = this.headings.replaceHeading(i.textContent.trim(), parseInt(i.localName.charAt(1)));
+                    console.log(this.markDownContent);
                 }
             }
         }
     }
 
-    replaceHeading(content, headingLevel) {
-        if (headingLevel < 3) {
-            let underline = Util.repeat((headingLevel === 1 ? '=' : '-'), content.length);
-            return (
-                '\n\n' + content + '\n' + underline + '\n\n'
-            )
-        } else {
-            return '\n\n' + Util.repeat('#', headingLevel) + ' ' + content + '\n\n'
-        }
+    updateMarkdown() {
+        this.markdown.innerHTML.concat(this.markDownContent);
     }
+
 }
 
 new Script();
