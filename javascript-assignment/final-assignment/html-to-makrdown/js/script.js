@@ -20,6 +20,7 @@ class Script {
         this.paragraphs = new Paragraph();
         this.emphasis = new Emphasis();
         this.event();
+        this.arr = [];
     }
 
     event() {
@@ -37,6 +38,9 @@ class Script {
         if (typeof this.htmlContent === 'string') {
             let doc = this.domParser.parseFromString('<x-parser id = "root">' + this.htmlContent + '</x-parser>', 'text/html');
             this.childNodes = doc.getElementById('root').childNodes;
+            console.log(this.childNodes);
+            this.arr = Array.from(this.childNodes);
+            // console.log(this.arr);
         }
     }
 
@@ -60,16 +64,20 @@ class Script {
     }
 
     updateReplace() {
-        let arr = Array.from(this.childNodes);
-        if (arr.length >= 0) {
-            arr.reduce((acc, output) => {
-                console.log(output + acc);
-            },'');
+        if (this.arr.length >= 0) {
+            return this.arr.reduce((acc, output) => {
+                if (output.nodeType === 1) {
+                    console.log(acc, output.innerHTML);
+                    return [...acc  , output.innerHTML + '\n\n'];
+                }
+                return acc
+            }, []);
         }
     }
 
     updateMarkDown() {
-        this.markdown.innerHTML = this.markDownContent;
+        console.log(this.arr);
+        this.markdown.innerHTML = this.updateReplace();
     }
 
 }
