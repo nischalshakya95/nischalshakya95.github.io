@@ -4,6 +4,6 @@ const STRONG = '**';
 
 const EM = '*';
 
-const leadingNewLinesRegExp = /^\n*/;
+const LEADING_NEW_LINE_REG_EXP = /^\n*/;
 
-const trailingNewLinesRegExp = /\n*$/;
+const TRAILING_NEW_LINE_REG_EXP = /\n*$/;

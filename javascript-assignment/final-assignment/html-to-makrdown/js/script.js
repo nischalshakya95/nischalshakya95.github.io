@@ -43,14 +43,17 @@ class Script {
     compareAndReplace(node) {
         let tag = this.blockElements.indexOf(node.localName);
         let compare = this.blockElements[tag];
+
         if (tag !== -1) {
             let content = node.textContent.trim();
             if (compare === 'h1' || compare === 'h2' || compare === 'h3' ||
                 compare === 'h4' || compare === 'h5' || compare === 'h6') {
-                this.markDownContent = this.headings.replaceHeading(content, parseInt(node.localName.charAt(1)));
+                this.markDownContent = this.headings.replaceHeading(content, parseInt(node.localName.charAt(1)))
+                    .replace(LEADING_NEW_LINE_REG_EXP, '');
             }
             if (compare === 'p') {
-                this.markDownContent = this.paragraphs.replaceParagraph(content);
+                this.markDownContent = this.paragraphs.replaceParagraph(content)
+                    .replace(LEADING_NEW_LINE_REG_EXP, '');
             }
             return this.markDownContent;
         }
