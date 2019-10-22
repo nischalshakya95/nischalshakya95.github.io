@@ -6,10 +6,10 @@ class ListElement extends ElementFactory {
         this.count = 1;
     }
 
-    replace(content, tag) {
-        for (let c of content) {
+    replace(node, tag) {
+        for (let c of node.children) {
             if (c.nodeType === 1) {
-                c.parentNode.localName === 'ol' ? this.lists.push(this.count++ + '. ' + c.textContent + '\n') : this.lists.push('* ' + c.textContent + '\n');
+                c.parentElement.localName === 'ol' ? this.lists.push(this.count++ + '. ' + c.textContent + '\n') : this.lists.push('* ' + c.textContent + '\n');
             }
         }
         this.lists.push('\n');

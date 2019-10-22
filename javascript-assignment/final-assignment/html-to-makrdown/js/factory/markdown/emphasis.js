@@ -9,7 +9,8 @@ class Emphasis extends ElementFactory {
         return DOUBLE_NEW_LINE + EM + content + EM + DOUBLE_NEW_LINE;
     }
 
-    replace(content, tag) {
+    replace(node, tag) {
+        let content = node.textContent.trim();
         if (tag === 'em') {
             return this.replaceEm(content);
         } else if (tag === 'strong') {

@@ -18,7 +18,7 @@ class Script {
             this.markDownContent = this.htmlContent;
             this.createParser();
             this.updateMarkDown();
-            this.updateReplace();
+            this.generateMarkdown();
         });
     }
 
@@ -30,21 +30,17 @@ class Script {
         }
     }
 
-    compareAndReplace(node) {
-        let content = node.textContent.trim();
+    getMarkdown(node) {
         this.elementFactory = GetElementFactory.getElement(node.localName);
-        if (node.localName === 'ul' || node.localName === 'ol') {
-            content = node.children;
-        }
-        this.markDownContent = this.elementFactory.replace(content, node.localName).replace(LEADING_NEW_LINE_REG_EXP, '');
+        this.markDownContent = this.elementFactory.replace(node, node.localName).replace(LEADING_NEW_LINE_REG_EXP, '');
         return this.markDownContent;
     }
 
-    updateReplace() {
+    generateMarkdown() {
         if (this.arr.length >= 0) {
             return this.arr.reduce((acc, node) => {
                 if (node.nodeType === 1) {
-                    return [...acc, this.compareAndReplace(node)];
+                    return [...acc, this.getMarkdown(node)];
                 }
                 return acc;
             }, []);
@@ -52,7 +48,7 @@ class Script {
     }
 
     updateMarkDown() {
-        this.markdown.innerHTML = this.updateReplace().join('');
+        this.markdown.innerHTML = this.generateMarkdown().join('');
     }
 }
 
