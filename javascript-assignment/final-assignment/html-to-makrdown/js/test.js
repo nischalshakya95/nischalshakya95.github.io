@@ -4,4 +4,4 @@ let output = Array.prototype.reduce.call(arr, function (acc, output) {
     // console.log('output', output);
     return acc + output;
 });
-console.log(output);
+console.log(arr.indexOf(1).toString());

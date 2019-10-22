@@ -1,6 +1,7 @@
 class HeadingElement extends ElementFactory{
 
-    replace(content, headingLevel) {
+    replace(content, tag) {
+        let headingLevel = parseInt(tag.charAt(1));
         if (headingLevel < 3) {
             let underline = Util.repeat((headingLevel === 1 ? '=' : '-'), content.length);
             return (

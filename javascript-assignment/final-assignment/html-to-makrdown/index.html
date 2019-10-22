@@ -14,26 +14,27 @@
     <h2>HTML to Markdown convertor</h2>
 </div>
 <div class="row">
-    <div class="col-6">
+    <div class="col-2"></div>
+    <div class="col-4">
         <label class="col-12">HTML</label>
         <label for="html"></label><textarea id="html" rows="32"></textarea>
     </div>
-    <div class="col-6">
-        <label class="col-12">Markdown</label>
+    <div class="col-4">
+        <label class="col-6">Markdown</label>
         <label for="markdown"></label><textarea id="markdown" rows="32" disabled></textarea>
-        <button type="button" class="col-8 btn btn-cons btn-success">Download</button>
+        <button type="button" class="col-5">Download</button>
     </div>
+    <div class="col-2"></div>
 </div>
 
 <script src="./js/constant.js"></script>
 <script src="./js/util.js"></script>
 <script src="./js/factory/elementfactory.js"></script>
 <script src="./js/factory/getelementfactory.js"></script>
-<script src="./js/factory/headingelement.js"></script>
-<script src="./js/factory/paragraphelement.js"></script>
-<script src="./js/markdown/headings.js"></script>
-<script src="./js/markdown/paragraph.js"></script>
-<script src="./js/markdown/emphasis.js"></script>
+<script src="js/factory/markdown/headingelement.js"></script>
+<script src="js/factory/markdown/paragraphelement.js"></script>
+<script src="js/factory/markdown/emphasis.js"></script>
+<script src="js/factory/markdown/blockquote.js"></script>
 <script src="./js/mapper.js"></script>
 <script src="./js/script.js"></script>
 </body>

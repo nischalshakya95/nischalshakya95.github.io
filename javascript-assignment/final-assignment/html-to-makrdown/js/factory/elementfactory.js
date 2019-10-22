@@ -2,5 +2,5 @@ class ElementFactory {
 
     constructor() {}
 
-    replace(){}
+    replace(content, tag){}
 }
