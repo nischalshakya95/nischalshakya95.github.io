@@ -11,8 +11,11 @@ class GetElementFactory {
         if (elementType === 'strong' || elementType === 'em') {
             return new Emphasis();
         }
-        if (elementType === 'blockquote'){
+        if (elementType === 'blockquote') {
             return new Blockquote();
+        }
+        if (elementType === 'ul' || elementType === 'ol') {
+            return new ListElement();
         }
     }
 }

@@ -34,8 +34,16 @@ class Script {
     compareAndReplace(node) {
         let content = node.textContent.trim();
         this.elementFactory = GetElementFactory.getElement(node.localName);
-        this.markDownContent = this.elementFactory.replace(content, node.localName)
-            .replace(LEADING_NEW_LINE_REG_EXP, '');
+        if (node.localName === 'ul' || node.localName === 'ol') {
+            for (let c of node.children) {
+                content = c.textContent.trim();
+                this.markDownContent = this.elementFactory.replace(content, node.localName).replace(LEADING_NEW_LINE_REG_EXP, '');
+            }
+        } else {
+            this.markDownContent = this.elementFactory.replace(content, node.localName).replace(LEADING_NEW_LINE_REG_EXP, '');
+        }
+        console.log(content);
+
         return this.markDownContent;
     }
 
