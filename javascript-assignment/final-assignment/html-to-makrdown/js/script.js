@@ -18,7 +18,6 @@ class Script {
         this.markDownContent = null;
         this.headings = new Headings();
         this.paragraphs = new Paragraph();
-        this.emphasis = new Emphasis();
         this.event();
         this.arr = [];
     }
@@ -28,7 +27,6 @@ class Script {
             this.htmlContent = this.html.value;
             this.markDownContent = this.htmlContent;
             this.createParser();
-            this.replace();
             this.updateMarkDown();
             this.updateReplace();
         });
@@ -38,48 +36,40 @@ class Script {
         if (typeof this.htmlContent === 'string') {
             let doc = this.domParser.parseFromString('<x-parser id = "root">' + this.htmlContent + '</x-parser>', 'text/html');
             this.childNodes = doc.getElementById('root').childNodes;
-            console.log(this.childNodes);
             this.arr = Array.from(this.childNodes);
-            // console.log(this.arr);
         }
     }
 
-    replace() {
-        for (let i of this.childNodes) {
-            if (typeof i !== undefined) {
-                let tag = this.blockElements.indexOf(i.localName);
-                let compare = this.blockElements[tag];
-                if (tag !== -1) {
-                    let content = i.textContent.trim();
-                    if (compare === 'h1' || compare === 'h2' || compare === 'h3' ||
-                        compare === 'h4' || compare === 'h5' || compare === 'h6') {
-                        this.markDownContent = this.headings.replaceHeading(content, parseInt(i.localName.charAt(1)));
-                    }
-                    if (compare === 'p') {
-                        this.markDownContent = this.paragraphs.replaceParagraph(content);
-                    }
-                }
+    compareAndReplace(node) {
+        let tag = this.blockElements.indexOf(node.localName);
+        let compare = this.blockElements[tag];
+        if (tag !== -1) {
+            let content = node.textContent.trim();
+            if (compare === 'h1' || compare === 'h2' || compare === 'h3' ||
+                compare === 'h4' || compare === 'h5' || compare === 'h6') {
+                this.markDownContent = this.headings.replaceHeading(content, parseInt(node.localName.charAt(1)));
             }
+            if (compare === 'p') {
+                this.markDownContent = this.paragraphs.replaceParagraph(content);
+            }
+            return this.markDownContent;
         }
     }
 
     updateReplace() {
         if (this.arr.length >= 0) {
-            return this.arr.reduce((acc, output) => {
-                if (output.nodeType === 1) {
-                    console.log(acc, output.innerHTML);
-                    return [...acc  , output.innerHTML + '\n\n'];
+            return this.arr.reduce((acc, node) => {
+                if (node.nodeType === 1) {
+                    return [...acc, this.compareAndReplace(node)];
                 }
-                return acc
+                return acc;
             }, []);
         }
     }
 
     updateMarkDown() {
-        console.log(this.arr);
-        this.markdown.innerHTML = this.updateReplace();
+        this.markdown.innerHTML = this.updateReplace().join('');
     }
-
 }
 
 new Script();

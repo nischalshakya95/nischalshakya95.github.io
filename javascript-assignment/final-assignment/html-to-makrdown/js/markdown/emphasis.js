@@ -1,4 +1,4 @@
-class Emphasis extends Content {
+class Emphasis {
 
     replaceStrong(content) {
         return STRONG + content + STRONG;
