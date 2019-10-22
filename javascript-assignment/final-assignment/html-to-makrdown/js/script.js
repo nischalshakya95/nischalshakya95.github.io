@@ -29,6 +29,7 @@ class Script {
             this.createParser();
             this.replace();
             this.updateMarkDown();
+            this.updateReplace();
         });
     }
 
@@ -36,7 +37,6 @@ class Script {
         if (typeof this.htmlContent === 'string') {
             let doc = this.domParser.parseFromString('<x-parser id = "root">' + this.htmlContent + '</x-parser>', 'text/html');
             this.childNodes = doc.getElementById('root').childNodes;
-            console.log(this.childNodes);
         }
     }
 
@@ -56,6 +56,15 @@ class Script {
                     }
                 }
             }
+        }
+    }
+
+    updateReplace() {
+        let arr = Array.from(this.childNodes);
+        if (arr.length >= 0) {
+            arr.reduce((acc, output) => {
+                console.log(output + acc);
+            },'');
         }
     }
 
