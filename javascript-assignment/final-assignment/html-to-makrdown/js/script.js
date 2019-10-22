@@ -27,7 +27,6 @@ class Script {
             let doc = this.domParser.parseFromString('<x-parser id = "root">' + this.htmlContent + '</x-parser>', 'text/html');
             this.childNodes = doc.getElementById('root').childNodes;
             this.arr = Array.from(this.childNodes);
-            console.log(this.childNodes);
         }
     }
 
@@ -35,15 +34,9 @@ class Script {
         let content = node.textContent.trim();
         this.elementFactory = GetElementFactory.getElement(node.localName);
         if (node.localName === 'ul' || node.localName === 'ol') {
-            for (let c of node.children) {
-                content = c.textContent.trim();
-                this.markDownContent = this.elementFactory.replace(content, node.localName).replace(LEADING_NEW_LINE_REG_EXP, '');
-            }
-        } else {
-            this.markDownContent = this.elementFactory.replace(content, node.localName).replace(LEADING_NEW_LINE_REG_EXP, '');
+            content = node.children;
         }
-        console.log(content);
-
+        this.markDownContent = this.elementFactory.replace(content, node.localName).replace(LEADING_NEW_LINE_REG_EXP, '');
         return this.markDownContent;
     }
 
