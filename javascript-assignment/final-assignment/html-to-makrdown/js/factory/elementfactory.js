@@ -1,0 +1,6 @@
+class ElementFactory {
+
+    constructor() {}
+
+    replace(){}
+}

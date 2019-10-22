@@ -16,8 +16,7 @@ class Script {
         this.htmlContent = null;
         this.childNodes = null;
         this.markDownContent = null;
-        this.headings = new Headings();
-        this.paragraphs = new Paragraph();
+        this.elementFactory = null;
         this.event();
         this.arr = [];
     }
@@ -36,6 +35,7 @@ class Script {
         if (typeof this.htmlContent === 'string') {
             let doc = this.domParser.parseFromString('<x-parser id = "root">' + this.htmlContent + '</x-parser>', 'text/html');
             this.childNodes = doc.getElementById('root').childNodes;
+            console.log(this.childNodes);
             this.arr = Array.from(this.childNodes);
         }
     }
@@ -48,11 +48,14 @@ class Script {
             let content = node.textContent.trim();
             if (compare === 'h1' || compare === 'h2' || compare === 'h3' ||
                 compare === 'h4' || compare === 'h5' || compare === 'h6') {
-                this.markDownContent = this.headings.replaceHeading(content, parseInt(node.localName.charAt(1)))
+                this.elementFactory = new GetElementFactory(node.localName).getElement();
+                console.log(this.elementFactory);
+                this.markDownContent = this.elementFactory.replace(content, parseInt(node.localName.charAt(1)))
                     .replace(LEADING_NEW_LINE_REG_EXP, '');
             }
             if (compare === 'p') {
-                this.markDownContent = this.paragraphs.replaceParagraph(content)
+                this.elementFactory = new GetElementFactory(node.localName).getElement();
+                this.markDownContent = this.elementFactory.replace(content)
                     .replace(LEADING_NEW_LINE_REG_EXP, '');
             }
             return this.markDownContent;
