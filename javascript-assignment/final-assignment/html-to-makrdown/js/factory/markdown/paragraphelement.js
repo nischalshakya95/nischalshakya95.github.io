@@ -4,6 +4,6 @@ class ParagraphElement extends ElementFactory {
         if (node.childElementCount > 0) {
             this.getChildElement().getChildNodes(node).replace(TRAILING_NEW_LINE_REG_EXP, '');
         }
-        return DOUBLE_NEW_LINE + node.innerText.replace(/[\r\n]+/gm, '') + DOUBLE_NEW_LINE;
+        return DOUBLE_NEW_LINE + node.innerText.replace(/[\r\n]+/gm, ' ') + DOUBLE_NEW_LINE;
     }
 }
