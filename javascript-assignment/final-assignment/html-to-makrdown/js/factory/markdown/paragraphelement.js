@@ -1,7 +1,9 @@
 class ParagraphElement extends ElementFactory {
 
     replace(node, tag) {
-        let content = node.textContent.trim();
-        return DOUBLE_NEW_LINE + content + DOUBLE_NEW_LINE;
+        if (node.childElementCount > 0) {
+            this.getChildElement().getChildNodes(node).replace(TRAILING_NEW_LINE_REG_EXP, '');
+        }
+        return DOUBLE_NEW_LINE + node.innerText.replace(/[\r\n]+/gm, '') + DOUBLE_NEW_LINE;
     }
 }

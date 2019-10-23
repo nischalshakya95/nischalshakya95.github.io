@@ -12,7 +12,7 @@ class ChildElement {
                     this.getChildNodes(c);
                 }
                 c.textContent = this.markDownContent.getMarkDown(c);
-                this.result = c.textContent;
+                this.result = c.textContent.replace(LEADING_NEW_LINE_REG_EXP, '').replace(TRAILING_NEW_LINE_REG_EXP, '');
             }
             return this.result;
         }
