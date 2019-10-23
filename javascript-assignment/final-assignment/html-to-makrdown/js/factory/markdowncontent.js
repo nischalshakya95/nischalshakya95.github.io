@@ -5,7 +5,7 @@ class MarkdownContent {
     }
 
     getMarkDown(node) {
-        this.elementFactory = GetElementFactory.getElement(node.localName);
+        this.elementFactory = GetElementFactory.getElement(node.nodeName.toLowerCase());
         return this.elementFactory.replace(node, node.localName).replace(LEADING_NEW_LINE_REG_EXP, '');
     }
 }

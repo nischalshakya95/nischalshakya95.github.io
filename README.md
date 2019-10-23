@@ -83,9 +83,9 @@ ___
 | Syntax      | Description |
 | ----------- | ----------- |
 | Header      | Title       |
-| Paragraph   | Text        |
+| Paragraph   | Textelement        |
 
 | Syntax | Description |
 | --- | ----------- |
 | Header | Title |
-| Paragraph | Text |
+| Paragraph | Textelement |

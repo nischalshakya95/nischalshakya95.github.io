@@ -17,5 +17,8 @@ class GetElementFactory {
         if (elementType === 'ul' || elementType === 'ol') {
             return new ListElement();
         }
+        if (elementType === '#text') {
+            return new TextElement();
+        }
     }
 }
