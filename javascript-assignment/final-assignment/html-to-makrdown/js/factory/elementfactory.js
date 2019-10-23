@@ -1,6 +1,11 @@
 class ElementFactory {
 
-    constructor() {}
+    constructor() {
+    }
 
     replace(node, tag){}
+
+    getChildElement() {
+        return new ChildElement();
+    }
 }

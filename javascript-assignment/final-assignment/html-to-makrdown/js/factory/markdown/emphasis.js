@@ -5,13 +5,12 @@ class Emphasis extends ElementFactory {
     }
 
     replaceEm(content) {
-        if (content === '') return '';
         return DOUBLE_NEW_LINE + EM + content + EM + DOUBLE_NEW_LINE;
     }
 
     replace(node, tag) {
         let content = node.textContent.trim();
-        console.log('emphasis content ', content);
+        if (!content) return '';
         if (tag === 'em') {
             return this.replaceEm(content);
         } else if (tag === 'strong') {

@@ -1,16 +1,10 @@
 class HeadingElement extends ElementFactory {
 
-    constructor() {
-        super();
-        this.markDownContent = new MarkdownContent();
-        this.result = null;
-    }
-
     replace(node, tag) {
         let content = node.textContent.trim();
         let headingLevel = parseInt(tag.charAt(1));
         if (node.childElementCount > 0) {
-            this.getChildNodes(node);
+            content = this.getChildElement().getChildNodes(node).replace(TRAILING_NEW_LINE_REG_EXP, '');
         }
         if (headingLevel < 3) {
             let underline = Util.repeat((headingLevel === 1 ? '=' : '-'), content.length);
@@ -19,16 +13,6 @@ class HeadingElement extends ElementFactory {
             )
         } else {
             return '\n\n' + Util.repeat('#', headingLevel) + ' ' + content + '\n\n'
-        }
-    }
-
-    getChildNodes(node) {
-        if (node.nodeType === 1) {
-            for (let c of node.childNodes) {
-                if (c.hasChildNodes() && c.childElementCount !== 0) {
-                    this.getChildNodes(c);
-                }
-            }
         }
     }
 }
