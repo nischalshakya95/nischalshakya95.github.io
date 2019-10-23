@@ -6,8 +6,7 @@ class Script {
         this.domParser = new DOMParser();
         this.htmlContent = null;
         this.childNodes = null;
-        this.markDownContent = null;
-        this.elementFactory = null;
+        this.markDownContent = new MarkdownContent();
         this.event();
         this.arr = [];
     }
@@ -15,7 +14,6 @@ class Script {
     event() {
         document.addEventListener('keyup', e => {
             this.htmlContent = this.html.value;
-            this.markDownContent = this.htmlContent;
             this.createParser();
             this.updateMarkDown();
             this.generateMarkdown();
@@ -27,19 +25,19 @@ class Script {
             let doc = this.domParser.parseFromString('<x-parser id = "root">' + this.htmlContent + '</x-parser>', 'text/html');
             this.childNodes = doc.getElementById('root').childNodes;
             this.arr = Array.from(this.childNodes);
+            console.log(this.childNodes);
         }
     }
 
     getMarkdown(node) {
-        this.elementFactory = GetElementFactory.getElement(node.localName);
-        this.markDownContent = this.elementFactory.replace(node, node.localName).replace(LEADING_NEW_LINE_REG_EXP, '');
-        return this.markDownContent;
+        return this.markDownContent.getMarkDown(node);
     }
 
     generateMarkdown() {
         if (this.arr.length >= 0) {
             return this.arr.reduce((acc, node) => {
                 if (node.nodeType === 1) {
+                    console.log(node);
                     return [...acc, this.getMarkdown(node)];
                 }
                 return acc;

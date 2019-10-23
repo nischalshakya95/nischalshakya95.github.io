@@ -11,6 +11,7 @@ class Emphasis extends ElementFactory {
 
     replace(node, tag) {
         let content = node.textContent.trim();
+        console.log('emphasis content ', content);
         if (tag === 'em') {
             return this.replaceEm(content);
         } else if (tag === 'strong') {
