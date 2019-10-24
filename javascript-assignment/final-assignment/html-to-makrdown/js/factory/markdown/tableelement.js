@@ -4,6 +4,7 @@ class TableElement extends ElementFactory {
         super();
         this.heading = '';
         this.rows = ' ';
+        this.afterHeading = ' ';
     }
 
     replace(node, tag) {
@@ -18,9 +19,10 @@ class TableElement extends ElementFactory {
                         this.rows += this.replaceRow(row.innerText.trim());
                     }
                 }
+                this.afterHeading = '| ----- | ------- | --------';
                 this.rows += '|' + '\n';
             }
-            return this.heading + ' |' + '\n' + this.rows;
+            return this.heading + '\n' + this.afterHeading + this.rows;
         }
     }
 
