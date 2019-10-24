@@ -11,7 +11,7 @@ class Emphasis extends ElementFactory {
     }
 
     replace(node, tag) {
-        let content = node.textContent.trim();
+        let content = node.innerText.trim();
         if (node.childElementCount > 0) {
             content = this.getChildElement().getChildNodes(node).replace(TRAILING_NEW_LINE_REG_EXP, '');
         }

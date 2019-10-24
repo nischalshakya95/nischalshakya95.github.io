@@ -1,9 +1,9 @@
 class HeadingElement extends ElementFactory {
 
     replace(node, tag) {
-        let content = node.textContent.trim();
+        let content = node.innerText.trim();
         if (content !== '') {
-            let headingLevel = parseInt(tag.charAt(1));
+            let headingLevel = parseInt(node.localName.charAt(1));
             if (node.childElementCount > 0) {
                 content = this.getChildElement().getChildNodes(node).replace(TRAILING_NEW_LINE_REG_EXP, '');
             }
