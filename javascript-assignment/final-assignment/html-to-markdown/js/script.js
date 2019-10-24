@@ -9,14 +9,17 @@ class Script {
         this.markDownContent = new MarkdownContent();
         this.event();
         this.arr = [];
+        this.isEnterPressed = false;
     }
 
     event() {
         document.addEventListener('keyup', e => {
             this.htmlContent = this.html.value;
-            this.createParser();
-            this.updateMarkDown();
-            this.generateMarkdown();
+            if (e.key !== 'Enter') {
+                this.createParser();
+                this.generateMarkdown();
+                this.updateMarkDown();
+            }
         });
     }
 
