@@ -29,5 +29,8 @@ class GetElementFactory {
         if (elementType === 'table') {
             return new TableElement();
         }
+        if (elementType === 'br') {
+            return new BreakElement();
+        }
     }
 }
