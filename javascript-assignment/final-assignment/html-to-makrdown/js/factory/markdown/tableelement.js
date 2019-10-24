@@ -3,6 +3,7 @@ class TableElement extends ElementFactory {
     constructor() {
         super();
         this.heading = '';
+        this.rows = ' ';
     }
 
     replace(node, tag) {
@@ -14,15 +15,23 @@ class TableElement extends ElementFactory {
                     if (row.nodeName.toLowerCase() === 'th') {
                         this.heading += this.replaceHeading(row.innerText.trim());
                     }
-
+                    if (row.nodeName.toLowerCase() === 'td') {
+                        this.rows += this.replaceRow(row.innerText.trim());
+                    }
                 }
+                this.rows += '\n';
             }
-            return this.heading + ' |';
+            return this.heading + ' |' + '\n' + this.rows;
         }
     }
 
     replaceHeading(content) {
         return '| ' + content + ' ';
     }
+
+    replaceRow(content) {
+        return '| ' + content + ' ';
+    }
+
 
 }
