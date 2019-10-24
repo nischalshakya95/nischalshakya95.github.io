@@ -20,5 +20,11 @@ class GetElementFactory {
         if (elementType === '#text') {
             return new TextElement();
         }
+        if (elementType === 'img') {
+            return new ImageElement();
+        }
+        if (elementType === 'a') {
+            return new LinkElement();
+        }
     }
 }
