@@ -36,10 +36,7 @@ class Script {
     generateMarkdown() {
         if (this.arr.length >= 0) {
             return this.arr.reduce((acc, node) => {
-                if (node.nodeType === 1 || node.nodeType === 3) {
-                    return [...acc, this.getMarkdown(node)];
-                }
-                return acc;
+                return [...acc, this.getMarkdown(node)];
             }, []);
         }
     }

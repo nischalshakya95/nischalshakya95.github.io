@@ -9,7 +9,17 @@ class ListElement extends ElementFactory {
     replace(node, tag) {
         for (let c of node.children) {
             if (c.nodeType === 1) {
-                c.parentElement.localName === 'ol' ? this.lists.push(this.count++ + '. ' + c.textContent + '\n') : this.lists.push('* ' + c.textContent + '\n');
+                if (c.parentElement.localName === 'ul') {
+                    if (c.childElementCount > 0) {
+                        this.getChildElement().getChildNodes(c);
+                    }
+                    this.lists.push('* ' + c.innerText + '\n')
+                } else if (c.parentElement.localName === 'ol') {
+                    if (c.childElementCount > 0) {
+                        this.getChildElement().getChildNodes(c);
+                    }
+                    this.lists.push(this.count++ + '. ' + c.innerText + '\n')
+                }
             }
         }
         this.lists.push('\n');
