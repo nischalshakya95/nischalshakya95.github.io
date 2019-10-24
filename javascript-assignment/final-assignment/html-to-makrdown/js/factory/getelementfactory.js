@@ -26,5 +26,8 @@ class GetElementFactory {
         if (elementType === 'a') {
             return new LinkElement();
         }
+        if (elementType === 'table') {
+            return new TableElement();
+        }
     }
 }
