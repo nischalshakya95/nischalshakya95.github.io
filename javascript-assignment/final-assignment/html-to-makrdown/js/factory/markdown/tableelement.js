@@ -36,10 +36,6 @@ class TableElement extends ElementFactory {
         return this.afterHeading;
     }
 
-    addSpacesBetweenText() {
-
-    }
-
     replaceHeading(content) {
         return '| ' + content + ' ';
     }
