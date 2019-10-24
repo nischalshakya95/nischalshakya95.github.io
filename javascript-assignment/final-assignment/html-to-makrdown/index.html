@@ -13,19 +13,24 @@
 <div class="header">
     <h2>HTML to Markdown convertor</h2>
 </div>
-<div class="row">
-    <div class="col-2"></div>
-    <div class="col-4">
-        <label class="col-12">HTML</label>
-        <label for="html"></label><textarea id="html" rows="32"></textarea>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="label">
+                <label>HTML</label>
+            </div>
+            <textarea id="html" rows="32"></textarea>
+        </div>
+        <div class="col-6">
+            <div class="label">
+                <label> Markdown </label>
+            </div>
+            <label for="markdown"></label><textarea id="markdown" rows="32" disabled></textarea>
+            <button type="button" class="col-5">Download</button>
+        </div>
     </div>
-    <div class="col-4">
-        <label class="col-6">Markdown</label>
-        <label for="markdown"></label><textarea id="markdown" rows="32" disabled></textarea>
-        <button type="button" class="col-5">Download</button>
-    </div>
-    <div class="col-2"></div>
 </div>
+
 
 <script src="./js/constant.js"></script>
 <script src="./js/util.js"></script>
