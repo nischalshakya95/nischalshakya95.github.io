@@ -4,6 +4,6 @@ class ParagraphElement extends ElementFactory {
         if (node.childElementCount > 0) {
             this.getChildElement().getChildNodes(node);
         }
-        return node.textContent;
+        return node.textContent + '\n\n';
     }
 }
