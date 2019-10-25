@@ -13,12 +13,12 @@ class ListElement extends ElementFactory {
                     if (c.childElementCount > 0) {
                         this.getChildElement().getChildNodes(c);
                     }
-                    this.lists.push('* ' + c.innerText.replace(/[\r\n]+/gm, ' ') + '\n')
+                    this.lists.push('* ' + c.innerText.replace(/[\n]+/gm, ' ') + '\n')
                 } else if (c.parentElement.localName === 'ol') {
                     if (c.childElementCount > 0) {
                         this.getChildElement().getChildNodes(c);
                     }
-                    this.lists.push(this.count++ + '. ' + c.innerText.replace(/[\r\n]+/gm, ' ') + '\n')
+                    this.lists.push(this.count++ + '. ' + c.innerText.replace(/[\n]+/gm, ' ') + '\n')
                 }
             }
         }
