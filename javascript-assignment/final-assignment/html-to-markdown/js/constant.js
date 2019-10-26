@@ -32,4 +32,9 @@ const HEADING_SIX_REGEX = /[#]{6}(.+)/g;
 
 const HEADING_SIX_REPLACE = '<h6>$1</h6>';
 
+const BLOCKQUOTE_REGEX = /^&gt;(.+)/gm;
+
+const BLOCKQUOTE_REPLACE = '<blockquote>$1</blockquote>';
+
+
 
