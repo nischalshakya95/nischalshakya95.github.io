@@ -6,8 +6,8 @@ class Script {
         this.trigger = document.getElementById('raw-switch');
         this.outputHTML = document.getElementById('output-html');
         this.status = this.trigger.getElementsByTagName('span')[0];
-        this.status.innerText = 'Off';
-        this.rawMode = false;
+        this.status.innerText = 'On';
+        this.rawMode = true;
         this.updateStatus();
         this.domParser = new DOMParser();
         this.htmlContent = null;
@@ -20,9 +20,10 @@ class Script {
     updateStatus() {
         this.trigger.addEventListener('click', () => {
             this.rawMode = !this.rawMode;
+            this.status.innerText = this.rawMode ? 'On' : 'Off';
             this.status.innerText === 'On' ? this.markdown.style.display = 'block' : this.markdown.style.display = 'none';
             this.status.innerText === 'Off'? this.outputHTML.style.display = 'block': this.outputHTML.style.display = 'none';
-            this.status.innerText = this.rawMode ? 'On' : 'Off';
+
         });
     }
 
