@@ -14,6 +14,10 @@
     padding: 15px 0;
 }
 
+.raw {
+    padding: 15px 0;
+}
+
 .row::after {
     content: "";
     clear: both;
@@ -44,6 +48,17 @@ button {
     color: #fff;
     background-color: #5cb85c;
     border-color: #4cae4c;
+}
+
+#markdown {
+    display: block;
+}
+
+section {
+    height: 100%;
+    overflow-y : scroll;
+    overflow-x: hidden;
+    display: none;
 }
 
 /*for mobiles*/

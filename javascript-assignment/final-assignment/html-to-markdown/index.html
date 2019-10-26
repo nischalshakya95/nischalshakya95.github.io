@@ -12,7 +12,7 @@
 
 <body>
 <div class="header">
-    <h2>HTML to Markdown convertor</h2>
+    <h2>HTML to Markdown Converter</h2>
 </div>
 <div class="container">
     <div class="row">
@@ -26,7 +26,11 @@
             <div class="label">
                 <label> Markdown </label>
             </div>
+            <div class="raw">
+                <a href="#" id="raw-switch" class="raw-switch">Raw: <span></span></a>
+            </div>
             <label for="markdown"></label><textarea id="markdown" rows="32" disabled></textarea>
+            <section id="output-html"><h1> Heading One </h1></section>
             <button id="download" type="button" class="col-5"><i class="fa fa-download" aria-hidden="true"> Download</i>
             </button>
         </div>
