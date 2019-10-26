@@ -5,14 +5,19 @@ class Script {
         this.markdown = document.getElementById('markdown');
         this.trigger = document.getElementById('raw-switch');
         this.outputHTML = document.getElementById('output-html');
+
         this.status = this.trigger.getElementsByTagName('span')[0];
+
         this.status.innerText = 'On';
         this.rawMode = true;
-        this.updateStatus();
-        this.domParser = new DOMParser();
         this.htmlContent = null;
         this.childNodes = null;
+
+        this.domParser = new DOMParser();
         this.markDownContent = new MarkdownContent();
+        this.htmlConvertor = new HtmlConverter();
+
+        this.updateStatus();
         this.event();
         this.arr = [];
     }
@@ -43,7 +48,6 @@ class Script {
             let doc = this.domParser.parseFromString('<x-parser id = "root">' + this.htmlContent + '</x-parser>', 'text/html');
             this.childNodes = doc.getElementById('root').childNodes;
             this.arr = Array.from(this.childNodes);
-            this.htmlArr = [];
             console.log(this.childNodes);
         }
     }
@@ -62,7 +66,8 @@ class Script {
 
     updateMarkDown() {
         this.markdown.innerHTML = this.generateMarkdown().join('');
-        this.outputHTML.innerHTML = this.markdown.innerHTML;
+        console.log(typeof  this.markdown.innerHTML);
+        this.outputHTML.innerHTML = this.htmlConvertor.replace(this.markdown.innerHTML);
     }
 }
 
