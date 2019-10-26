@@ -15,7 +15,6 @@ class Script {
         this.markDownContent = new MarkdownContent();
         this.event();
         this.arr = [];
-        this.htmlArr = [];
     }
 
     updateStatus() {
@@ -34,9 +33,7 @@ class Script {
             if (e.key !== 'Enter') {
                 this.createParser();
                 this.generateMarkdown();
-                this.generateHTML();
                 this.updateMarkDown();
-
             }
         });
     }
@@ -63,14 +60,9 @@ class Script {
         }
     }
 
-    generateHTML() {
-
-    }
-
     updateMarkDown() {
         this.markdown.innerHTML = this.generateMarkdown().join('');
-        this.outputHTML.innerHTML = this.markdown.innerHTML.replace(/^(.+)\n\=+/gm, '<h1>$1</h1>')
-            .replace(/^(.+)\n\-+/gm, '<h2>$1</h2>');
+        this.outputHTML.innerHTML = this.markdown.innerHTML;
     }
 }
 
