@@ -15,6 +15,7 @@ class Script {
         this.markDownContent = new MarkdownContent();
         this.event();
         this.arr = [];
+        this.htmlArr = [];
     }
 
     updateStatus() {
@@ -22,8 +23,7 @@ class Script {
             this.rawMode = !this.rawMode;
             this.status.innerText = this.rawMode ? 'On' : 'Off';
             this.status.innerText === 'On' ? this.markdown.style.display = 'block' : this.markdown.style.display = 'none';
-            this.status.innerText === 'Off'? this.outputHTML.style.display = 'block': this.outputHTML.style.display = 'none';
-
+            this.status.innerText === 'Off' ? this.outputHTML.style.display = 'block' : this.outputHTML.style.display = 'none';
         });
     }
 
@@ -34,7 +34,9 @@ class Script {
             if (e.key !== 'Enter') {
                 this.createParser();
                 this.generateMarkdown();
+                this.generateHTML();
                 this.updateMarkDown();
+
             }
         });
     }
@@ -44,6 +46,7 @@ class Script {
             let doc = this.domParser.parseFromString('<x-parser id = "root">' + this.htmlContent + '</x-parser>', 'text/html');
             this.childNodes = doc.getElementById('root').childNodes;
             this.arr = Array.from(this.childNodes);
+            this.htmlArr = [];
             console.log(this.childNodes);
         }
     }
@@ -60,8 +63,14 @@ class Script {
         }
     }
 
+    generateHTML() {
+
+    }
+
     updateMarkDown() {
         this.markdown.innerHTML = this.generateMarkdown().join('');
+        this.outputHTML.innerHTML = this.markdown.innerHTML.replace(/^(.+)\n\=+/gm, '<h1>$1</h1>')
+            .replace(/^(.+)\n\-+/gm, '<h2>$1</h2>');
     }
 }
 
