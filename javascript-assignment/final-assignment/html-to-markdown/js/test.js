@@ -1,5 +1,5 @@
-let linkMd = '[A link](https://markdowntohtml.com/) ';
-
-let regexp = /[\[]{1}([^\]]+)[\]]{1}[(]{1}([^)"]+)("(.+)")?[)]{1}/g;
-
-console.log(linkMd.replace(regexp, '<a href = "$2" title="$4">$1</a>'));
+let val = '<h1>headingOne<h2>headingtwo</h2></h1><h1>headingone</h1>';
+console.log(val.indexOf('<h1>'), val.indexOf('</h1>'));
+updatedValue = val.substring(0, val.indexOf('</h1>'));
+console.log(val.replace(updatedValue, ''));
+console.log(updatedValue.substring(updatedValue.indexOf('<h2>'), updatedValue.indexOf('</h2>')));

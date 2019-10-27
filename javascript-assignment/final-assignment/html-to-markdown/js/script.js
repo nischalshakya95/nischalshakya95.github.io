@@ -16,6 +16,7 @@ class Script {
         this.domParser = new DOMParser();
         this.markDownContent = new MarkdownContent();
         this.htmlConvertor = new HtmlConverter();
+        this.stack = new Stack();
 
         this.updateStatus();
         this.event();
@@ -49,7 +50,7 @@ class Script {
             this.childNodes = doc.getElementById('root').childNodes;
             this.arr = Array.from(this.childNodes);
             console.log(this.childNodes);
-            console.log(this.htmlContent);
+            console.log(this.htmlContent.split('\n'));
         }
     }
 
