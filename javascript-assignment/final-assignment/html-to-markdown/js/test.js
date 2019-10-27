@@ -1,3 +1,5 @@
-let str = "<h1>hello world</h1> <h2>world hello</h2>";
-let n = str.split(/[a-z1-6](.*)/gm);
-console.log(n);
+let linkMd = '[A link](https://markdowntohtml.com/) ';
+
+let regexp = /[\[]{1}([^\]]+)[\]]{1}[(]{1}([^)"]+)("(.+)")?[)]{1}/g;
+
+console.log(linkMd.replace(regexp, '<a href = "$2" title="$4">$1</a>'));

@@ -40,5 +40,9 @@ const IMAGE_REGEX = /!\[([^\]]+)]\(([^)]+)\)/g;
 
 const IMAGE_REPLACE = '<img src=$2 alt=$1 />';
 
+const LINK_REGEX = /[\[]{1}([^\]]+)[\]]{1}[(]{1}([^)"]+)("(.+)")?[)]{1}/g;
+
+const LINK_REPLACE = '<a href="$2" title="$4">$1</a>';
+
 
 

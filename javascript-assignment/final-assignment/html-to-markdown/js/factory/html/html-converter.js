@@ -14,6 +14,8 @@ class HtmlConverter {
 
         markdown = markdown.replace(IMAGE_REGEX, IMAGE_REPLACE);
 
+        markdown = markdown.replace(LINK_REGEX, LINK_REPLACE);
+
         return markdown;
     }
 }
