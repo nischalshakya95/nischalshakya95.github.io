@@ -36,5 +36,9 @@ const BLOCKQUOTE_REGEX = /^&gt;(.+)/gm;
 
 const BLOCKQUOTE_REPLACE = '<blockquote>$1</blockquote>';
 
+const IMAGE_REGEX = /!\[([^\]]+)]\(([^)]+)\)/g;
+
+const IMAGE_REPLACE = '<img src=$2 alt=$1 />';
+
 
 

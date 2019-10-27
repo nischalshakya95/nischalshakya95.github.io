@@ -1,3 +1,3 @@
-let str = "Hello world, welcome to the universe.";
-let n = str.includes("world", 12);
+let str = "<h1>hello world</h1> <h2>world hello</h2>";
+let n = str.split(/[a-z1-6](.*)/gm);
 console.log(n);

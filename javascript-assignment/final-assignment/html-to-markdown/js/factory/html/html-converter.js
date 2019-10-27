@@ -10,9 +10,9 @@ class HtmlConverter {
         markdown = markdown.replace(HEADING_FOUR_REGEX, HEADING_FOUR_REPLACE);
         markdown = markdown.replace(HEADING_THREE_REGEX, HEADING_THREE_REPLACE);
 
-        debugger
         markdown = markdown.replace(BLOCKQUOTE_REGEX, BLOCKQUOTE_REPLACE);
-        console.log(markdown);
+
+        markdown = markdown.replace(IMAGE_REGEX, IMAGE_REPLACE);
 
         return markdown;
     }

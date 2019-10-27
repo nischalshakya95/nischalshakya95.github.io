@@ -49,6 +49,7 @@ class Script {
             this.childNodes = doc.getElementById('root').childNodes;
             this.arr = Array.from(this.childNodes);
             console.log(this.childNodes);
+            console.log(this.htmlContent);
         }
     }
 
@@ -66,7 +67,6 @@ class Script {
 
     updateMarkDown() {
         this.markdown.innerHTML = this.generateMarkdown().join('');
-        console.log(typeof  this.markdown.innerHTML);
         this.outputHTML.innerHTML = this.htmlConvertor.replace(this.markdown.innerHTML);
     }
 }
