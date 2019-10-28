@@ -7,7 +7,7 @@ class HeadingElement extends ElementFactory {
         if (content !== '') {
             let headingLevel = parseInt(node.localName.charAt(1));
             if ((content.startsWith(startTag) && content.endsWith(endTag))) {
-                content = content.replace(startTag, '').replace(endTag, '');
+                content = content.replace(startTag, '').replace(endTag, '').trim();
                 if (node.childElementCount > 0) {
                     content = this.getChildElement().getChildNodes(node).replace(TRAILING_NEW_LINE_REG_EXP, '');
                 }
@@ -17,10 +17,14 @@ class HeadingElement extends ElementFactory {
                         '\n\n' + content + '\n' + underline + '\n\n'
                     )
                 } else {
-                    return '\n\n' + Util.repeat('#', headingLevel) + ' ' + content + '\n\n'
+                    if (content !== '') {
+                        return '\n\n' + Util.repeat('#', headingLevel) + ' ' + content + '\n\n'
+                    } else {
+                        return 'Content is empty' + '\n\n';
+                    }
                 }
             } else {
-                return 'end tag is not valid or missing ' + '\n\n';
+                return 'end tag is invalid or missing ' + '\n\n';
             }
 
         } else {
