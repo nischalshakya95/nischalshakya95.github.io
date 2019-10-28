@@ -21,7 +21,6 @@ class Script {
         this.updateStatus();
         this.event();
         this.arr = [];
-        this.htmlArr = [];
     }
 
     updateStatus() {
@@ -40,7 +39,6 @@ class Script {
             if (e.key !== 'Enter') {
                 this.createParser();
                 this.generateMarkdown();
-                this.validate();
                 this.updateMarkDown();
             }
         });
@@ -55,25 +53,12 @@ class Script {
         }
     }
 
-    validate() {
-        let str = this.htmlContent;
-        if (str.includes('<h1>')) {
-            let startIndex = str.indexOf('<h1>');
-            let endIndex = str.indexOf('</h1>');
-            let startTag = '<h1>';
-            let endTag = '</h1>';
-            let content = str.substring(startIndex, endIndex);
-            let heading = new Heading(startIndex, startTag, content, endIndex, endTag);
-            if (endIndex === -1) {
-                this.markDownContent.innerHTML = 'no closing tag';
-            }
-        }
-    }
-
     getMarkdown(node) {
         let regex = new RegExp('<' + node.localName + '>(.+)', 'ig');
         let str = this.htmlContent.match(regex);
-        node.textContent = str[0];
+        if (str !== null) {
+            node.textContent = str[str.length - 1];
+        }
         return this.markDownContent.getMarkDown(node);
     }
 
