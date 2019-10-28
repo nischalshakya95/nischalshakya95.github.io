@@ -7,4 +7,8 @@ class Heading {
         this.endIndex = endIndex;
         this.endTag = endTag;
     }
+
+    validate(){
+
+    }
 }

@@ -21,6 +21,7 @@ class Script {
         this.updateStatus();
         this.event();
         this.arr = [];
+        this.htmlArr = [];
     }
 
     updateStatus() {
@@ -63,7 +64,6 @@ class Script {
             let endTag = '</h1>';
             let content = str.substring(startIndex, endIndex);
             let heading = new Heading(startIndex, startTag, content, endIndex, endTag);
-            console.log(heading);
         }
     }
 

@@ -15,6 +15,8 @@ class HeadingElement extends ElementFactory {
             } else {
                 return '\n\n' + Util.repeat('#', headingLevel) + ' ' + content + '\n\n'
             }
+        } else {
+            return 'Content is empty' + '\n\n';
         }
     }
 }
