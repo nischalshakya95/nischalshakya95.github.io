@@ -53,11 +53,6 @@ class Script {
     }
 
     getMarkdown(node) {
-        let regex = new RegExp('<' + node.localName + '>(.+)', 'ig');
-        let str = this.htmlContent.match(regex);
-        if (str !== null) {
-            node.textContent = str[str.length - 1];
-        }
         return this.markDownContent.getMarkDown(node);
     }
 
