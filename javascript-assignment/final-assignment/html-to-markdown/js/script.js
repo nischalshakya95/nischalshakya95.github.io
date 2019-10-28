@@ -39,6 +39,7 @@ class Script {
             if (e.key !== 'Enter') {
                 this.createParser();
                 this.generateMarkdown();
+                this.validate();
                 this.updateMarkDown();
             }
         });
@@ -50,7 +51,19 @@ class Script {
             this.childNodes = doc.getElementById('root').childNodes;
             this.arr = Array.from(this.childNodes);
             console.log(this.childNodes);
-            console.log(this.htmlContent.split('\n'));
+        }
+    }
+
+    validate() {
+        let str = this.htmlContent;
+        if (str.includes('<h1>')) {
+            let startIndex = str.indexOf('<h1>');
+            let endIndex = str.indexOf('</h1>');
+            let startTag = '<h1>';
+            let endTag = '</h1>';
+            let content = str.substring(startIndex, endIndex);
+            let heading = new Heading(startIndex, startTag, content, endIndex, endTag);
+            console.log(heading);
         }
     }
 
