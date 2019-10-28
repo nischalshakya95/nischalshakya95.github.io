@@ -64,10 +64,16 @@ class Script {
             let endTag = '</h1>';
             let content = str.substring(startIndex, endIndex);
             let heading = new Heading(startIndex, startTag, content, endIndex, endTag);
+            if (endIndex === -1) {
+                this.markDownContent.innerHTML = 'no closing tag';
+            }
         }
     }
 
     getMarkdown(node) {
+        let regex = new RegExp('<' + node.localName + '>(.+)', 'ig');
+        let str = this.htmlContent.match(regex);
+        node.textContent = str[0];
         return this.markDownContent.getMarkDown(node);
     }
 

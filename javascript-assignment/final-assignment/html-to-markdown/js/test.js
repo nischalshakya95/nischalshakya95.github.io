@@ -1,4 +1,3 @@
-let val = '<p>headingOne</p>';
-console.log(val.indexOf('<h1>'), val.indexOf('</h1>'));
-updatedValue = val.substring(0, val.indexOf('</h1>'));
-console.log(val.replace(updatedValue, ''));
+let val = '<h1>headingOne</h1><p><h2>hello world</h2>headingOne</p><p>paragraph</p></h2>';
+let match = val.match(/<h2>(.+)/gi);
+console.log(match[0].endsWith('</h2>'));

@@ -2,8 +2,14 @@ class HeadingElement extends ElementFactory {
 
     replace(node, tag) {
         let content = node.innerText.trim();
+        let startTag = '<' + tag.toLowerCase() + '>';
+        let endTag = '</' + tag.toLowerCase() + '>';
         if (content !== '') {
             let headingLevel = parseInt(node.localName.charAt(1));
+            if (!content.startsWith(startTag) || content.endsWith(endTag)) {
+                return 'End tag is not defined';
+            }
+            content = content.replace(startTag, '').replace(endTag, '');
             if (node.childElementCount > 0) {
                 content = this.getChildElement().getChildNodes(node).replace(TRAILING_NEW_LINE_REG_EXP, '');
             }
