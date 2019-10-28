@@ -1,5 +1,7 @@
 class HeadingElement extends ElementFactory {
 
+    emptyMsg = 'Empty heading';
+
     replace(node, tag, str) {
         if (str !== null) {
             if (this.validate(str, tag)) {
@@ -18,11 +20,11 @@ class HeadingElement extends ElementFactory {
                         if (content !== '') {
                             return '\n\n' + Util.repeat('#', headingLevel) + ' ' + content + '\n\n'
                         } else {
-                            return 'Content is empty' + '\n\n';
+                            return this.emptyMsg + '\n\n';
                         }
                     }
                 } else {
-                    return 'Content is empty' + '\n\n';
+                    return this.emptyMsg + '\n\n';
                 }
             } else {
                 return 'Invalid ending tag' + '\n\n';

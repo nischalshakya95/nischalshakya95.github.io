@@ -1,3 +1,4 @@
-let val = '<h1>headingOne</h1><p><h2>hello world</h2>headingOne</p><p>paragraph</p></h2>';
-let match = val.match(/<h2>(.+)/gi);
-console.log(match[0].endsWith('</h2>'));
+let str = '<h1>nischal shakya<h2></h1>';
+let regexOne = /(<h1>\w(<|>)|<\/h1>)/ig;
+let regex = /\s*(?!^<h1>)(?!<\/h1>$)(<h[1-6]>.*|<\/h[1-6]>.*)/ig;
+console.log(regexOne.test(str));
