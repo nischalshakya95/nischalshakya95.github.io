@@ -3,7 +3,7 @@ class ElementFactory {
     constructor() {
     }
 
-    replace(node, tag){}
+    replace(node, tag, str){}
 
     getChildElement() {
         return new ChildElement();

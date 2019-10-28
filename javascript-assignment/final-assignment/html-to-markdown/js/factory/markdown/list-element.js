@@ -6,7 +6,7 @@ class ListElement extends ElementFactory {
         this.count = 1;
     }
 
-    replace(node, tag) {
+    replace(node, tag, str) {
         for (let c of node.children) {
             if (c.nodeType === 1) {
                 if (c.parentElement.localName === 'ul') {

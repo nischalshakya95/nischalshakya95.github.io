@@ -56,9 +56,9 @@ class Script {
         let regex = new RegExp('<' + node.localName + '>(.+)', 'ig');
         let str = this.htmlContent.match(regex);
         if (str !== null) {
-            console.log(str[str.length - 1]);
+            return this.markDownContent.getMarkDown(node, str[str.length - 1]);
         }
-        return this.markDownContent.getMarkDown(node);
+
     }
 
     generateMarkdown() {

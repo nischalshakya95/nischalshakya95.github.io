@@ -1,6 +1,6 @@
 class ParagraphElement extends ElementFactory {
 
-    replace(node, tag) {
+    replace(node, tag, str) {
         if (node.childElementCount > 0) {
             this.getChildElement().getChildNodes(node);
         }

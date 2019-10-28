@@ -10,10 +10,10 @@ class Emphasis extends ElementFactory {
         return DOUBLE_NEW_LINE + EM + content + EM + DOUBLE_NEW_LINE;
     }
 
-    replace(node, tag) {
+    replace(node, tag, str) {
         let content = node.innerText.trim();
         if (node.childElementCount > 0) {
-            content = this.getChildElement().getChildNodes(node).replace(TRAILING_NEW_LINE_REG_EXP, '');
+            content = this.getChildElement().getChildNodes(node).replace(TRAILING_NEW_LINE_REG_EXP, '', null);
         }
         if (!content) return '';
         if (tag === 'em') {

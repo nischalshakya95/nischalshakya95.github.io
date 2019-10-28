@@ -1,6 +1,6 @@
 class ImageElement extends ElementFactory {
 
-    replace(node, tag) {
+    replace(node, tag, str) {
         if (node.nextSibling || node.childElementCount > 0) {
             return 'invalid' + DOUBLE_NEW_LINE;
         }
