@@ -1,5 +1,50 @@
 .wrapper {
     margin: 0 auto;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.top-nav {
+    display: block;
+    padding: 15px;
+}
+
+.brand-logo {
+    display: inline-block;
+    padding-bottom: 2px;
+}
+
+.brand-logo img {
+    float: left;
+}
+
+.brand-logo span {
+    font-size: 13px;
+    margin-left: 12px;
+    color: #cc003e;
+    margin-top: 6px;
+    float: left;
+}
+
+.right-action {
+    float: right;
+    margin-right: 20px;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.right-action ul li {
+    display: inline;
+    padding: 0 12px;
+}
+
+.right-action ul li.checkout {
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+li .cart-icon {
+    margin: 0 10px;
 }
 
 .row::after {
@@ -10,15 +55,14 @@
 
 [class*="col-"] {
     float: left;
-    padding: 15px;
 }
 
 [class*="col-"] {
     width: 100%;
 }
 
-@media only screen and (min-width: 600px) {
-    /* For tablets: */
+@media only screen and (max-width: 600px) {
+
     .col-s-1 {
         width: 8.33%;
     }
@@ -65,6 +109,19 @@
 
     .col-s-12 {
         width: 100%;
+    }
+
+    .top-nav {
+        padding: 5px;
+    }
+
+    .brand-logo span {
+        font-size: 11px;
+        margin-top: 8px;
+    }
+
+    .right-action ul {
+        padding: 0;
     }
 }
 
