@@ -14,3 +14,23 @@
     font-size: 15px;
     font-weight: 600;
 }
+
+.item-list .blog-item .blog-title {
+    font-size: 1.3em;
+    color: #cc003e;
+}
+
+.item-list .blog-item .blog-stats {
+    font-size: 0.8em;
+    padding: 15px 0;
+    color: #888;
+}
+
+.item-list .blog-item .blog-detail p span a {
+    font-weight: 600;
+    color: #cc003e;
+}
+
+.seller-item-list {
+    display: inline;
+}
