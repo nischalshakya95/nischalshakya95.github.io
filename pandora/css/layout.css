@@ -265,6 +265,46 @@ li .cart-icon {
 
 /*slide show of image end*/
 
+/*welcome style start*/
+.welcome-wrapper {
+    padding: 10px;
+}
+
+.icon {
+    float: left;
+    object-fit: cover;
+}
+
+.welcome {
+    float: right;
+    text-align: center;
+    transform: translateY(40px);
+    font-size: 14px;
+}
+
+.welcome h2 {
+    color: #cc003e;
+    font-weight: 100;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.welcome h2 span {
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+
+.welcome p {
+    color: #444;
+    line-height: 20px;
+}
+
+.welcome p span {
+    font-weight: bold;
+}
+/*welcome style end*/
+
 .row::after {
     content: "";
     clear: both;
@@ -350,7 +390,11 @@ li .cart-icon {
         display: none;
     }
 
-    .slideshow-container{
+    .slideshow-container {
+        display: none;
+    }
+
+    .icon{
         display: none;
     }
 }
