@@ -19,3 +19,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
 }
+
+footer {
+    padding: 2vh 10vw;
+}

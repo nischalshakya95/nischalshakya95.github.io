@@ -450,6 +450,63 @@ section.product-images {
 
 /*Blog, news and about & contacts end*/
 
+/*Footer content start*/
+.footer {
+    background-color: #333333;
+    color: white;
+    width: 100%;
+}
+
+.footer-header {
+    padding: 15px 0;
+    border-bottom: 1px solid #333333;
+}
+
+.footer-content ul li::before {
+    content: "\2022";
+    color: #cc003e;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.social-links, .payment-methods {
+    margin: 5px 0;
+}
+
+.social-link, .payment-method {
+    display: inline-block;
+    width: 20px;
+}
+
+.social-link {
+    border-radius: 50%;
+}
+
+.social-link img, .payment-methods img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.final-footer {
+    text-align: center;
+}
+
+.final-footer ul li:first-child img {
+    position: relative;
+    top: 16px;
+}
+
+.final-footer ul li:last-child img {
+    position: relative;
+    top: 10px;
+}
+/*Footer section end*/
+
+
 .row::after {
     content: "";
     clear: both;

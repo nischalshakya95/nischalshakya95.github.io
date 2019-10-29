@@ -34,3 +34,18 @@
 .seller-item-list {
     display: inline;
 }
+
+.tweet-icon,
+.tweet-message {
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+.footer-content ul {
+    list-style: none; /* Remove default bullets */
+}
+
+.final-footer ul li {
+    display: inline;
+    font-size: 11px;
+}
