@@ -305,6 +305,26 @@ li .cart-icon {
 }
 /*welcome style end*/
 
+/*Featured items and view more items start*/
+.item-header {
+    margin-top: 20px;
+    padding: 20px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.featured-item {
+    float: left;
+}
+
+.view-more-items {
+    float: right;
+}
+
+.view-more-items-content {
+    padding: 5px 5px;
+}
+/*Feature items and view more items end*/
+
 .row::after {
     content: "";
     clear: both;
@@ -394,7 +414,7 @@ li .cart-icon {
         display: none;
     }
 
-    .icon{
+    .icon {
         display: none;
     }
 }
