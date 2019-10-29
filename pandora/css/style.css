@@ -1,3 +1,16 @@
-ul li:last-child a {
+.right-action ul li:last-child a {
     color: #cc003e;
+}
+
+.custom-inner p {
+    color: #fff;
+    font-size: 12px;
+}
+
+.num-item p {
+    margin-bottom: 0;
+    color: #cb164f;
+    margin-top: 4px;
+    font-size: 15px;
+    font-weight: 600;
 }
