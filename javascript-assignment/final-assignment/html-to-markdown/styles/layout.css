@@ -5,16 +5,22 @@
     font-size: 12px;
 }
 
+[class*="col-"] {
+    width: 100%;
+}
+
 .container {
     width: 1170px;
     margin: 0 auto;
 }
 
 .label {
+    float:left;
     padding: 15px 0;
 }
 
 .raw {
+    float: right;
     padding: 15px 0;
 }
 
@@ -27,10 +33,6 @@
 [class*="col-"] {
     float: left;
     padding: 15px;
-}
-
-[class*="col-"] {
-    width: 100%;
 }
 
 textarea {
