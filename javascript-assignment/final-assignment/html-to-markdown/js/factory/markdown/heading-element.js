@@ -14,7 +14,7 @@ class HeadingElement extends ElementFactory {
                     if (headingLevel < 3) {
                         let underline = Util.repeat((headingLevel === 1 ? '=' : '-'), content.length);
                         return (
-                            '\n\n' + content + '\n' + underline + '\n\n'
+                            '\n\n' + content.replace(/\s+/g, ' ') + '\n' + underline + '\n\n'
                         )
                     } else {
                         if (content !== '') {
