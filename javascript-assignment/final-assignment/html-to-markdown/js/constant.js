@@ -44,7 +44,7 @@ const LINK_REGEX = /[\[]{1}([^\]]+)[\]]{1}[(]{1}([^)"]+)("(.+)")?[)]{1}/g;
 
 const LINK_REPLACE = '<a href="$2" title="$4">$1</a>';
 
-const HEADING_VALIDATION_REGEX = /\s*(?!^<h1>)(?!<\/h1>$)(<\/?h[1-6]|<\/?p>)/im;
+const HEADING_VALIDATION_REGEX = /\s*(?!^<h1>)(?!<\/h1>$)(<\/?\w+>)/im;
 
 const REMOVE_SPACE_BEFORE_AFTER_ELEMENT = /\s(?!<\/?\w+>)\s/igm;
 

@@ -59,7 +59,7 @@ class Script {
         if (this.invalidateHTML() === false) {
             return this.markDownContent.getMarkDown(node);
         } else {
-            return 'Make sure you have html in proper format';
+            return 'Make sure you have html in proper format ' + '\n\n';
         }
     }
 
