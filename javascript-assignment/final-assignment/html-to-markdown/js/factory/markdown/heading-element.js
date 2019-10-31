@@ -1,7 +1,5 @@
 class HeadingElement extends ElementFactory {
 
-    emptyMsg = 'Empty heading';
-
     replace(node, tag, str) {
         if (str !== null) {
             let content = node.innerText.trim();
@@ -16,14 +14,8 @@ class HeadingElement extends ElementFactory {
                         '\n\n' + content.replace(/\s+/g, ' ') + '\n' + underline + '\n\n'
                     )
                 } else {
-                    if (content !== '') {
-                        return '\n\n' + Util.repeat('#', headingLevel) + ' ' + content.replace(/\s+/g, ' ') + '\n\n'
-                    } else {
-                        return this.emptyMsg + '\n\n';
-                    }
+                    return '\n\n' + Util.repeat('#', headingLevel) + ' ' + content.replace(/\s+/g, ' ') + '\n\n'
                 }
-            } else {
-                return this.emptyMsg + '\n\n';
             }
         }
     }

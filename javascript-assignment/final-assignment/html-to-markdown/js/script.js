@@ -1,34 +1,21 @@
 class Script {
 
+    invalidMsg = 'Make sure you have html in proper format' + '\n\n';
+
     constructor() {
         this.html = document.getElementById('html');
         this.markdown = document.getElementById('markdown');
-        this.trigger = document.getElementById('raw-switch');
         this.outputHTML = document.getElementById('output-html');
-        this.status = this.trigger.getElementsByTagName('span')[0];
 
-        this.status.innerText = 'On';
-        this.rawMode = true;
         this.htmlContent = null;
         this.childNodes = null;
         this.invalidHTML = false;
 
         this.domParser = new DOMParser();
         this.markDownContent = new MarkdownContent();
-        this.htmlConverter = new HtmlConverter();
 
-        this.updateStatus();
         this.event();
         this.arr = [];
-    }
-
-    updateStatus() {
-        this.trigger.addEventListener('click', () => {
-            this.rawMode = !this.rawMode;
-            this.status.innerText = this.rawMode ? 'On' : 'Off';
-            this.status.innerText === 'On' ? this.markdown.style.display = 'block' : this.markdown.style.display = 'none';
-            this.status.innerText === 'Off' ? this.outputHTML.style.display = 'block' : this.outputHTML.style.display = 'none';
-        });
     }
 
 
@@ -37,9 +24,8 @@ class Script {
             this.htmlContent = this.html.value;
             if (e.key !== 'Enter') {
                 this.createParser();
-                this.generateMarkdown();
                 this.updateMarkDown();
-                this.invalidateHTML();
+                this.generateMarkdown();
             }
         });
     }
@@ -54,12 +40,7 @@ class Script {
     }
 
     getMarkdown(node) {
-        console.log(this.invalidateHTML());
-        if (this.invalidateHTML() === false) {
-            return this.markDownContent.getMarkDown(node);
-        } else {
-            return 'Make sure you have html in proper format';
-        }
+        return this.markDownContent.getMarkDown(node);
     }
 
     invalidateHTML() {
@@ -69,10 +50,27 @@ class Script {
             let closingBracket = array[i].indexOf('>');
             if (openingBracket !== -1 && closingBracket !== -1) {
                 let nodeName = array[i].substring(openingBracket + 1, closingBracket);
-                console.log(nodeName);
-                this.invalidHTML = GetValidationFactory.getValidation(nodeName).isInvalid(array[i], nodeName);
-                if (this.invalidHTML === true) {
-                    break;
+                if (array[i].startsWith('<' + nodeName + '>') && array[i].endsWith('</' + nodeName + '>')) {
+                    if (nodeName === 'h1') {
+                        this.invalidHTML = HEADING_ONE_VALIDATION_REGEX.test(array[i]);
+                    }
+                    if (nodeName === 'h2') {
+                        this.invalidHTML = HEADING_TWO_VALIDATION_REGEX.test(array[i]);
+                    }
+                    if (nodeName === 'h3') {
+                        this.invalidHTML = HEADING_THREE_VALIDATION_REGEX.test(array[i]);
+                    }
+                    if (nodeName === 'h4') {
+                        this.invalidHTML = HEADING_FOUR_VALIDATION_REGEX.test(array[i]);
+                    }
+                    if (nodeName === 'h5') {
+                        this.invalidHTML = HEADING_FIVE_VALIDATION_REGEX.test(array[i]);
+                    }
+                    if (nodeName === 'h6') {
+                        this.invalidHTML = HEADING_SIX_VALIDATION_REGEX.test(array[i]);
+                    }
+                } else {
+                    this.invalidHTML = true;
                 }
             }
         }
@@ -88,8 +86,7 @@ class Script {
     }
 
     updateMarkDown() {
-        this.markdown.innerHTML = this.generateMarkdown().join('');
-        this.outputHTML.innerHTML = this.htmlConverter.replace(this.markdown.innerHTML);
+        this.markdown.innerHTML = this.invalidateHTML() ? this.invalidMsg : this.generateMarkdown().join('');
     }
 }
 
