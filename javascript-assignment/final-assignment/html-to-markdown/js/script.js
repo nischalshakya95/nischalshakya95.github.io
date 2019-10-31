@@ -49,6 +49,7 @@ class Script {
             this.childNodes = doc.getElementById('root').childNodes;
             this.arr = Array.from(this.childNodes);
             console.log(this.childNodes);
+            console.log(this.htmlContent);
         }
     }
 
