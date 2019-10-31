@@ -26,7 +26,6 @@ class HeadingElement extends ElementFactory {
             } else {
                 return this.emptyMsg + '\n\n';
             }
-
         }
     }
 }
