@@ -17,7 +17,6 @@ class Script {
         this.markDownContent = new MarkdownContent();
         this.htmlConverter = new HtmlConverter();
 
-
         this.updateStatus();
         this.event();
         this.arr = [];
@@ -71,7 +70,7 @@ class Script {
             if (openingBracket !== -1 && closingBracket !== -1) {
                 let nodeName = array[i].substring(openingBracket + 1, closingBracket);
                 console.log(nodeName);
-                this.invalidHTML = HEADING_VALIDATION_REGEX.test(array[i]);
+                this.invalidHTML = GetValidationFactory.getValidation(nodeName).isInvalid(array[i], nodeName);
                 if (this.invalidHTML === true) {
                     break;
                 }

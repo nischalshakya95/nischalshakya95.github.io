@@ -1,6 +1,7 @@
 class ValidationFactory {
 
-    isInvalid(str) {
+    isInvalid(str, tag) {
+
     }
 
 }
