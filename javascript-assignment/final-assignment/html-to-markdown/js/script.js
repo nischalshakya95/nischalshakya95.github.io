@@ -11,10 +11,12 @@ class Script {
         this.rawMode = true;
         this.htmlContent = null;
         this.childNodes = null;
+        this.invalidHTML = false;
 
         this.domParser = new DOMParser();
         this.markDownContent = new MarkdownContent();
         this.htmlConverter = new HtmlConverter();
+
 
         this.updateStatus();
         this.event();
@@ -38,6 +40,7 @@ class Script {
                 this.createParser();
                 this.generateMarkdown();
                 this.updateMarkDown();
+                this.invalidateHTML();
             }
         });
     }
@@ -52,17 +55,29 @@ class Script {
     }
 
     getMarkdown(node) {
-        let array = this.htmlContent.split(SPLIT_REGEX).filter(a => a.length !== 0);
-        // console.log(array);
-        for (let i = 0; i < array.length; i++) {
-            console.log(array[i]);
-            // let openingBracket = array[i].indexOf('<');
-            // let closingBracket = array[i].indexOf('>');
-            // if (openingBracket !== -1 && closingBracket !== -1) {
-            //     let nodeName = array[i].substring(openingBracket + 1, closingBracket);
-            //     console.log(nodeName);
-            this.markDownContent.getMarkDown(node, array[i]);
+        console.log(this.invalidateHTML());
+        if (this.invalidateHTML() === false) {
+            return this.markDownContent.getMarkDown(node);
+        } else {
+            return 'Make sure you have html in proper format';
         }
+    }
+
+    invalidateHTML() {
+        let array = this.htmlContent.split(SPLIT_REGEX).filter(a => a.length !== 0);
+        for (let i = 0; i < array.length; i++) {
+            let openingBracket = array[i].indexOf('<');
+            let closingBracket = array[i].indexOf('>');
+            if (openingBracket !== -1 && closingBracket !== -1) {
+                let nodeName = array[i].substring(openingBracket + 1, closingBracket);
+                console.log(nodeName);
+                this.invalidHTML = HEADING_VALIDATION_REGEX.test(array[i]);
+                if (this.invalidHTML === true) {
+                    break;
+                }
+            }
+        }
+        return this.invalidHTML;
     }
 
     generateMarkdown() {
@@ -76,7 +91,6 @@ class Script {
     updateMarkDown() {
         this.markdown.innerHTML = this.generateMarkdown().join('');
         this.outputHTML.innerHTML = this.htmlConverter.replace(this.markdown.innerHTML);
-        this.outputHTML.innerHTML = this.htmlContent;
     }
 }
 

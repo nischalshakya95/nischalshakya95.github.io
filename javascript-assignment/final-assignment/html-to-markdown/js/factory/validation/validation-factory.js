@@ -1,0 +1,6 @@
+class ValidationFactory {
+
+    isInvalid(str) {
+    }
+
+}

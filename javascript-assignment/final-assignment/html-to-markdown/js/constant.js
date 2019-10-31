@@ -46,6 +46,8 @@ const LINK_REPLACE = '<a href="$2" title="$4">$1</a>';
 
 const HEADING_VALIDATION_REGEX = /\s*(?!^<h1>)(?!<\/h1>$)(<\/?h[1-6]|<\/?p>)/im;
 
+const REMOVE_SPACE_BEFORE_AFTER_ELEMENT = /\s(?!<\/?\w+>)\s/igm;
+
 const SPLIT_REGEX = /(<[a-z0-9]*\/?>.+?<\/[a-z0-9]*>\s+?)/igm;
 
 
