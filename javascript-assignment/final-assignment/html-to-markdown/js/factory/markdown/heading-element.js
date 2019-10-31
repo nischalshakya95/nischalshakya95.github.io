@@ -4,7 +4,6 @@ class HeadingElement extends ElementFactory {
 
     replace(node, tag, str) {
         if (str !== null) {
-            // if (this.validate(str, tag)) {
             let content = node.innerText.trim();
             if (content !== '') {
                 let headingLevel = parseInt(node.localName.charAt(1));
@@ -26,13 +25,7 @@ class HeadingElement extends ElementFactory {
             } else {
                 return this.emptyMsg + '\n\n';
             }
-            // } else {
-            //     return 'Invalid ending tag' + '\n\n';
-            // }
-        }
-    }
 
-    validate(str, tag) {
-        return str.endsWith('</' + tag.toLowerCase() + '>');
+        }
     }
 }

@@ -60,6 +60,7 @@ class Script {
     generateMarkdown() {
         if (this.arr.length >= 0) {
             return this.arr.reduce((acc, node) => {
+                console.log(node.nodeName);
                 return [...acc, this.getMarkdown(node)];
             }, []);
         }
