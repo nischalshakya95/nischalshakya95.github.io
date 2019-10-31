@@ -52,17 +52,8 @@ class Script {
     }
 
     getMarkdown(node) {
-        // if (node.textContent !== '') {
-        //     let regex = new RegExp('<' + node.localName + '>(.+)', 'ig');
-        //     let str = this.htmlContent.match(regex);
-        //     console.log(str);
-        //     if (str !== null) {
-        //         return this.markDownContent.getMarkDown(node, str[str.length - 1]);
-        //     }
-        // }
-        // if (node.src !== '') {
-        //     return this.markDownContent.getMarkDown(node);
-        // }
+        let arr = this.htmlContent.split(SPLIT_REGEX).filter(a => a.length !== 0);
+        console.log(arr);
         return this.markDownContent.getMarkDown(node);
     }
 
@@ -78,7 +69,6 @@ class Script {
         this.markdown.innerHTML = this.generateMarkdown().join('');
         this.outputHTML.innerHTML = this.htmlConverter.replace(this.markdown.innerHTML);
         this.outputHTML.innerHTML = this.htmlContent;
-        // console.log(document.getElementsByTagName('h1'));
     }
 }
 
