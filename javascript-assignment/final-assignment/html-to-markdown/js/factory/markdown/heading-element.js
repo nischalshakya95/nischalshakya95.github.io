@@ -3,6 +3,7 @@ class HeadingElement extends ElementFactory {
     emptyMsg = 'Empty heading';
 
     replace(node, tag, str) {
+        console.log(str);
         if (str !== null) {
             let content = node.innerText.trim();
             if (content !== '') {

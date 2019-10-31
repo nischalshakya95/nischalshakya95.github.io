@@ -52,15 +52,22 @@ class Script {
     }
 
     getMarkdown(node) {
-        let arr = this.htmlContent.split(SPLIT_REGEX).filter(a => a.length !== 0);
-        console.log(arr);
-        return this.markDownContent.getMarkDown(node);
+        let array = this.htmlContent.split(SPLIT_REGEX).filter(a => a.length !== 0);
+        // console.log(array);
+        for (let i = 0; i < array.length; i++) {
+            console.log(array[i]);
+            // let openingBracket = array[i].indexOf('<');
+            // let closingBracket = array[i].indexOf('>');
+            // if (openingBracket !== -1 && closingBracket !== -1) {
+            //     let nodeName = array[i].substring(openingBracket + 1, closingBracket);
+            //     console.log(nodeName);
+            this.markDownContent.getMarkDown(node, array[i]);
+        }
     }
 
     generateMarkdown() {
         if (this.arr.length >= 0) {
             return this.arr.reduce((acc, node) => {
-                console.log(node.nodeName);
                 return [...acc, this.getMarkdown(node)];
             }, []);
         }
