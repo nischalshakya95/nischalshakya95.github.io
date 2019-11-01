@@ -5,7 +5,6 @@ class Script {
     constructor() {
         this.html = document.getElementById('html');
         this.markdown = document.getElementById('markdown');
-        this.outputHTML = document.getElementById('output-html');
 
         this.htmlContent = null;
         this.childNodes = null;
