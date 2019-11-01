@@ -43,6 +43,7 @@
 
 .footer-content ul {
     list-style: none; /* Remove default bullets */
+    line-height: 25px;
 }
 
 .final-footer ul li {
