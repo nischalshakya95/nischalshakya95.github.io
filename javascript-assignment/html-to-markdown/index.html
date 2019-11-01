@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="./styles/style.css"/>
+    <script src="https://use.fontawesome.com/57c0ca331b.js"></script>
+</head>
+
+<body>
+<div class="header">
+    <h2>HTML to Markdown Converter</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="label">
+                <label>HTML</label>
+            </div>
+            <label for="html"></label><textarea id="html" rows="32"></textarea>
+        </div>
+        <div class="col-6">
+            <div class="label">
+                <label> Markdown </label>
+            </div>
+            <label for="markdown"></label><textarea id="markdown" rows="32" disabled></textarea>
+            <button id="download" type="button" class="col-5"><i class="fa fa-download" aria-hidden="true"> Download</i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="./js/constant.js"></script>
+<script src="./js/util.js"></script>
+<script src="js/factory/element-factory.js"></script>
+<script src="js/factory/getelementfactory.js"></script>
+
+<script src="js/factory/markdown/child-element.js"></script>
+<script src="js/factory/markdown/heading-element.js"></script>
+<script src="js/factory/markdown/paragraph-element.js"></script>
+<script src="js/factory/markdown/text-element.js"></script>
+<script src="js/factory/markdown/emphasis.js"></script>
+<script src="js/factory/markdown/blockquote.js"></script>
+<script src="js/factory/markdown/list-element.js"></script>
+<script src="js/factory/markdown/image-element.js"></script>
+<script src="js/factory/markdown/link-element.js"></script>
+<script src="js/factory/markdown/table-element.js"></script>
+<script src="js/factory/markdown/break-element.js"></script>
+
+<script src="js/factory/validation/getvalidationfactory.js"></script>
+<script src="js/factory/validation/validation-factory.js"></script>
+<script src="js/factory/validation/heading-validation.js"></script>
+
+
+<script src="js/factory/markdown-content.js"></script>
+<script src="./js/script.js"></script>
+</body>
+
+</html>
