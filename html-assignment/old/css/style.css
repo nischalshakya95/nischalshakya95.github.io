@@ -1,11 +1,5 @@
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.right-action ul li:last-child a {
-    color: #cc003e;
+.wrapper i {
+    float: right;
 }
 
 .custom-inner p {
@@ -16,9 +10,40 @@
 .num-item p {
     margin-bottom: 0;
     color: #cb164f;
-    margin-top: 4px;
-    font-size: 15px;
+    margin-top: 8px;
+    font-size: 18px;
     font-weight: 600;
+}
+
+.welcome {
+    width: 50%;
+    float: right;
+    text-align: center;
+    height: 100%;
+    transform: translateY(60px);
+}
+
+.welcome h2 {
+    color: #cc003e;
+    font-weight: 100;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.welcome h2 span {
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: underline;
+
+}
+
+.welcome p {
+    color: #444;
+    line-height: 20px;
+}
+
+.welcome p span {
+    font-weight: bold;
 }
 
 .item-list .blog-item .blog-title {
@@ -41,20 +66,14 @@
     display: inline;
 }
 
-.tweet-icon {
-    float: left;
-}
+.tweet-icon,
 .tweet-message {
-    float: right;
     display: inline-block;
     vertical-align: text-top;
-    width: calc(100% - 30px);
 }
 
 .footer-content ul {
     list-style: none; /* Remove default bullets */
-    line-height: 25px;
-    padding-left: 15px;
 }
 
 .final-footer ul li {

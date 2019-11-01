@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="./css/layout.css"/>
     <link rel="stylesheet" href="./css/style.css"/>
@@ -9,13 +10,18 @@
 </head>
 <body>
 <div class="wrapper">
-    <nav>
-        <div class="top-nav">
-            <div class="brand-logo">
-                <img src="./images/logo.png" alt="logo"/>
-                <span>fantastic product & great prices</span>
-            </div>
 
+    <div class="row">
+        <div class="col-s-12 col-m-12 col-l-6 col-xl-6">
+            <div class="top-nav">
+                <div class="brand-logo">
+                    <img src="./images/logo.png" alt="logo"/>
+                    <span>fantastic product & great prices</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-s-12 col-m-12 col-l-6 col-xl-6">
             <div class="right-action">
                 <ul>
                     <li>
@@ -27,55 +33,56 @@
                     </li>
                     <li>
                         <img src="./images/my-account.png" alt=""/>
-                        <a href="#">My Account</a>
+                        <a href="#">My Account ^</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="mid-nav">
-            <div class="login">
-                <label>
-                    <span>Log-in</span>
-                    <input type="text" placeholder="Email address"/>
+    </div>
+
+    <div class="row">
+        <div class="col-m-12 col-xl-12">
+            <div class="mid-nav">
+                <div class="login">
+                    <label>
+                        <span>Log-in :</span>
+                        <input type="text" placeholder="Email address"/>
+                    </label>
+                </div>
+                <label class="password-box">
+                    <input type="password" placeholder="Password"/>
+                    <span>Forget?</span>
                 </label>
+                <button class="login-button">Login</button>
+                <button>Continue as guest</button>
             </div>
-            <label class="password-box">
-                <input type="password" placeholder="Password"/>
-                <span>Forget?</span>
-            </label>
-            <button class="login-button">Login</button>
-            <button>Continue as guest</button>
         </div>
+    </div>
+
+    <div class="row">
         <div class="bottom-nav">
-            <ul class="nav-links">
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Women +</a>
-                </li>
-                <li>
-                    <a href="#">Men +</a>
-                </li>
-                <li>
-                    <a href="#">Blog</a>
-                </li>
-                <li>
-                    <a href="#">Contact & info</a>
-                </li>
-                <li>
-                    <a href="#">Features</a>
-                </li>
-            </ul>
-            <div class="search">
-                <img src="./images/search-img.png" alt="img"/>
-                <label>
-                    <input type="text" name="search" placeholder="search"/>
-                </label>
+            <div class="col-m-8 col-xl-8">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Women +</a></li>
+                    <li><a href="#">Men +</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact & info</a></li>
+                    <li><a href="#">Features</a></li>
+                </ul>
+            </div>
+            <div class="col-m-4 col-xl-4">
+                <div class="search">
+                    <img src="./images/search-img.png" alt="img"/>
+                    <label>
+                        <input type="text" name="search" placeholder="search"/>
+                    </label>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
 </div>
+
 <div class="slideshow-container">
     <div class="background-image">
         <div class="images">
@@ -101,7 +108,7 @@
                 Vivamus fermentum dictum rhoncus. Ut molestie vehicula ipsum sed
                 sagittis. Aenean euismod odio <br/>ac risus vulputate ultricies.
                 Nam tincidunt ornare turpis, sit amet mattis.
-                <span class="read"> Read more</span>
+                <span class="read"> Read more +</span>
             </p>
         </div>
 
@@ -127,152 +134,177 @@
                 </div>
             </div>
         </div>
-
         <a class="prev" onclick="prev()">&#10094;</a>
         <a class="next" onclick="next()">&#10095;</a>
     </div>
 </div>
 
 <div class="wrapper">
+
     <div class="welcome-wrapper">
-
-        <div class="icon">
-            <img src="./images/fordesktoplaptop.png" alt="fordesktoplaptop"/>
-        </div>
-
-        <div class="welcome">
-            <h2>Welcome to <span> Pandora </span> responsive Shopify theme</h2>
-            <p>
-                <span> Congratulations on starting your own e-commerce store!</span>
-                <br/>
-                GANYMEDE is an elegant and responsive Shopify theme which
-                dynamically adjusts for all screen sizes and devices. Your shop will
-                look great and will be easy to use on desktops, laptops, tablets and
-                mobile smartphones.
-            </p>
-        </div>
-
-    </div>
-
-    <!--Featured items and view more items-->
-    <div class="item-header">
-        <span class="featured-item">Featured Items</span>
-        <div class="view-more-items">
-            <img src="./images/eye.png" alt=""/>
-            <span class="view-more-items-content">view more items</span>
+        <div class="row">
+            <div class="col-l-6 col-xl-6 icon">
+                <img src="./images/fordesktoplaptop.png" alt="fordesktoplaptop"/>
+            </div>
+            <div class="col-l-6 col-xl-6 col-m-12 col-s-12">
+                <div class="welcome">
+                    <h2>Welcome to <span> Pandora </span> responsive Shopify theme</h2>
+                    <p>
+                        <span> Congratulations on starting your own e-commerce store!</span>
+                        <br/>
+                        GANYMEDE is an elegant and responsive Shopify theme which
+                        dynamically adjusts for all screen sizes and devices. Your shop will
+                        look great and will be easy to use on desktops, laptops, tablets and
+                        mobile smartphone.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-    <!--Featured items and view more items-->
 
-    <!--  Featured items list start  -->
+    <div class="row">
+        <div class="item-header">
+            <span class="featured-item">Featured Items</span>
+            <div class="view-more-items">
+                <img src="./images/eye.png" alt="eye"/>
+                <span class="view-more-items-content">view more items</span>
+            </div>
+        </div>
+    </div>
+
+    <!--featured item image list start-->
     <section class="product-images">
-        <div class="card">
-            <div class="card-image">
-                <img src="./images/photoOne.png" alt=""/>
+        <div class="row">
+            <div class="col-xl-6 col-l-6 col-m-6 col-s-12">
+
+                <div class="card">
+                    <div class="card-image">
+                        <img src="./images/photoOne.png" alt="photoOne"/>
+                    </div>
+                    <div class="card-details">
+                        <h5>Elegant Sweater with tie</h5>
+                        <span>$59.99</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img class="sale-banner" src="./images/sale.png" alt="photoTwo"/>
+                    <div class="card-image">
+                        <img src="./images/photoTwo.png" alt=""/>
+                    </div>
+                    <div class="card-details">
+                        <h5>Black white foulard</h5>
+                        <span>$9.99</span>
+                    </div>
+                </div>
+
             </div>
-            <div class="card-details">
-                <h5>Elegant Sweater with tie</h5>
-                <span>$59.99</span>
-            </div>
-        </div>
-        <div class="card">
-            <img class="sale-banner" src="./images/sale.png" alt=""/>
-            <div class="card-image">
-                <img src="./images/photoTwo.png" alt=""/>
-            </div>
-            <div class="card-details">
-                <h5>Black white foulard</h5>
-                <span>$9.99</span>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-image">
-                <img src="./images/photoThree.png" alt=""/>
-            </div>
-            <div class="card-details">
-                <h5>Colorful Summer Dress</h5>
-                <span>$26.29</span>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-image">
-                <img src="./images/photoFour.png" alt=""/>
-            </div>
-            <div class="card-details">
-                <h5>Black and white polka dot dress</h5>
-                <span>$29.99</span>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-image">
-                <img src="./images/photoFive.png" alt=""/>
-            </div>
-            <div class="card-details">
-                <h5>Black sleeveless sweater</h5>
-                <span>$39.99</span>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-image">
-                <img src="./images/photoSix.png" alt=""/>
-            </div>
-            <div class="card-details">
-                <h5>Polka dot light blue blouse</h5>
-                <span>$13.99</span>
+            <div class="col-xl-6 col-l-6 col-m-6 col-s-12">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="./images/photoThree.png" alt="photoThree"/>
+                    </div>
+                    <div class="card-details">
+                        <h5>Colorful Summer Dress</h5>
+                        <span>$26.29</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <img src="./images/photoFour.png" alt="photoFour"/>
+                    </div>
+                    <div class="card-details">
+                        <h5>Black and white polka dot dress</h5>
+                        <span>$29.99</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-image">
-                <img src="./images/photoSeven.png" alt=""/>
+
+        <div class="row">
+            <div class="col-x1-6 col-l-6 col-m-12 col-s-12">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="./images/photoFive.png" alt="photoFive"/>
+                    </div>
+                    <div class="card-details">
+                        <h5>Black sleeveless sweater</h5>
+                        <span>$39.99</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <img src="./images/photoSix.png" alt="photoSix"/>
+                    </div>
+                    <div class="card-details">
+                        <h5>Polka dot light blue blouse</h5>
+                        <span>$13.99</span>
+                    </div>
+                </div>
             </div>
-            <div class="card-details">
-                <h5>Striped colorful dress</h5>
-                <span>$29.99</span>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-image">
-                <img src="./images/photoEight.png" alt=""/>
-            </div>
-            <div class="card-details">
-                <h5>White summer dress and hat</h5>
-                <span>$49.99</span>
+            <div class="col-x1-6 col-l-6 col-m-6 col-s-12">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="./images/photoSeven.png" alt="photoSeven"/>
+                    </div>
+                    <div class="card-details">
+                        <h5>Striped colorful dress</h5>
+                        <span>$29.99</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <img src="./images/photoEight.png" alt="photoEight"/>
+                    </div>
+                    <div class="card-details">
+                        <h5>White summer dress and hat</h5>
+                        <span>$49.99</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <!--Featured items list end-->
+    <!--Featured item image list end-->
 
     <!--Special offer section start-->
-    <div class="item-header">
-        <span>Special Offers</span>
+    <div class="row">
+        <div class="item-header-special-offer">
+            <span>Special Offers</span>
+        </div>
     </div>
-
-    <div class="offer-section">
-        <div class="column">
-            <img src="images/sales.png" alt=""/>
-        </div>
-        <div class="column">
-            <img src="images/fiftypercentoff.png" alt=""/>
-        </div>
-        <div class="column">
-            <img src="images/new.png" alt=""/>
+    <div class="row">
+        <div class="offer-section">
+            <div class="col-xl-4 col-l-4">
+                <div class="column">
+                    <img src="images/sales.png" alt="sales"/>
+                </div>
+            </div>
+            <div class="col-xl-4 col-l-4">
+                <div class="column">
+                    <img src="images/fiftypercentoff.png" alt="off"/>
+                </div>
+            </div>
+            <div class="col-xl-4 col-l-4">
+                <div class="column">
+                    <img src="images/new.png" alt="new"/>
+                </div>
+            </div>
         </div>
     </div>
     <!--Special offer section end-->
 
-    <div class="blog-section">
-        <div class="column">
-            <div class="item-header">
-                Latest news from blog
-            </div>
+    <!--Blog, best sellers and about & contacts start-->
+
+    <div class="row" style="margin-top: 20px">
+        <div class="col-xl-4 col-l-4">
+            <span class="underlines">Latest from news blog</span>
             <div class="item-list">
                 <div class="blog-item">
                     <div class="blog-title">
                         Title One
                     </div>
                     <div class="blog-stats">
-                <span><img src="./images/date.png" alt=""/> May 12,2012 |
-                  <img src="images/cmt.png" alt=""/> 6</span>
+                        <img src="./images/date.png" alt="date"/> May 12,2012 |<img src="images/cmt.png" alt="cmt"/>6
                     </div>
                     <div class="blog-detail">
                         <p>
@@ -287,10 +319,8 @@
                         Title Two
                     </div>
                     <div class="blog-stats">
-                <span
-                ><img src="./images/date.png" alt=""/> May 25,2012 |
-                  <img src="images/cmt.png" alt=""/> 12</span
-                >
+                        <img src="./images/date.png" alt="date"/> May 25,2012 |
+                        <img src="images/cmt.png" alt="cmt"/> 12
                     </div>
                     <div class="blog-detail">
                         <p>
@@ -305,10 +335,8 @@
                         Title Three
                     </div>
                     <div class="blog-stats">
-                <span
-                ><img src="./images/date.png" alt=""/> May 11,2012 |
-                  <img src="images/cmt.png" alt=""/> 0</span
-                >
+                        <img src="./images/date.png" alt="date"/> May 11,2012 |
+                        <img src="images/cmt.png" alt="cmt"/>0
                     </div>
                     <div class="blog-detail">
                         <p>
@@ -320,51 +348,34 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="column">
-            <div class="item-header">
-                Best Sellers
-            </div>
-            <div class="seller-item-list">
-                <div class="best-seller-image ml-0">
-                    <div class="seller-img">
-                        <img src="./images/photoEight.png" alt=""/>
+        <div class="col-xl-4 col-l-4" style="padding: 0 10px;">
+            <span class="underlines">Best Sellers</span>
+            <div class="best-seller">
+                <div class="clearfix">
+                    <div class="best-seller-image-one">
+                        <img src="images/photoOne.png" alt="photoone"/>
+                        <span>$9.99</span>
                     </div>
-                    <div class="caption">
-                        <p>$400</p>
+                    <div class="best-seller-image-two">
+                        <img src="images/photoTwo.png" alt="photoone"/>
+                        <span>$9.99</span>
                     </div>
                 </div>
-                <div class="best-seller-image">
-                    <div class="seller-img">
-                        <img src="./images/photoOne.png" alt=""/>
+                <div class="clearfix">
+                    <div class="best-seller-image-one">
+                        <img src="images/photoOne.png" alt="photoone"/>
+                        <span>$9.99</span>
                     </div>
-                    <div class="caption">
-                        <p>$400</p>
-                    </div>
-                </div>
-                <div class="best-seller-image ml-0">
-                    <div class="seller-img">
-                        <img src="./images/photoFour.png" alt=""/>
-                    </div>
-                    <div class="caption">
-                        <p>$400</p>
-                    </div>
-                </div>
-                <div class="best-seller-image">
-                    <div class="seller-img">
-                        <img src="./images/photoFive.png" alt=""/>
-                    </div>
-                    <div class="caption">
-                        <p>$400</p>
+                    <div class="best-seller-image-two">
+                        <img src="images/photoTwo.png" alt="photoone"/>
+                        <span>$9.99</span>
                     </div>
                 </div>
             </div>
+
         </div>
-        <div class="column">
-            <div class="item-header">
-                About & Contacts
-            </div>
+        <div class="col-xl-4 col-l-4">
+            <span class="underlines">About & Contacts</span>
             <div class="item-header-content">
                 <div class="item-header-details">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur
@@ -378,142 +389,143 @@
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur
                     eos impedit error fugit possimus.
                     <br/><br/>
-                    <img
-                            src="images/phone.png"
-                            alt=""
-                            style="position:relative; right:3px"
-                    />
+                    <img src="images/phone.png"
+                         alt="phone"
+                         style="position:relative; right:3px; top:10px"/>
                     7-685-531-2605
                     <br/><br/>
-                    <img src="images/msg.png" alt=""/>
+                    <img src="images/msg.png" alt="msg" style="position:relative; top: 10px"/>
                     <span style="margin-left:10px">
-                info@planetshine.net
-              </span>
+                    info@planetshine.net
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<!--Blog, best sellers and about & contacts end-->
+<!--Footer start-->
 <footer class="footer">
-    <div class="column w-18">
-        <div class="footer-header">
-            Navigation
-        </div>
-        <div class="footer-content">
-            <ul>
-                <li>Homepage</li>
-                <li>Women</li>
-                <li>Featured</li>
-                <li>Items News</li>
-                <li>Blog Features</li>
-                <li>Contact & Info</li>
-            </ul>
-        </div>
-    </div>
-    <div class="column w-26">
-        <div class="footer-header">
-            Latest Tweets
-        </div>
-        <div class="footer-content">
-            <div class="tweet">
-                <div class="tweet-icon">
-                    <img src="./images/msg-twitter.png" alt=""/>
-                </div>
-                <div class="tweet-message">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod
-                </div>
+    <div class="row">
+        <div class="col-xl-3 col-l-3">
+            <div class="footer-header">
+                Navigation
             </div>
-            <div class="tweet">
-                <div class="tweet-icon">
-                    <img src="./images/msg-twitter.png" alt=""/>
-                </div>
-                <div class="tweet-message">
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam,
-                </div>
-            </div>
-            <div class="tweet">
-                <div class="tweet-icon">
-                    <img src="./images/msg-twitter.png" alt=""/>
-                </div>
-                <div class="tweet-message">
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo
-                </div>
-            </div>
-            <div class="tweet">
-                <div class="tweet-icon">
-                    <img src="./images/msg-twitter.png" alt=""/>
-                </div>
-                <div class="tweet-message">
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate
-                </div>
+            <div class="footer-content">
+                <ul>
+                    <li>Homepage</li>
+                    <li>Women</li>
+                    <li>Featured</li>
+                    <li>Items News</li>
+                    <li>Blog Features</li>
+                    <li>Contact & Info</li>
+                </ul>
             </div>
         </div>
-    </div>
-    <div class="column w-26">
-        <div class="footer-header">
-            Newsletter
-        </div>
-        <div class="footer-content">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam,
-            <div class="search-here">
-                <img src="./images/msg.png"/>
-                <label>
-                    <input type="search" placeholder="search here" name=""/>
-                </label>
+        <div class="col-xl-3 col-l-3">
+            <div class="footer-header">
+                Latest Tweets
+            </div>
+            <div class="footer-content">
+                <div class="tweet clearfix">
+                    <div class="tweet-icon">
+                        <img src="./images/msg-twitter.png" alt=""/>
+                    </div>
+                    <div class="tweet-message">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                        eiusmod
+                    </div>
+                </div>
+                <div class="tweet">
+                    <div class="tweet-icon">
+                        <img src="./images/msg-twitter.png" alt=""/>
+                    </div>
+                    <div class="tweet-message">
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                        minim veniam,
+                    </div>
+                </div>
+                <div class="tweet">
+                    <div class="tweet-icon">
+                        <img src="./images/msg-twitter.png" alt=""/>
+                    </div>
+                    <div class="tweet-message">
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo
+                    </div>
+                </div>
+                <div class="tweet">
+                    <div class="tweet-icon">
+                        <img src="./images/msg-twitter.png" alt=""/>
+                    </div>
+                    <div class="tweet-message">
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="column w-18">
-        <div class="footer-header">
-            About Us
-        </div>
-        <div class="footer-content">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod
-            <div class="social-links">
-                <div class="social-link">
-                    <img src="./images/youtube.png" alt=""/>
-                </div>
-                <div class="social-link">
-                    <img src="./images/fb.png" alt=""/>
-                </div>
-                <div class="social-link">
-                    <img src="./images/twitter.png" alt=""/>
-                </div>
-                <div class="social-link">
-                    <img src="./images/lollo.png" alt=""/>
-                </div>
-                <div class="social-link">
-                    <img src="./images/rss-feed.png" alt=""/>
-                </div>
-                <div class="social-link">
-                    <img src="./images/pin-interest.png" alt=""/>
+        <div class="col-xl-3 col-l-3">
+            <div class="footer-header">
+                Newsletter
+            </div>
+            <div class="footer-content">
+                To subscribe to our newsletter, type in your email address below and press 'Enter'
+                <br>
+                We don't send span ever
+                <div class="search-here">
+                    <img src="./images/msg.png" alt="msg"/>
+                    <label>
+                        <input type="search" placeholder="search here" name="search"/>
+                    </label>
                 </div>
             </div>
-            <div class="payment-methods">
-                <div class="payment-method">
-                    <img src="./images/visa-zero.png" alt=""/>
+        </div>
+        <div class="col-xl-3 col-l-3">
+            <div class="footer-header">
+                About Us
+            </div>
+            <div class="footer-content">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod
+                <div class="social-links">
+                    <div class="social-link">
+                        <img src="./images/youtube.png" alt="youtube"/>
+                    </div>
+                    <div class="social-link">
+                        <img src="./images/fb.png" alt="fb"/>
+                    </div>
+                    <div class="social-link">
+                        <img src="./images/twitter.png" alt="twitter"/>
+                    </div>
+                    <div class="social-link">
+                        <img src="./images/lollo.png" alt="lollo"/>
+                    </div>
+                    <div class="social-link">
+                        <img src="./images/rss-feed.png" alt="social-link"/>
+                    </div>
+                    <div class="social-link">
+                        <img src="./images/pin-interest.png" alt="pin-interest"/>
+                    </div>
                 </div>
-                <div class="payment-method">
-                    <img src="./images/visa-one.png" alt=""/>
-                </div>
-                <div class="payment-method">
-                    <img src="./images/visa-two.png" alt=""/>
-                </div>
-                <div class="payment-method">
-                    <img src="./images/visa-three.png" alt=""/>
-                </div>
-                <div class="payment-method">
-                    <img src="./images/pin-interest.png" alt=""/>
-                </div>
-                <div class="payment-method">
-                    <img src="./images/google.png" alt=""/>
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <img src="./images/visa-zero.png" alt="visa-zero"/>
+                    </div>
+                    <div class="payment-method">
+                        <img src="./images/visa-one.png" alt="visa-one"/>
+                    </div>
+                    <div class="payment-method">
+                        <img src="./images/visa-two.png" alt="visa-two"/>
+                    </div>
+                    <div class="payment-method">
+                        <img src="./images/visa-three.png" alt="visa-three"/>
+                    </div>
+                    <div class="payment-method">
+                        <img src="./images/pin-interest.png" alt="pin-interest"/>
+                    </div>
+                    <div class="payment-method">
+                        <img src="./images/google.png" alt="google"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -534,7 +546,7 @@
         </ul>
     </div>
 </footer>
-
+<!--Footer end-->
 
 <script src="./js/script.js"></script>
 </body>
