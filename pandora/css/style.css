@@ -1,5 +1,5 @@
-.wrapper i {
-    float: right;
+.right-action ul li:last-child a {
+    color: #cc003e;
 }
 
 .custom-inner p {
@@ -10,40 +10,9 @@
 .num-item p {
     margin-bottom: 0;
     color: #cb164f;
-    margin-top: 8px;
-    font-size: 18px;
+    margin-top: 4px;
+    font-size: 15px;
     font-weight: 600;
-}
-
-.welcome {
-    width: 50%;
-    float: right;
-    text-align: center;
-    height: 100%;
-    transform: translateY(60px);
-}
-
-.welcome h2 {
-    color: #cc003e;
-    font-weight: 100;
-    margin-bottom: 15px;
-    font-size: 1.4em;
-}
-
-.welcome h2 span {
-    font-weight: 600;
-    text-transform: uppercase;
-    text-decoration: underline;
-
-}
-
-.welcome p {
-    color: #444;
-    line-height: 20px;
-}
-
-.welcome p span {
-    font-weight: bold;
 }
 
 .item-list .blog-item .blog-title {
