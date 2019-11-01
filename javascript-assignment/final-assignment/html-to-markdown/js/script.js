@@ -44,6 +44,7 @@ class Script {
 
     invalidateHTML() {
         let array = this.htmlContent.split(SPLIT_REGEX).filter(a => a.length !== 0);
+        console.log(array);
         for (let i = 0; i < array.length; i++) {
             let openingBracket = array[i].indexOf('<');
             let closingBracket = array[i].indexOf('>');
@@ -67,6 +68,9 @@ class Script {
                     }
                     if (nodeName === 'h6') {
                         this.invalidHTML = HEADING_SIX_VALIDATION_REGEX.test(array[i]);
+                    }
+                    if (nodeName === 'p') {
+                        this.invalidHTML = PARAGRAPH_VALIDATION_REGEX.test(array[i]);
                     }
                 } else {
                     this.invalidHTML = true;
