@@ -1,3 +1,9 @@
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 .right-action ul li:last-child a {
     color: #cc003e;
 }
@@ -35,15 +41,20 @@
     display: inline;
 }
 
-.tweet-icon,
+.tweet-icon {
+    float: left;
+}
 .tweet-message {
+    float: right;
     display: inline-block;
     vertical-align: text-top;
+    width: calc(100% - 30px);
 }
 
 .footer-content ul {
     list-style: none; /* Remove default bullets */
     line-height: 25px;
+    padding-left: 15px;
 }
 
 .final-footer ul li {

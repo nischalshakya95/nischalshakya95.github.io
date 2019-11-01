@@ -191,7 +191,7 @@ li .cart-icon {
 .bg-number {
     position: absolute;
     bottom: -18px;
-    left: 500px;
+    left: calc(50% - 100px);
 }
 
 .background-image {
@@ -454,6 +454,32 @@ section.product-images {
 
 .seller-item-list {
     display: inline;
+}
+
+.best-seller {
+    margin-top: 20px;
+}
+
+.best-seller-image-one {
+    width: 47%;
+    float: left;
+    background: white;
+    padding: 5px
+}
+
+.best-seller-image-two {
+    width: 47%;
+    float: right;
+    background: white;
+    padding: 5px
+}
+
+.best-seller-image-one img {
+    width: 100%;
+}
+
+.best-seller-image-two img {
+    width: 100%;
 }
 
 /*Blog, news and about & contacts end*/
